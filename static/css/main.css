@@ -1,0 +1,40 @@
+*{margin:0;padding:0;}
+html,body,#app{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+}
+body{
+    font-family:"Helvetica Neue",Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+}
+a{text-decoration: none}
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}
+.clearfix:after { content:"."; display:block; height:0; visibility:hidden; clear:both; }                                                            
+/*伪类清除*/
+.clearfix { zoom:1; }    
+
+/*路由transtion过渡效果*/
+.move-enter-active,.move-leave-active{
+    transition: opacity .5s;
+}
+.move-enter,.move-leave{
+    opacity: 0;
+}
+/*右边page内容块*/
+.content {
+    background: none repeat scroll 0 0 #fff;
+    position: absolute;
+    left: 250px;
+    right: 0;
+    top: 70px;
+    bottom: 0;
+    width: auto;
+    padding: 25px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
