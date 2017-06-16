@@ -1,7 +1,7 @@
 <template>
 	<div class="six">第六页</div>
 </template>
-<<style scoped>
+<style scoped>
 .six{
     font-size:60px;
 }
