@@ -2,6 +2,9 @@
 
 > vue-admin for GQFX
 
+
+![Markdown](static/img/readme.PNG)
+
 ## Build Setup
 
 ``` bash

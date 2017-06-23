@@ -1,10 +1,10 @@
 <template>
         <div class="header">
-            <div class="left">
-                GQFX-CRM
+            <div class="left" v-bind:class="[ getcollapsed ? '' : 'min-left']">
+                XMAO
             </div>
-            <div class="center">
-                <i class="el-icon-d-arrow-left" @click.prevent="collapse"></i>
+            <div class="center" @click.prevent="changecollapsed">
+                <i v-bind:class="[ getcollapsed ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right']" ></i>
             </div>
             <div class="right">
                   <el-dropdown trigger="hover">
@@ -19,19 +19,30 @@
         </div>
 </template>
 <script>
+    import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
     export default {
       name: 'header',  
       data () {
         return {
           name: 'linxin',
-          collapsed:false
+          // collapsed:false
         }
+      },
+      computed: {
+      // 使用对象展开运算符将getters混入computed对象中
+      ...mapGetters([
+        'getcollapsed'
+      ])    
       },
       methods: {
         //折叠导航栏
-        collapse:function(){
-          this.collapsed=!this.collapsed;
-        }
+        // collapse:function(){
+        //   this.collapsed=!this.collapsed;
+        // }
+        ...mapActions([
+          'changecollapsed'
+        ])
       }
     }
 </script>
@@ -56,6 +67,10 @@
         border-width:1px;
         border-right-style:solid;
         float:left;
+    }
+    .left.min-left{
+      width:91px;
+      padding:0;
     }
     .header .center{
         padding:0 23px;

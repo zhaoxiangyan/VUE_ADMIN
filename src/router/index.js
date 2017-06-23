@@ -30,6 +30,10 @@ export default new Router({
           component: resolve => require(['../components/page/One.vue'], resolve)
         },
         {
+          path: '/one',
+          component: resolve => require(['../components/page/One.vue'], resolve)
+        },
+        {
           path: '/two',
           component: resolve => require(['../components/page/Two.vue'], resolve)
         },
