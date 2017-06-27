@@ -2,7 +2,7 @@
     <div class="sidebar" :style="opencollapse">
         <!--导航菜单-->
          <el-menu :default-active="onRoutes" class="el-menu-vertical-demo" theme="dark" unique-opened router v-if="getcollapsed">
-            <template v-for="(item,index) in Item" >
+            <template v-for="(item,index) in $t('Item')">
               <el-submenu :index="index+''" v-if="item.item">
                 <template slot="title"><i :class="item.iconclassname"></i>{{item.menu}}</template>
                 <el-menu-item v-for="options in item.item" :key="options.url" :index="options.url">{{options.option}}</el-menu-item>
@@ -14,14 +14,14 @@
         </el-menu> 
         <!--导航菜单-折叠后-->
         <ul :default-active="onRoutes" class="collapsed" style="width:90px" v-else ref="menuCollapsed" router>
-			<li v-for="(item,index) in Item">
+			<li v-for="(item,index) in  $t('Item')">
               <template v-if="!item.item">
 				<div><router-link :to="item.url"><i :class="item.iconclassname"></i></router-link></div>
               </template>  
               <template v-else>
                 <div @mouseover="showmenu(index,true)" @mouseout="showmenu(index,false)"><i :class="item.iconclassname"></i></div>
                 <ul :class="'submenu-hook-'+index" @mouseover="showmenu(index,true)" @mouseout="showmenu(index,false)">
-                    <li v-for="options in item.item"><router-link  :to="options.url">{{options.option}}</router-link></li>
+                    <li v-for="(options,index) in item.item"><router-link  :to="options.url">{{options.option}}</router-link></li>
                 </ul> 
               </template>
 			</li>
@@ -32,125 +32,127 @@
 <script>
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
+    import VueI18n from 'vue-i18n'
+    import i18n from '../../vueI18n/i18n.js'
     export default {
       name: 'sidebar',
       data () {
            return {
-              Item: [
-                    {
-                        menu:"仪表板",
-                        iconclassname:"el-icon-date",
-                        url:"home"
-                    },
-                    {
-                        menu:"账号管理",
-                        iconclassname:"el-icon-menu",
-                        item:[
-                            {option:"角色管理",url:"one"},
-                            {option:"账号管理",url:"two"}
-                        ]
-                    },
-                    {
-                        menu:"系统参数设置",
-                        iconclassname:"el-icon-message",
-                        item:[
-                            {option:"交易类型设置",url:"three"},
-                            {option:"交易类型名称设置",url:"four"},
-                            {option:"交易类型语言设置",url:"five"},
-                            {option:"投资额设置",url:"six"},
-                            {option:"利润率设置",url:"seven"},
-                            {option:"时间段设置",url:"eight"},
-                            {option:"系统加载设置",url:"nine"}
-                        ]   
-                    },
-                    {
-                        menu:"风控参数设置",
-                        iconclassname:"el-icon-star-off",
-                        item:[
-                            {option:"交易品种与类型设置",url:""},
-                            {option:"交易时间段设置",url:""},
-                            {option:"交易组投资额风控",url:""},
-                            {option:"交易组利润率风控",url:""}
-                        ]
-                    },
-                    {
-                        menu:"风险参数设置",
-                        iconclassname:"el-icon-star-on",
-                        item:[
-                            {option:"交易总量设置",url:""},
-                            {option:"订单总数设置",url:""},
-                            {option:"投资参数设置",url:""}
-                        ]
-                    },
-                    {
-                        menu:"风险监控",
-                        iconclassname:"el-icon-menu",
-                        item:[
-                            {option:"交易报警监控",url:""},
-                            {option:"外汇普通盈亏监控",url:""},
-                            {option:"短线外汇盈亏监控",url:""},
-                            {option:"IP地址监控",url:""}
-                        ]
-                    },
-                    {
-                        menu:"报表查询",
-                        iconclassname:"el-icon-message",
-                        item:[
-                            {option:"短线外汇持仓交易明细",url:""},
-                            {option:"短线外汇平仓交易明细",url:""},
-                            {option:"外汇持仓交易明细",url:""},
-                            {option:"外汇平仓交易明细",url:""},
-                            {option:"入金明细",url:""},
-                            {option:"出金明细",url:""},
-                            {option:"佣金明细",url:""},
-                            {option:"用户佣金明细",url:""},
-                            {option:"佣金来源明细",url:""},
-                            {option:"订单佣金明细",url:""}
-                        ]
-                    },
-                    {
-                        menu:"统计查询",
-                        iconclassname:"el-icon-star-on",
-                        item:[
-                            {option:"新注册用户统计",url:""},
-                            {option:"交易量统计",url:""},
-                            {option:"入金量统计",url:""},
-                            {option:"出金量统计",url:""},
-                            {option:"佣金量统计",url:""},
-                            {option:"用户佣金量统计",url:""},
-                            {option:"短线外汇盈亏统计",url:""},
-                            {option:"外汇交易盈亏统计",url:""}
-                        ]
-                    },
-                    {
-                        menu:"审核/冻结/设置",
-                        iconclassname:"el-icon-star-off",
-                        item:[
-                            {option:"注册客户审核",url:""},
-                            {option:"客户冻结",url:""},
-                            {option:"代理审核",url:""},
-                            {option:"出金审核",url:""},
-                            {option:"代理资格撤销",url:""},
-                            {option:"系统参数设置",url:""},
-                            {option:"通用佣金参数设置",url:""},
-                            {option:"指定佣金参数设置",url:""},
-                            {option:"短线佣金参数设置",url:""},
-                            {option:"外汇佣金参数设置",url:""},
-                            {option:"组参数设置",url:""},
-                            {option:"组品种设置",url:""},
-                            {option:"品种参数设置",url:""},
-                            {option:"报警参数设置",url:""}
-                        ]
-                    },
-                    {
-                        menu:"信息管理",
-                        iconclassname:"el-icon-star-on",
-                        item:[
-                            {option:"通告管理",url:""},
-                            {option:"留言管理",url:""}
-                        ]
-                    }]
-
+               
+            //   Item: [
+            //         {
+            //             menu:"仪表板",
+            //             iconclassname:"el-icon-date",
+            //             url:"home"
+            //         },
+            //         {
+            //             menu:"账号管理",
+            //             iconclassname:"el-icon-menu",
+            //             item:[
+            //                 {option:"角色管理",url:"one"},
+            //                 {option:"账号管理",url:"two"}
+            //             ]
+            //         },
+            //         {
+            //             menu:"系统参数设置",
+            //             iconclassname:"el-icon-message",
+            //             item:[
+            //                 {option:"交易类型设置",url:"three"},
+            //                 {option:"交易类型名称设置",url:"four"},
+            //                 {option:"交易类型语言设置",url:"five"},
+            //                 {option:"投资额设置",url:"six"},
+            //                 {option:"利润率设置",url:"seven"},
+            //                 {option:"时间段设置",url:"eight"},
+            //                 {option:"系统加载设置",url:"nine"}
+            //             ]   
+            //         },
+            //         {
+            //             menu:"风控参数设置",
+            //             iconclassname:"el-icon-star-off",
+            //             item:[
+            //                 {option:"交易品种与类型设置",url:""},
+            //                 {option:"交易时间段设置",url:""},
+            //                 {option:"交易组投资额风控",url:""},
+            //                 {option:"交易组利润率风控",url:""}
+            //             ]
+            //         },
+            //         {
+            //             menu:"风险参数设置",
+            //             iconclassname:"el-icon-star-on",
+            //             item:[
+            //                 {option:"交易总量设置",url:""},
+            //                 {option:"订单总数设置",url:""},
+            //                 {option:"投资参数设置",url:""}
+            //             ]
+            //         },
+            //         {
+            //             menu:"风险监控",
+            //             iconclassname:"el-icon-menu",
+            //             item:[
+            //                 {option:"交易报警监控",url:""},
+            //                 {option:"外汇普通盈亏监控",url:""},
+            //                 {option:"短线外汇盈亏监控",url:""},
+            //                 {option:"IP地址监控",url:""}
+            //             ]
+            //         },
+            //         {
+            //             menu:"报表查询",
+            //             iconclassname:"el-icon-message",
+            //             item:[
+            //                 {option:"短线外汇持仓交易明细",url:""},
+            //                 {option:"短线外汇平仓交易明细",url:""},
+            //                 {option:"外汇持仓交易明细",url:""},
+            //                 {option:"外汇平仓交易明细",url:""},
+            //                 {option:"入金明细",url:""},
+            //                 {option:"出金明细",url:""},
+            //                 {option:"佣金明细",url:""},
+            //                 {option:"用户佣金明细",url:""},
+            //                 {option:"佣金来源明细",url:""},
+            //                 {option:"订单佣金明细",url:""}
+            //             ]
+            //         },
+            //         {
+            //             menu:"统计查询",
+            //             iconclassname:"el-icon-star-on",
+            //             item:[
+            //                 {option:"新注册用户统计",url:""},
+            //                 {option:"交易量统计",url:""},
+            //                 {option:"入金量统计",url:""},
+            //                 {option:"出金量统计",url:""},
+            //                 {option:"佣金量统计",url:""},
+            //                 {option:"用户佣金量统计",url:""},
+            //                 {option:"短线外汇盈亏统计",url:""},
+            //                 {option:"外汇交易盈亏统计",url:""}
+            //             ]
+            //         },
+            //         {
+            //             menu:"审核/冻结/设置",
+            //             iconclassname:"el-icon-star-off",
+            //             item:[
+            //                 {option:"注册客户审核",url:""},
+            //                 {option:"客户冻结",url:""},
+            //                 {option:"代理审核",url:""},
+            //                 {option:"出金审核",url:""},
+            //                 {option:"代理资格撤销",url:""},
+            //                 {option:"系统参数设置",url:""},
+            //                 {option:"通用佣金参数设置",url:""},
+            //                 {option:"指定佣金参数设置",url:""},
+            //                 {option:"短线佣金参数设置",url:""},
+            //                 {option:"外汇佣金参数设置",url:""},
+            //                 {option:"组参数设置",url:""},
+            //                 {option:"组品种设置",url:""},
+            //                 {option:"品种参数设置",url:""},
+            //                 {option:"报警参数设置",url:""}
+            //             ]
+            //         },
+            //         {
+            //             menu:"信息管理",
+            //             iconclassname:"el-icon-star-on",
+            //             item:[
+            //                 {option:"通告管理",url:"oppp"},
+            //                 {option:"留言管理",url:""}
+            //             ]
+            //         }]
            }
       },
       computed: {

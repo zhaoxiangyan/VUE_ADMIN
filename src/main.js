@@ -21,4 +21,3 @@ new Vue({
   i18n,
   render: h => h(App)
 })
-i18n.locale = 'en'

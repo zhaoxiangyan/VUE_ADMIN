@@ -9,6 +9,6 @@ export const changecollapsed = ({commit}) => {
 //     commit('DECREMENT')
 // }
 // 切换语言
-export const changelanguage = ({commit}) => {
-  commit('CHANGELANGUAGE')
-}
+// export const changelanguage = ({commit}) => {
+//   commit('CHANGELANGUAGE')
+// }

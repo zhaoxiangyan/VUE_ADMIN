@@ -7,239 +7,239 @@ const messages = {
   en: {
     Item: [
       {
-        menu: 'English',
+        menu: 'Dashboard',
         iconclassname: 'el-icon-date',
         url: 'home'
       },
       {
-        menu: '账号管理',
+        menu: 'Account management',
         iconclassname: 'el-icon-menu',
         item: [
-                    {option: '角色管理', url: 'one'},
-                    {option: '账号管理', url: 'two'}
+                    {option: 'Role management', url: 'one'},
+                    {option: 'Account management', url: 'two'}
         ]
       },
       {
-        menu: '系统参数设置',
+        menu: 'System parameter setting',
         iconclassname: 'el-icon-message',
         item: [
-                    {option: '交易类型设置', url: 'three'},
-                    {option: '交易类型名称设置', url: 'four'},
-                    {option: '交易类型语言设置', url: 'five'},
-                    {option: '投资额设置', url: 'six'},
-                    {option: '利润率设置', url: 'seven'},
-                    {option: '时间段设置', url: 'eight'},
-                    {option: '系统加载设置', url: 'nine'}
+                    {option: 'Transaction type', url: 'three'},
+                    {option: 'Transaction type name', url: 'four'},
+                    {option: 'Transaction type language', url: 'five'},
+                    {option: 'Investment settings', url: 'six'},
+                    {option: 'Margin setting', url: 'seven'},
+                    {option: 'Time setting', url: 'eight'},
+                    {option: 'System load settings', url: 'nine'}
         ]
       },
       {
         menu: '风控参数设置',
         iconclassname: 'el-icon-star-off',
         item: [
-                    {option: '交易品种与类型设置', url: ''},
-                    {option: '交易时间段设置', url: ''},
+                    {option: 'Types and types of transactions', url: ''},
+                    {option: 'Transaction period setting', url: ''},
                     {option: '交易组投资额风控', url: ''},
                     {option: '交易组利润率风控', url: ''}
         ]
       },
       {
-        menu: '风险参数设置',
+        menu: 'Risk parameter setting',
         iconclassname: 'el-icon-star-on',
         item: [
-                    {option: '交易总量设置', url: ''},
-                    {option: '订单总数设置', url: ''},
-                    {option: '投资参数设置', url: ''}
+                    {option: 'Total transaction settings', url: ''},
+                    {option: 'Total order setting', url: ''},
+                    {option: 'Investment parameter setting', url: ''}
         ]
       },
       {
-        menu: '风险监控',
+        menu: 'Risk monitoring',
         iconclassname: 'el-icon-menu',
         item: [
-                    {option: '交易报警监控', url: ''},
+                    {option: 'Transaction alarm monitoring', url: ''},
                     {option: '外汇普通盈亏监控', url: ''},
                     {option: '短线外汇盈亏监控', url: ''},
-                    {option: 'IP地址监控', url: ''}
+                    {option: 'IP address monitoring', url: ''}
         ]
       },
       {
-        menu: '报表查询',
+        menu: 'Report query',
         iconclassname: 'el-icon-message',
         item: [
                     {option: '短线外汇持仓交易明细', url: ''},
                     {option: '短线外汇平仓交易明细', url: ''},
                     {option: '外汇持仓交易明细', url: ''},
                     {option: '外汇平仓交易明细', url: ''},
-                    {option: '入金明细', url: ''},
-                    {option: '出金明细', url: ''},
-                    {option: '佣金明细', url: ''},
-                    {option: '用户佣金明细', url: ''},
-                    {option: '佣金来源明细', url: ''},
-                    {option: '订单佣金明细', url: ''}
+                    {option: 'Entry details', url: ''},
+                    {option: 'Output gold details', url: ''},
+                    {option: 'Commission details', url: ''},
+                    {option: 'User Commission details', url: ''},
+                    {option: 'Commission source details', url: ''},
+                    {option: 'Order Commission details', url: ''}
         ]
       },
       {
-        menu: '统计查询',
+        menu: 'Statistical query',
         iconclassname: 'el-icon-star-on',
         item: [
-                    {option: '新注册用户统计', url: ''},
-                    {option: '交易量统计', url: ''},
-                    {option: '入金量统计', url: ''},
-                    {option: '出金量统计', url: ''},
-                    {option: '佣金量统计', url: ''},
-                    {option: '用户佣金量统计', url: ''},
+                    {option: 'New registered user statistics', url: ''},
+                    {option: 'Volume statistics', url: ''},
+                    {option: 'Gold entry statistics', url: ''},
+                    {option: 'Gold output statistics', url: ''},
+                    {option: 'Commission volume statistics', url: ''},
+                    {option: 'User Commission volume statistics', url: ''},
                     {option: '短线外汇盈亏统计', url: ''},
                     {option: '外汇交易盈亏统计', url: ''}
         ]
       },
       {
-        menu: '审核/冻结/设置',
+        menu: 'Auditing/Freezing/Setting',
         iconclassname: 'el-icon-star-off',
         item: [
-                            {option: '注册客户审核', url: ''},
-                            {option: '客户冻结', url: ''},
-                            {option: '代理审核', url: ''},
-                            {option: '出金审核', url: ''},
-                            {option: '代理资格撤销', url: ''},
-                            {option: '系统参数设置', url: ''},
-                            {option: '通用佣金参数设置', url: ''},
-                            {option: '指定佣金参数设置', url: ''},
-                            {option: '短线佣金参数设置', url: ''},
-                            {option: '外汇佣金参数设置', url: ''},
-                            {option: '组参数设置', url: ''},
-                            {option: '组品种设置', url: ''},
-                            {option: '品种参数设置', url: ''},
-                            {option: '报警参数设置', url: ''}
+                    {option: 'Registered customer audit', url: ''},
+                    {option: 'Client freeze', url: ''},
+                    {option: 'Agency audit', url: ''},
+                    {option: 'Audit of gold payment', url: ''},
+                    {option: 'Proxy revocation', url: ''},
+                    {option: 'System parameter setting', url: ''},
+                    {option: '通用佣金参数设置', url: ''},
+                    {option: '指定佣金参数设置', url: ''},
+                    {option: '短线佣金参数设置', url: ''},
+                    {option: '外汇佣金参数设置', url: ''},
+                    {option: 'Group parameter settings', url: ''},
+                    {option: 'Group variety setting', url: ''},
+                    {option: 'Variety parameter setting', url: ''},
+                    {option: 'Alarm parameter setting', url: ''}
         ]
       },
       {
-        menu: '信息管理',
+        menu: 'Information management',
         iconclassname: 'el-icon-star-on',
         item: [
-            {option: '通告管理', url: ''},
-            {option: '留言管理', url: ''}
+            {option: 'Notification management', url: ''},
+            {option: 'Message management', url: ''}
         ]
       }]
   },
   ja: {
     Item: [
       {
-        menu: '日本語の',
+        menu: 'ダッシュボード',
         iconclassname: 'el-icon-date',
         url: 'home'
       },
       {
-        menu: '账号管理',
+        menu: 'アカウント管理',
         iconclassname: 'el-icon-menu',
         item: [
-                    {option: '角色管理', url: 'one'},
-                    {option: '账号管理', url: 'two'}
+                    {option: 'キャラクター管理', url: 'one'},
+                    {option: 'アカウント管理', url: 'two'}
         ]
       },
       {
-        menu: '系统参数设置',
+        menu: 'システムパラメータ設定',
         iconclassname: 'el-icon-message',
         item: [
-                    {option: '交易类型设置', url: 'three'},
-                    {option: '交易类型名称设置', url: 'four'},
-                    {option: '交易类型语言设置', url: 'five'},
-                    {option: '投资额设置', url: 'six'},
-                    {option: '利润率设置', url: 'seven'},
-                    {option: '时间段设置', url: 'eight'},
-                    {option: '系统加载设置', url: 'nine'}
+                    {option: '取引タイプ設定', url: 'three'},
+                    {option: '取引タイプ名称設定', url: 'four'},
+                    {option: '取引タイプ言語設定', url: 'five'},
+                    {option: '投資額設定', url: 'six'},
+                    {option: '利益率設定', url: 'seven'},
+                    {option: '時間帯設定', url: 'eight'},
+                    {option: 'システム負荷設定', url: 'nine'}
         ]
       },
       {
-        menu: '风控参数设置',
+        menu: '風制御パラメータ設定',
         iconclassname: 'el-icon-star-off',
         item: [
-                    {option: '交易品种与类型设置', url: ''},
-                    {option: '交易时间段设置', url: ''},
-                    {option: '交易组投资额风控', url: ''},
-                    {option: '交易组利润率风控', url: ''}
+                    {option: '取引品種とタイプ設定', url: ''},
+                    {option: 'トランザクションタイム設定', url: ''},
+                    {option: '取引グループ投資額風制御', url: ''},
+                    {option: '取引グループ利益率風制御', url: ''}
         ]
       },
       {
-        menu: '风险参数设置',
+        menu: 'リスクパラメータ設定',
         iconclassname: 'el-icon-star-on',
         item: [
-                    {option: '交易总量设置', url: ''},
-                    {option: '订单总数设置', url: ''},
-                    {option: '投资参数设置', url: ''}
+                    {option: '総取引総量設定', url: ''},
+                    {option: '受注総数設定', url: ''},
+                    {option: '投資パラメータ設定', url: ''}
         ]
       },
       {
-        menu: '风险监控',
+        menu: 'リスク監視',
         iconclassname: 'el-icon-menu',
         item: [
-                    {option: '交易报警监控', url: ''},
-                    {option: '外汇普通盈亏监控', url: ''},
-                    {option: '短线外汇盈亏监控', url: ''},
-                    {option: 'IP地址监控', url: ''}
+                    {option: 'トランザクション警報制御', url: ''},
+                    {option: '外国為替普通損益監視', url: ''},
+                    {option: '短期外貨外貨損益監視', url: ''},
+                    {option: 'IPアドレス監視', url: ''}
         ]
       },
       {
-        menu: '报表查询',
+        menu: '諸表クエリ',
         iconclassname: 'el-icon-message',
         item: [
-                    {option: '短线外汇持仓交易明细', url: ''},
-                    {option: '短线外汇平仓交易明细', url: ''},
-                    {option: '外汇持仓交易明细', url: ''},
-                    {option: '外汇平仓交易明细', url: ''},
-                    {option: '入金明细', url: ''},
-                    {option: '出金明细', url: ''},
-                    {option: '佣金明细', url: ''},
-                    {option: '用户佣金明细', url: ''},
-                    {option: '佣金来源明细', url: ''},
-                    {option: '订单佣金明细', url: ''}
+                    {option: '短期外貨取引明細倉', url: ''},
+                    {option: '短期外貨外貨取引明細', url: ''},
+                    {option: '外国為替取引明細倉', url: ''},
+                    {option: '外貨平倉取引明細', url: ''},
+                    {option: '入金明細', url: ''},
+                    {option: '金の明細を出す', url: ''},
+                    {option: 'コミッション明細', url: ''},
+                    {option: 'ユーザコミッション明細', url: ''},
+                    {option: 'コミッションは明細が由来します', url: ''},
+                    {option: '注文コミッション明細明細', url: ''}
         ]
       },
       {
-        menu: '统计查询',
+        menu: '統計調査',
         iconclassname: 'el-icon-star-on',
         item: [
-                    {option: '新注册用户统计', url: ''},
-                    {option: '交易量统计', url: ''},
-                    {option: '入金量统计', url: ''},
-                    {option: '出金量统计', url: ''},
-                    {option: '佣金量统计', url: ''},
-                    {option: '用户佣金量统计', url: ''},
-                    {option: '短线外汇盈亏统计', url: ''},
-                    {option: '外汇交易盈亏统计', url: ''}
+                    {option: '新登録ユーザー統計', url: ''},
+                    {option: '取引量統計', url: ''},
+                    {option: '入金量統計', url: ''},
+                    {option: '金量統計', url: ''},
+                    {option: 'コミッション統計', url: ''},
+                    {option: 'ユーザマージン統計', url: ''},
+                    {option: '短期外貨外貨損益統計', url: ''},
+                    {option: '外貨取引損益統計', url: ''}
         ]
       },
       {
-        menu: '审核/冻结/设置',
+        menu: '監査/凍結/設定',
         iconclassname: 'el-icon-star-off',
         item: [
-                            {option: '注册客户审核', url: ''},
-                            {option: '客户冻结', url: ''},
-                            {option: '代理审核', url: ''},
-                            {option: '出金审核', url: ''},
-                            {option: '代理资格撤销', url: ''},
-                            {option: '系统参数设置', url: ''},
-                            {option: '通用佣金参数设置', url: ''},
-                            {option: '指定佣金参数设置', url: ''},
-                            {option: '短线佣金参数设置', url: ''},
-                            {option: '外汇佣金参数设置', url: ''},
-                            {option: '组参数设置', url: ''},
-                            {option: '组品种设置', url: ''},
-                            {option: '品种参数设置', url: ''},
-                            {option: '报警参数设置', url: ''}
+                            {option: '登録顧客審査', url: ''},
+                            {option: 'お客様凍結', url: ''},
+                            {option: '代理審査', url: ''},
+                            {option: '金を出して審査する', url: ''},
+                            {option: '代理資格を取り消す', url: ''},
+                            {option: 'システムパラメータ設定', url: ''},
+                            {option: '一般コミッションパラメータ設定', url: ''},
+                            {option: '指定コミッションパラメータ設定', url: ''},
+                            {option: 'スタブコミッションパラメータ設定', url: ''},
+                            {option: '外国為替コミッションパラメータ設定', url: ''},
+                            {option: '組パラメータ設定', url: ''},
+                            {option: '組品種設置', url: ''},
+                            {option: '品種パラメータ設定', url: ''},
+                            {option: '警報パラメータ設定', url: ''}
         ]
       },
       {
-        menu: '信息管理',
+        menu: '情報管理',
         iconclassname: 'el-icon-star-on',
         item: [
             {option: '通告管理', url: ''},
-            {option: '留言管理', url: ''}
+            {option: 'メッセージ管理', url: ''}
         ]
       }]
   },
   cn: {
     Item: [
       {
-        menu: '简体中文',
+        menu: '仪表板',
         iconclassname: 'el-icon-date',
         url: 'home'
       },
@@ -355,6 +355,7 @@ const messages = {
 }
 
 export default new VueI18n({
-  locale: 'ja', // set locale
+  locale: 'cn', // set locale
   messages // set locale messages
 })
+

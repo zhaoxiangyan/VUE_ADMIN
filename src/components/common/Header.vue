@@ -1,13 +1,3 @@
-<i18n>
-{
-  "en": {
-    "hello": "hello world!"
-  },
-  "ja": {
-    "hello": "こんにちは、世界！"
-  }
-}
-</i18n>
 <template>
         <div class="header">
             <div class="left" v-bind:class="[ getcollapsed ? '' : 'min-left']">
@@ -16,7 +6,6 @@
             <div class="center" @click.prevent="changecollapsed">
                 <i v-bind:class="[ getcollapsed ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right']" ></i>
             </div>
-            <span>语言切换：{{$t("Item[0].menu")}}</span>
             <div class="right">
                   <el-dropdown class="personal" trigger="hover">
                    <span class="el-dropdown-link">andy<img src="../../assets/user_photo.jpg"></span>
@@ -26,12 +15,12 @@
                       <el-dropdown-item divided>退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                  </el-dropdown>  
-                 <el-dropdown class="language" trigger="click">
-                   <span class="el-dropdown-link"><img src="../../assets/China.png">{{$t('Item[0].menu')}}</span>
+                 <el-dropdown class="language" trigger="hover">
+                   <span class="el-dropdown-link"><img src="../../assets/China.png">{{$t("Item[0].menu")}}</span>
                     <el-dropdown-menu class="language_box"  slot="dropdown">
-                      <el-dropdown-item @click="i18n.locale='ja'"><img src="../../assets/China.png">简体中文</el-dropdown-item>
-                      <el-dropdown-item @click="locale('ja')"><img src="../../assets/Japan.png">日语</el-dropdown-item>
-                      <el-dropdown-item @click="locale('en')"><img src="../../assets/United Kingdom(Great Britain).png" >英语</el-dropdown-item>
+                      <el-dropdown-item @click.native="ll('cn')"><img src="../../assets/China.png">简体中文</el-dropdown-item>
+                      <el-dropdown-item @click.native="ll('ja')"><img src="../../assets/Japan.png">日语</el-dropdown-item>
+                      <el-dropdown-item @click.native="ll('en')"><img src="../../assets/United Kingdom(Great Britain).png" >英语</el-dropdown-item>
                     </el-dropdown-menu>
                  </el-dropdown>
             </div>
@@ -41,43 +30,29 @@
 <script>
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
-
+    import VueI18n from 'vue-i18n'
+    import i18n from '../../vueI18n/i18n.js'
     export default {
       name: 'header',  
       data () {
         return {
-          // locale: 'en'
-       
+          // name: 'linxin'
         }
       },
-      // watch: {
-      //   locale (val) {
-      //     this.$i18n.locale = val
-      //   }
-      // },
       computed: {
       // 使用对象展开运算符将getters混入computed对象中
       ...mapGetters([
-        'getcollapsed',
-        'getlocale'
-      ])    
+        'getcollapsed'
+      ])   
       },
       methods: {
         //折叠导航栏
         ...mapActions([
-          'changecollapsed',
-          'changelanguage'
+          'changecollapsed'
         ]),
-        locale: function(val) {
-          alert(val);
-          i18n.locale = val;
+        ll: function(n){
+          i18n.locale = n;
         }
-        // Changelanguage: function(type){
-        //   store.commit('changelanguage',type);
-        // }
-        // Changelanguage(n){
-        //   this.$store.dispatch("changelanguage")
-        // }
       }
     }
 </script>
