@@ -8,7 +8,7 @@
             </div>
             <div class="right">
                   <el-dropdown class="personal" trigger="hover">
-                   <span class="el-dropdown-link">andy<img src="../../assets/user_photo.jpg"></span>
+                   <span class="el-dropdown-link">andy<img src="../../../assets/user_photo.jpg"></span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item>我的消息</el-dropdown-item>
                       <el-dropdown-item>设置</el-dropdown-item>
@@ -16,11 +16,11 @@
                     </el-dropdown-menu>
                  </el-dropdown>  
                  <el-dropdown class="language" trigger="hover">
-                   <span class="el-dropdown-link"><img src="../../assets/China.png">{{$t("Item[0].menu")}}</span>
+                   <span class="el-dropdown-link"><img src="../../../assets/China.png">{{$t("Item[0].menu")}}</span>
                     <el-dropdown-menu class="language_box"  slot="dropdown">
-                      <el-dropdown-item @click.native="ll('cn')"><img src="../../assets/China.png">简体中文</el-dropdown-item>
-                      <el-dropdown-item @click.native="ll('ja')"><img src="../../assets/Japan.png">日语</el-dropdown-item>
-                      <el-dropdown-item @click.native="ll('en')"><img src="../../assets/United Kingdom(Great Britain).png" >英语</el-dropdown-item>
+                      <el-dropdown-item @click.native="ll('cn')"><img src="../../../assets/China.png">简体中文</el-dropdown-item>
+                      <el-dropdown-item @click.native="ll('ja')"><img src="../../../assets/Japan.png">日语</el-dropdown-item>
+                      <el-dropdown-item @click.native="ll('en')"><img src="../../../assets/United Kingdom(Great Britain).png" >英语</el-dropdown-item>
                     </el-dropdown-menu>
                  </el-dropdown>
             </div>
@@ -31,7 +31,7 @@
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
     import VueI18n from 'vue-i18n'
-    import i18n from '../../vueI18n/i18n.js'
+    import i18n from '../../../vueI18n/i18n.js'
     export default {
       name: 'header',  
       data () {

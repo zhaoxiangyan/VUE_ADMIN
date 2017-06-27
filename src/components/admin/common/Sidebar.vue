@@ -33,7 +33,7 @@
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
     import VueI18n from 'vue-i18n'
-    import i18n from '../../vueI18n/i18n.js'
+    import i18n from '../../../vueI18n/i18n.js'
     export default {
       name: 'sidebar',
       data () {

@@ -9,61 +9,55 @@ export default new Router({
      // 路由地址重定向
     {
       path: '/',
-      redirect: '/hello'
+      redirect: '/adminlogin'
     },
     {
-      path: '/hello',
-      // name: 'Hello',
-      // component: Hello
-      component: resolve => require(['../components/Hello.vue'], resolve)
-    },
-    {
-      path: '/login',
-      component: resolve => require(['../components/common/Login.vue'], resolve)
+      path: '/adminlogin',
+      component: resolve => require(['../components/adminLogin.vue'], resolve)
     },
     {
       path: '/home',
-      component: resolve => require(['../components/common/Home.vue'], resolve),
+      component: resolve => require(['../components/admin/common/Home.vue'], resolve),
       children: [
         {
           path: '/',
-          component: resolve => require(['../components/page/One.vue'], resolve)
+          component: resolve => require(['../components/admin/views/One.vue'], resolve)
         },
         {
           path: '/one',
-          component: resolve => require(['../components/page/One.vue'], resolve)
+          component: resolve => require(['../components/admin/views/One.vue'], resolve)
         },
         {
           path: '/two',
-          component: resolve => require(['../components/page/Two.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Two.vue'], resolve)
         },
         {
           path: '/three',
-          component: resolve => require(['../components/page/Three.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Three.vue'], resolve)
         },
         {
           path: '/four',
-          component: resolve => require(['../components/page/Four.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Four.vue'], resolve)
         },
         {
           path: '/five',
-          component: resolve => require(['../components/page/Five.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Five.vue'], resolve)
         },
         {
           path: '/six',
-          component: resolve => require(['../components/page/Six.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Six.vue'], resolve)
         },
         {
           path: '/seven',
-          component: resolve => require(['../components/page/Seven.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Seven.vue'], resolve)
         },
         {
           path: '/eight',
-          component: resolve => require(['../components/page/Eight.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Eight.vue'], resolve)
         },
         {
           path: '/nine',
-          component: resolve => require(['../components/page/Nine.vue'], resolve)
+          component: resolve => require(['../components/admin/views/Nine.vue'], resolve)
         }
       ]
     }
