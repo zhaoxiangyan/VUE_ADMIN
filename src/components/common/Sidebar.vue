@@ -13,7 +13,7 @@
             </template>
         </el-menu> 
         <!--导航菜单-折叠后-->
-        <ul class="collapsed" style="width:90px" v-else ref="menuCollapsed" router>
+        <ul :default-active="onRoutes" class="collapsed" style="width:90px" v-else ref="menuCollapsed" router>
 			<li v-for="(item,index) in Item">
               <template v-if="!item.item">
 				<div><router-link :to="item.url"><i :class="item.iconclassname"></i></router-link></div>
@@ -257,5 +257,8 @@
    }
    .collapsed li a:hover{
        background:#48576a;
+   }
+   .collapsed li a.router-link-active{
+       color: #20a0ff;
    }
 </style>
