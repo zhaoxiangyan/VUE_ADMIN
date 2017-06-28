@@ -119,20 +119,18 @@ const messages = {
             {option: 'Message management', url: ''}
         ]
       }],
-    Userlogin: [
-      {
-        value: 'cn',
-        label: 'Chinese'
-      },
-      {
-        value: 'ja',
-        label: 'Japanese'
-      },
-      {
-        value: 'en',
-        label: 'English'
-      }
-    ]
+    Userlogin: [{
+      type: [
+          {value: 'cn', label: 'Chinese'},
+          {value: 'ja', label: 'Japanese'},
+          {value: 'en', label: 'English'}
+      ],
+      placeholder1: 'Login account ',
+      placeholder2: 'Login password ',
+      checkbox: 'Remember',
+      login: 'Login in',
+      register: 'Register'
+    }]
   },
   ja: {
     Item: [
@@ -249,20 +247,18 @@ const messages = {
             {option: 'メッセージ管理', url: ''}
         ]
       }],
-    Userlogin: [
-      {
-        value: 'cn',
-        label: '中国語 '
-      },
-      {
-        value: 'ja',
-        label: '日本語 '
-      },
-      {
-        value: 'en',
-        label: '英語 '
-      }
-    ]
+    Userlogin: [{
+      type: [
+          {value: 'cn', label: '中国語'},
+          {value: 'ja', label: '日本語'},
+          {value: 'en', label: '英語'}
+      ],
+      placeholder1: 'アカウントの登録 ',
+      placeholder2: 'パスワードを登録 ',
+      checkbox: 'パスワードを覚えて ',
+      login: '登録 ',
+      register: '登録 '
+    }]
   },
   cn: {
     Item: [
@@ -379,20 +375,18 @@ const messages = {
             {option: '留言管理', url: ''}
         ]
       }],
-    Userlogin: [
-      {
-        value: 'cn',
-        label: '简体中文'
-      },
-      {
-        value: 'ja',
-        label: '日语'
-      },
-      {
-        value: 'en',
-        label: '英语 '
-      }
-    ]
+    Userlogin: [{
+      type: [
+          {value: 'cn', label: '简体中文'},
+          {value: 'ja', label: '日语'},
+          {value: 'en', label: '英语 '}
+      ],
+      placeholder1: '登录账号',
+      placeholder2: '登录密码',
+      checkbox: '记住密码',
+      login: '登录',
+      register: '注册'
+    }]
   }
 }
 

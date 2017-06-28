@@ -8,34 +8,23 @@
                             <form action="index-.html" class="panel-body">
                                 <div class="form-group clearfix">
                                     <i><img src="../assets/user/form_icon1.png"></i>
-                                    <input type="text" placeholder="登陆账号" class="form-control fl" name="username" id="username" value="">
+                                    <input type="text" :placeholder="$t('Userlogin[0].placeholder1')" class="form-control fl" name="username" id="username" value="">
                                 </div>
                                 <div class="form-group clearfix">
                                     <i><img src="../assets/user/form_icon2.png"></i>
-                                    <input type="password" placeholder="登陆密码" class="form-control fl" name="passwd" id="passwd" value="">
+                                    <input type="password" :placeholder="$t('Userlogin[0].placeholder2')" class="form-control fl" name="passwd" id="passwd" value="">
                                 </div>
                                 <div class="checkbox login_check">
-                                    <label><input type="checkbox" name="remember" id="remember" value="1" checked="checked">Remember</label>
+                                    <label><input type="checkbox" name="remember" id="remember" value="1" checked="checked">{{$t('Userlogin[0].checkbox')}}</label>
                                 </div>
-                                <button type="button" class="btn btn-warning" name="loginin" id="loginin">登陆</button>
-                                <button type="button" class="btn btn-hui" name="signin" id="signin">注册</button>
+                                <button type="button" class="btn btn-warning" name="loginin" id="loginin">{{$t('Userlogin[0].login')}}</button>
+                                <button type="button" class="btn btn-hui" name="signin" id="signin">{{$t('Userlogin[0].register')}}</button>
                             </form>
                             <div class="switch_box">
-                                <!--<div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                        中文简体 <span class="caret"></span>
-                                        
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" @click="setLanguage('cn')">中文简体</a></li>
-                                        <li><a href="#" @click="setLanguage('ja')">日语</a></li>
-                                        <li><a href="#" @click="setLanguage('en')">English</a></li>
-                                    </ul>
-                                </div>-->
                                 <template>
                                 <el-select v-model="locale" placeholder="请选择">
                                     <el-option
-                                    v-for="item in $t('Userlogin')"
+                                    v-for="item in $t('Userlogin[0].type')"
                                     :key="item.value"
                                     :label="item.label"
                                     :value="item.value">
@@ -177,79 +166,9 @@ input:focus{
                .switch_box{
                    padding:0px 35px 30px 35px;
                    text-align:right;
-                   .btn-group{
-                       position: relative;
-                       display: inline-block;
-                       vertical-align: middle;
-                       button{
-                          display: inline-block;
-                          padding: 6px 12px;
-                          margin-bottom: 0;
-                          font-size: 14px;
-                          font-weight: normal;
-                          line-height: 1.42857143;
-                          text-align: center;
-                          white-space: nowrap;
-                          vertical-align: middle;
-                          -ms-touch-action: manipulation;
-                          touch-action: manipulation;
-                          cursor: pointer;
-                          -webkit-user-select: none;
-                          -moz-user-select: none;
-                          -ms-user-select: none;
-                          user-select: none;
-                          background-image: none;
-                          border: 1px solid transparent;
-                          border-radius: 4px;
-                          position: relative;
-                          background: #9596a0;
-                          border-color: #9596a0;
-                          span{
-                              display: inline-block;
-                              width: 0;
-                              height: 0;
-                              margin-left: 0px;
-                              vertical-align: middle;
-                              border-top: 4px dashed;
-                              border-right: 4px solid transparent;
-                              border-left: 4px solid transparent;
-                          }
-                       }
-                       .dropdown-menu{
-                          position: absolute;
-                          top: 100%;
-                          left: 0;
-                          z-index: 1000;
-                          display: none;
-                          float: left;
-                          min-width: 160px;
-                          padding: 5px 0;
-                          margin: 2px 0 0;
-                          font-size: 14px;
-                          text-align: left;
-                          list-style: none;
-                          background-color: #fff;
-                          -webkit-background-clip: padding-box;
-                          background-clip: padding-box;
-                          border: 1px solid #ccc;
-                          border: 1px solid rgba(0, 0, 0, .15);
-                          border-radius: 4px;
-                          -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-                          box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-                          li>a{
-                              display: block;
-                              padding: 3px 20px;
-                              clear: both;
-                              font-weight: normal;
-                              line-height: 1.42857143;
-                              color: #333;
-                              white-space: nowrap;
-                          }
-                          li>a:hover,li>a:focus{
-                              background-color:#f5f5f5;
-                          }
-                       }
-                   }
+                   .el-select{
+                       width:105px;
+                   }      
                }    
            } 
        }
