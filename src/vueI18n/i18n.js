@@ -118,7 +118,21 @@ const messages = {
             {option: 'Notification management', url: ''},
             {option: 'Message management', url: ''}
         ]
-      }]
+      }],
+    Userlogin: [
+      {
+        value: 'cn',
+        label: 'Chinese'
+      },
+      {
+        value: 'ja',
+        label: 'Japanese'
+      },
+      {
+        value: 'en',
+        label: 'English'
+      }
+    ]
   },
   ja: {
     Item: [
@@ -234,7 +248,21 @@ const messages = {
             {option: '通告管理', url: ''},
             {option: 'メッセージ管理', url: ''}
         ]
-      }]
+      }],
+    Userlogin: [
+      {
+        value: 'cn',
+        label: '中国語 '
+      },
+      {
+        value: 'ja',
+        label: '日本語 '
+      },
+      {
+        value: 'en',
+        label: '英語 '
+      }
+    ]
   },
   cn: {
     Item: [
@@ -350,7 +378,21 @@ const messages = {
             {option: '通告管理', url: ''},
             {option: '留言管理', url: ''}
         ]
-      }]
+      }],
+    Userlogin: [
+      {
+        value: 'cn',
+        label: '简体中文'
+      },
+      {
+        value: 'ja',
+        label: '日语'
+      },
+      {
+        value: 'en',
+        label: '英语 '
+      }
+    ]
   }
 }
 
@@ -359,3 +401,5 @@ export default new VueI18n({
   messages // set locale messages
 })
 
+// Item是sidebar.vue页面数据
+// Userlogin是userlogin.vue页面数据

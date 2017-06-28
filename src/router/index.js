@@ -6,14 +6,10 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-     // 路由地址重定向
-    {
-      path: '/',
-      redirect: '/adminlogin'
-    },
+    // 管理员路由地址
     {
       path: '/adminlogin',
-      component: resolve => require(['../components/adminLogin.vue'], resolve)
+      component: resolve => require(['../components/adminlogin.vue'], resolve)
     },
     {
       path: '/home',
@@ -60,6 +56,16 @@ export default new Router({
           component: resolve => require(['../components/admin/views/Nine.vue'], resolve)
         }
       ]
+    },
+    // 用户路由地址
+    {
+      // 路由地址重定向
+      path: '/',
+      redirect: '/userlogin'
+    },
+    {
+      path: '/userlogin',
+      component: resolve => require(['../components/userlogin.vue'], resolve)
     }
   ]
 })

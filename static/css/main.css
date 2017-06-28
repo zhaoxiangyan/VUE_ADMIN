@@ -1,3 +1,4 @@
+/*公共样式表*/
 *{margin:0;padding:0;}
 html,body,#app,.wrapper{
     width:100%;
@@ -26,7 +27,7 @@ a{text-decoration: none}
     opacity: 0;
 }
 /*右边page内容块*/
-.content {
+#content {
     background: none repeat scroll 0 0 #fff;
     position: absolute;
     left: 250px;

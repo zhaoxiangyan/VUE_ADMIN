@@ -21,7 +21,7 @@
 </template>
 <script>
 	export default {
-  name: 'login',
+  name: 'adminlogin',
   data () {
     return {
       username: '',
