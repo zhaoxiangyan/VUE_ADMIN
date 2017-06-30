@@ -17,12 +17,12 @@
                                 <div class="checkbox login_check">
                                     <label><input type="checkbox" name="remember" id="remember" value="1" checked="checked">{{$t('Userlogin[0].checkbox')}}</label>
                                 </div>
-                                <button type="button" class="btn btn-warning" name="loginin" id="loginin">{{$t('Userlogin[0].login')}}</button>
-                                <button type="button" class="btn btn-hui" name="signin" id="signin">{{$t('Userlogin[0].register')}}</button>
+                                <button type="button" class="btn btn-warning" name="loginin" id="loginin" @click="userloginbtn">{{$t('Userlogin[0].login')}}</button>
+                                <button type="button" class="btn btn-hui" name="signin" id="signin" @click="userregisterbtn">{{$t('Userlogin[0].register')}}</button>
                             </form>
                             <div class="switch_box">
                                 <template>
-                                <el-select v-model="locale" placeholder="请选择">
+                                <el-select v-model="locale"  placeholder="请选择">
                                     <el-option
                                     v-for="item in $t('Userlogin[0].type')"
                                     :key="item.value"
@@ -60,6 +60,14 @@ export default {
     watch: {
         locale (val) {
             this.$i18n.locale = val 
+        }
+    },
+    methods: {
+        userloginbtn () {
+            this.$router.push('/home')
+        },
+        userregisterbtn () {
+            this.$router.push('/userregister')
         }
     }
 }

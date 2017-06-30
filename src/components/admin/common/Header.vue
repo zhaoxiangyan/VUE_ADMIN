@@ -20,7 +20,7 @@
                     <el-dropdown-menu class="language_box"  slot="dropdown">
                       <el-dropdown-item @click.native="ll('cn')"><img src="../../../assets/China.png">简体中文</el-dropdown-item>
                       <el-dropdown-item @click.native="ll('ja')"><img src="../../../assets/Japan.png">日语</el-dropdown-item>
-                      <el-dropdown-item @click.native="ll('en')"><img src="../../../assets/United Kingdom(Great Britain).png" >英语</el-dropdown-item>
+                      <el-dropdown-item @click.native="ll('en')"><img src="../../../assets/English.png" >英语</el-dropdown-item>
                     </el-dropdown-menu>
                  </el-dropdown>
             </div>

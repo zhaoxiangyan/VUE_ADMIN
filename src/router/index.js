@@ -64,6 +64,10 @@ export default new Router({
       redirect: '/userlogin'
     },
     {
+      path: '/userregister',
+      component: resolve => require(['../components/userregister.vue'], resolve)
+    },
+    {
       path: '/userlogin',
       component: resolve => require(['../components/userlogin.vue'], resolve)
     }

@@ -9,6 +9,8 @@ body{
     font-family:"Helvetica Neue",Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
 }
 a{text-decoration: none}
+img{border:0;vertical-align:middle;}
+ul,li{list-style:none;}
 .fl{
     float:left;
 }
