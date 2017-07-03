@@ -1,7 +1,8 @@
 <template>
     <div class="sidebar" :style="opencollapse">
+      <transition name="fade">
         <!--导航菜单-->
-         <el-menu :default-active="onRoutes" class="el-menu-vertical-demo" theme="dark" unique-opened router v-if="getcollapsed">
+         <el-menu key="save" :default-active="onRoutes" class="el-menu-vertical-demo" theme="dark" unique-opened router v-if="getcollapsed">
             <template v-for="(item,index) in $t('Item')">
               <el-submenu :index="index+''" v-if="item.item">
                 <template slot="title"><i :class="item.iconclassname"></i>{{item.menu}}</template>
@@ -13,7 +14,7 @@
             </template>
         </el-menu> 
         <!--导航菜单-折叠后-->
-        <ul :default-active="onRoutes" class="collapsed" style="width:90px" v-else ref="menuCollapsed" router>
+        <ul key="edit" :default-active="onRoutes" class="collapsed" style="width:90px" v-else ref="menuCollapsed" router>
 			<li v-for="(item,index) in  $t('Item')">
               <template v-if="!item.item">
 				<div><router-link :to="item.url"><i :class="item.iconclassname"></i></router-link></div>
@@ -26,6 +27,7 @@
               </template>
 			</li>
 		</ul>
+      </transition>  
     </div>
 </template>
 

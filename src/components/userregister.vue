@@ -2,24 +2,25 @@
 <div class="userregister">
 <!-- 头部导航内容块 -->
    <div class="nav">
-       <div class="nav_header">
+       <div class="nav_header" v-bind:class="[ collapsestate ? '' : 'width90']">
            <div class="nav_brand">
               <img class="nav_brand_logo" src="../assets/logo.png" >
            </div>
        </div>
-       <div class="nav_container clearfix">
+       <div class="nav_container clearfix" v-bind:class="[ collapsestate ? '' : 'margin-left90']">
            <ul class="nav_toolbar">
-               <li id="toggleMenubar"><a><i class="fa fa-bars"></i></a></li>
-               <li id="toggleFullscreen"><a><i class="fa fa-arrows-alt"></i></a></li>
+               <li id="toggleMenubar" @click.prevent="changecollapse"><a><i class="fa" v-bind:class="[ collapsestate ? 'fa-arrow-left' : 'fa-bars']" ></i></a></li>
+               <li v-if="fullscreen" id="toggleFullscreen" @click="fullScreen()"><a><i class="fa fa-arrows-alt"></i></a></li>
+               <li v-else @click="cancelFullScreen()"><a><i class="fa fa-compress"></i></a></li>
                <li class="dropdown">
-                  <a>快捷导航<i class="fa fa-angle-down"></i></a>
-                  <span>
-                        <div><i class="fa fa-angle-right"></i><a>登录</a></div>
-                        <div><i class="fa fa-angle-right"></i><a>注册</a></div>
+                  <a id="toggleQuick" @click="togglestate=!togglestate">快捷导航<i class="fa fa-angle-down"></i></a>
+                  <span v-show="togglestate">
+                        <div><i class="fa fa-angle-right"></i><router-link to="/userlogin">登录</router-link></div>
+                        <div><i class="fa fa-angle-right"></i><router-link to="/userregister">注册</router-link></div>
                   </span>
                </li>
            </ul>
-           <el-dropdown class="language fr" trigger="hover">
+           <el-dropdown class="language fr" trigger="click">
                     <span class="el-dropdown-link"><img src="../assets/China.png">{{$t("Item[0].menu")}}</span>
                     <el-dropdown-menu class="language_box"  slot="dropdown">
                       <el-dropdown-item @click.native="ll('cn')"><img src="../assets/China.png">简体中文</el-dropdown-item>
@@ -30,13 +31,13 @@
        </div>
    </div>
    <!--左边折叠导航栏-->
-   <div class="left_collapse">
+   <div class="left_collapse" v-bind:class="[ collapsestate ? '' : 'width90']">
         <ul>
            <li>导航</li>
         </ul>
    </div>
    <!--注册表单内容块-->
-   <div class="content">
+   <div class="content" v-bind:class="[ collapsestate ? '' : 'margin-left90']">
         <div class="content_title">
            <h1>注册真实账号</h1>
            <el-breadcrumb separator="/">
@@ -49,38 +50,38 @@
              <h3 class="form_title">注册真实账号</h3>
              <div class="form_body">
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*姓名:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*姓名:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="username" placeholder="username"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*推荐人编号:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*推荐人编号:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="parentid" placeholder="parentid"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*身份证号码:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*身份证号码:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="identifier" placeholder="identifier"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*手机:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*手机:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="mobile" placeholder="mobile"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*邮箱:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*邮箱:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="email" placeholder="email"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*国家:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*国家:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                         <el-select v-model="value" placeholder="country" style="width:100%;" name="country">
                             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                             </el-option>
@@ -88,44 +89,44 @@
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*省/州:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*省/州:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="province" placeholder="province"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*市:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*市:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="city" placeholder="city"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*县:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*县:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="town" placeholder="town"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*详细地址:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*详细地址:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input name="address" placeholder="address"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*账号密码:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*账号密码:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                        <el-input type="password" name="password" placeholder="password"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*确认账号密码:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*确认账号密码:</el-col>
+                    <el-col :sm="16"  :md="14" :lg="12">
                        <el-input type="password" name="repassword" placeholder="repassword"></el-input>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*上传身份证正面:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6">*上传身份证正面:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                         <el-upload 
                         class="upload-demo fl"
                         drag name="image1"
@@ -135,8 +136,8 @@
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*上传身份证反面:</el-col>
-                    <el-col :sm="12" :lg="12">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6" >*上传身份证反面:</el-col>
+                    <el-col :sm="16" :md="14" :lg="12">
                         <el-upload 
                         class="upload-demo fl"
                         drag name="image2"
@@ -146,21 +147,21 @@
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6">*</el-col>
-                    <el-col :sm="12" :lg="12" style="text-align:left;">
+                    <el-col class="input_title" :sm="8"  :md="10" :lg="6">*</el-col>
+                    <el-col :sm="16" :md="14" :lg="12" style="text-align:left;">
                     注意事项：上传的单张图片大小不要超过2M;否则影响开户！
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6"></el-col>
-                    <el-col :sm="12" :lg="12" style="text-align:left;">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6"></el-col>
+                    <el-col :sm="16"  :md="14" :lg="12" style="text-align:left;">
                      <el-checkbox v-model="checked" name="agree">我已阅读，了解并接受</el-checkbox>
                      <a href="javascript:void(0);" style="color:red;font-size:14px;">客户协议</a>
                     </el-col>
                  </el-row>
                  <el-row :gutter="15">
-                    <el-col class="input_title" :sm="12" :lg="6"></el-col>
-                    <el-col :sm="12" :lg="12" style="text-align:left;">
+                    <el-col class="input_title" :sm="8" :md="10" :lg="6"></el-col>
+                    <el-col :sm="16" :md="14" :lg="12" style="text-align:left;">
                        <el-button type="primary" style="width:130px;">注册</el-button>
                     </el-col>
                  </el-row>
@@ -198,12 +199,59 @@ export default {
         // 身份证上传
         imageUrl: '',
         // 勾选框数据
-        checked: true
+        checked: true,
+        // 快捷导航展开隐藏
+        togglestate: false,
+        // 控制全屏状态
+        fullscreen: true,
+        // 左边导航栏折叠
+        collapsestate: true
       } 
     },
+    created: function() {
+        // alert(typeof(document.getElementsByClassName("el-upload")));
+        // document.getElementsByClassName("el-upload")[0].style.width="100%";
+        var all = document.getElementsByClassName("upload-demo");
+        for(var i=0;i<all.length;i++){
+            // all[i].style.width='90px!important';
+            alert(all[i].innerHTML);
+            all[i].style.width='100px';
+        }
+    },
     methods: {
+        // 语言切换
         ll: function(n){
           i18n.locale = n;
+        },
+        // 左边导航栏折叠
+        changecollapse: function(){
+           this.collapsestate = !this.collapsestate;
+        },
+        // 全屏
+        fullScreen: function() { 
+            if(document.documentElement.requestFullScreen) { 
+            document.documentElement.requestFullScreen(); 
+            } else if(document.documentElement.webkitRequestFullScreen ) { 
+            document.documentElement.webkitRequestFullScreen(); 
+            } else if(document.documentElement.mozRequestFullScreen) { 
+            document.documentElement.mozRequestFullScreen(); 
+            } else if(document.documentElement.msRequestFullscreen) {
+            document.documentElement.msRequestFullscreen();    
+            }
+            this.fullscreen = !this.fullscreen;
+        },
+        // 退出全屏
+        cancelFullScreen: function() { 
+            if(document.exitFullscreen) { 
+            document.exitFullscreen(); 
+            } else if(document.msExitFullscreen) { 
+            document.msExitFullscreen();
+            } else if(document.mozCancelFullScreen) { 
+            document.mozCancelFullScreen();
+            } else if(document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();    
+            } 
+            this.fullscreen = !this.fullscreen;
         },
         // 身份证上传
         handleAvatarSuccess(res, file) {
@@ -259,7 +307,7 @@ export default {
                 float: left;
                 height: 66px;
                 img{height: 42px;
-                    margin:12px 0 0 30px;}
+                    margin:12px 0 0 19px;}
             }
         }
         .nav_container{
@@ -278,11 +326,11 @@ export default {
                 li#toggleFullscreen{}
                 li.dropdown{
                     a{
+                        cursor:pointer;
                         i{margin-left:5px;}
                     }
                     span{
                         position:absolute;
-                        display:none;
                         box-sizing:border-box;
                         -webkit-box-sizing:border-box;
                         -moz-box-sizing:border-box;
@@ -394,6 +442,7 @@ export default {
                    text-align:left;
                 }
                 .form_body{
+                    padding:0 30px;
                     .el-row{
                         margin-top:10px;
                         .input_title{
@@ -410,13 +459,23 @@ export default {
             }
         }
     }
-} 
+}
+@media(max-width:768px){
+.userregister .content .main form .form_body .el-row .input_title{
+    text-align:left;
+}}
 // 语言选择样式
 .language_box li img{height:35px;}  
 // element面包屑样式
 // span.el-breadcrumb__item{color: #97a8be!important;}
 .el-breadcrumb{font-size:15px;}
 // 上传图片
-// .el-upload{width:100%;height:100%;}
-// .el-upload-dragger{width:500px;height:34px;}
+
+// 导航栏折叠
+.width90{
+    width:90px!important;
+}
+.margin-left90{
+    margin-left:90px!important;
+}
 </style>
