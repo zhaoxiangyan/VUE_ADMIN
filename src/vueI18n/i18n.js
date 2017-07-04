@@ -119,18 +119,19 @@ const messages = {
             {option: 'Message management', url: ''}
         ]
       }],
-    Userlogin: [{
-      type: [
-          {value: 'cn', label: 'Chinese'},
-          {value: 'ja', label: 'Japanese'},
-          {value: 'en', label: 'English'}
-      ],
+    Userlogin: {
       placeholder1: 'Login account ',
       placeholder2: 'Login password ',
       checkbox: 'Remember',
-      login: 'Login in',
+      login: 'Login',
       register: 'Register'
-    }]
+    },
+    Userregister: {
+      text: ['Navigate', 'Fast Navigate', 'Login', 'Register', 'Account Registration', 'Current page'],
+      label: ['User Name', 'Introducing Broker Number', 'Passport Number', 'Mobile Number', 'Email Address', 'Country', 'Province/State', 'City', 'District', 'Address', 'Password', 'Confirm Password', 'Upload ID Card Front', 'Upload ID Card Back'],
+      formtext: ['Drag the picture here or', 'Click upload', 'Attention:Upload image size should not exceed 2Mb;otherwise might affect account verification', 'I have read,understood and accepted', 'Customer Agreement', 'Register']
+    },
+    Language: {src: '../../static/img/English.png', value: 'English'}
   },
   ja: {
     Item: [
@@ -247,18 +248,19 @@ const messages = {
             {option: 'メッセージ管理', url: ''}
         ]
       }],
-    Userlogin: [{
-      type: [
-          {value: 'cn', label: '中国語'},
-          {value: 'ja', label: '日本語'},
-          {value: 'en', label: '英語'}
-      ],
+    Userlogin: {
       placeholder1: 'アカウントの登録 ',
       placeholder2: 'パスワードを登録 ',
       checkbox: 'パスワードを覚えて ',
       login: '登録 ',
       register: '登録 '
-    }]
+    },
+    Userregister: {
+      text: ['ナビゲーション', 'ショートカットナビゲーション', '登録', '登録', '登録の真実のアカウント', '現在位置'],
+      label: ['氏名', '推薦人番号', '身分証明書番号', '携帯電話', '電子メール', '国', '省/州', '市', '県', '詳細なアドレス', 'アカウントのパスワード', 'アカウントのパスワードを確認する', '身分証明書をアップロードする', '身分証明書をアップロードする'],
+      formtext: ['写真はここに、あるいは', 'アップクリックする', '注意事項：1枚の写真のサイズアップロードを超えないでください2 M、さもなくば影響の口座を設ける', '私はすでに読んで、理解して受け入れて', 'クライアントプロトコル', '登録']
+    },
+    Language: {src: '../../static/img/Japan.png', value: '日本語'}
   },
   cn: {
     Item: [
@@ -375,18 +377,19 @@ const messages = {
             {option: '留言管理', url: ''}
         ]
       }],
-    Userlogin: [{
-      type: [
-          {value: 'cn', label: '简体中文'},
-          {value: 'ja', label: '日语'},
-          {value: 'en', label: '英语 '}
-      ],
+    Userlogin: {
       placeholder1: '登录账号',
       placeholder2: '登录密码',
       checkbox: '记住密码',
       login: '登录',
       register: '注册'
-    }]
+    },
+    Userregister: {
+      text: ['导航', '快捷导航', '登录', '注册', '注册真实账号', '当前位置'],
+      label: ['姓名', '推荐人编号', '身份证号码', '手机', '邮箱', '国家', '省/州', '市', '县', '详细地址', '账号密码', '确认账号密码', '上传身份证正面', '上传身份证反面'],
+      formtext: ['将图片拖到此处，或', '点击上传', '注意事项：上传的单张图片大小不要超过2M；否则影响开户', '我已阅读，了解并接受', '客户协议', '注册']
+    },
+    Language: {src: '../../static/img/China.png', value: '简体中文'}
   }
 }
 
@@ -397,3 +400,5 @@ export default new VueI18n({
 
 // Item是sidebar.vue页面数据
 // Userlogin是userlogin.vue页面数据
+// Userregister是userregister.vue页面数据
+// Language是多个页面语言切换公用数据

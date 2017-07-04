@@ -8,23 +8,23 @@
                             <form action="index-.html" class="panel-body">
                                 <div class="form-group clearfix">
                                     <i><img src="../assets/user/form_icon1.png"></i>
-                                    <input type="text" :placeholder="$t('Userlogin[0].placeholder1')" class="form-control fl" name="username" id="username" value="">
+                                    <input type="text" :placeholder="$t('Userlogin.placeholder1')" class="form-control fl" name="username" id="username" value="">
                                 </div>
                                 <div class="form-group clearfix">
                                     <i><img src="../assets/user/form_icon2.png"></i>
-                                    <input type="password" :placeholder="$t('Userlogin[0].placeholder2')" class="form-control fl" name="passwd" id="passwd" value="">
+                                    <input type="password" :placeholder="$t('Userlogin.placeholder2')" class="form-control fl" name="passwd" id="passwd" value="">
                                 </div>
                                 <div class="checkbox login_check">
-                                    <label><input type="checkbox" name="remember" id="remember" value="1" checked="checked">{{$t('Userlogin[0].checkbox')}}</label>
+                                    <label><input type="checkbox" name="remember" id="remember" value="1" checked="checked">{{$t('Userlogin.checkbox')}}</label>
                                 </div>
-                                <button type="button" class="btn btn-warning" name="loginin" id="loginin" @click="userloginbtn">{{$t('Userlogin[0].login')}}</button>
-                                <button type="button" class="btn btn-hui" name="signin" id="signin" @click="userregisterbtn">{{$t('Userlogin[0].register')}}</button>
+                                <button type="button" class="btn btn-warning" name="loginin" id="loginin" @click="userloginbtn">{{$t('Userlogin.login')}}</button>
+                                <button type="button" class="btn btn-hui" name="signin" id="signin" @click="userregisterbtn">{{$t('Userlogin.register')}}</button>
                             </form>
                             <div class="switch_box">
                                 <template>
-                                <el-select v-model="locale"  placeholder="请选择">
+                                <el-select v-model="locale"   placeholder="请选择">
                                     <el-option
-                                    v-for="item in $t('Userlogin[0].type')"
+                                    v-for="item in type"
                                     :key="item.value"
                                     :label="item.label"
                                     :value="item.value">
@@ -54,8 +54,17 @@ export default {
     name: 'userlogin',
     data () {
         return {
-            locale: 'cn'
+            // 语言选择框数据绑定
+            locale: '',
+            type: [
+                {value: 'cn', label: '简体中文'},
+                {value: 'ja', label: '日本語'},
+                {value: 'en', label: 'English'}
+            ]
         }
+    },
+    created: function(){
+        this.locale = this.$i18n.locale;
     },
     watch: {
         locale (val) {

@@ -1,12 +1,6 @@
 <template>
    <div class="login">
-<!--  canvas begin -->
-<div class="can-ss" style="width:100%; height:100%;">
-  <div id="canvas-warp" class="canvas-in">
-    <div id="output"></div>
-  </div>
-</div>
-<!-- canvas end --> 
+
 
 <div class="main">
   <div class="header">
@@ -36,23 +30,17 @@
   name: 'adminlogin',
   created: function(){
     // FSS("canvas-warp","output");
-  },
+	
 	}
+  }
 </script>
 <!-- scoped  样式只对当前组件起作用 -->
 <style scoped>
-/*canvas背景图样式 begin*/
-.can-ss{position:absolute;z-index:1;top:0px;background-color:#1252d4;-webkit-transition: background-color 400ms ease-in-out;-ms-transition: background-color 400ms ease-in-out;-o-transition: background-color 400ms ease-in-out;-moz-transition: background-color 400ms ease-in-out;transition: background-color 400ms ease-in-out;}
-.canvas-in {height:100%;width: 100%;}
-#output {opacity: 0.3;width: 100%;height:100%;-webkit-transition: all 400ms ease-in-out;-ms-transition: all 400ms ease-in-out;-o-transition: all 400ms ease-in-out;-moz-transition: all 400ms ease-in-out;transition: all 400ms ease-in-out;}
-.color{width: 210px;height: 20px;margin: 0 auto;position: fixed;left: 50%;margin-left: -110px;bottom: 20px;}
-.color li{float: left;margin: 0 5px;width: 20px;height: 20px;background: #ccc;box-shadow: 0 0 4px #FFF;list-style: none;cursor: pointer;}
-.glys{ font-size:26px; font-weight:bold; color:#fff; padding-left:20px; line-height:38px; font-family:"微软雅黑";}
-/*canvas背景图样式 end*/
 .login{
   width:100%;
   height:100%;
   overflow:hidden;
+  background:rgba(0,55,255,0.72);
 }
 .login .main{
   padding-top:8%;
