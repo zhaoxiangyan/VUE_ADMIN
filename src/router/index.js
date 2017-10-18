@@ -9,17 +9,19 @@ export default new Router({
      // 路由地址重定向
     {
       path: '/',
-      redirect: '/hello'
+      redirect: '/login'
     },
-    {
-      path: '/hello',
-      // name: 'Hello',
-      // component: Hello
-      component: resolve => require(['../components/Hello.vue'], resolve)
-    },
+    // {
+    //   path: '/hello',
+    //   component: resolve => require(['../components/Hello.vue'], resolve)
+    // },
     {
       path: '/login',
       component: resolve => require(['../components/common/Login.vue'], resolve)
+    },
+    {
+      path: '/register',
+      component: resolve => require(['../components/common/Register.vue'], resolve)
     },
     {
       path: '/home',

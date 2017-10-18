@@ -12,11 +12,14 @@
    	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码">
    	  	 	</div>
           <div class="re">
-            <label for="keepPwd"><input type="checkbox" id="keepPwd">记住密码</label>
+            <span>
+              <input type="checkbox" id="keepPwd">记住密码
+            </span>
             <a href="/findpwd">忘记密码？</a>
           </div>
    	  	 	<div class="login_div">
    	  	 		<input type="button" value="登录" id="submit" @click="login">
+   	  	 			<!--<a href="javascript:void(0)" @click="login">登录</a>-->
    	  	 		</input>
    	  	 	</div>
           <div id="login_message" class="error" v-show="empty">
@@ -135,7 +138,7 @@ form div.re{
   text-align:left;
   font-size:14px;
 }
-.re label{
+.re span{
   color:#858b97;
 }
 .re input{
