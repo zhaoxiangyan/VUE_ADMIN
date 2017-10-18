@@ -5,6 +5,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  // 打包之前要取消html5的history模式
   routes: [
      // 路由地址重定向
     {

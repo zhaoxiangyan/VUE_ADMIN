@@ -1,251 +1,292 @@
 <template>
-   <div class="login">
-   	  <div class="title">Turing-CRM后台管理系统</div>
-   	  <div class="login-form">
-   	  	 <form>
-   	  	 	<div class="required username_div">
-            <img src="../../assets/img/login_01.png">
-   	  	 		<input type="text" name="username"  v-model="username" placeholder="请输入邮箱">
-   	  	 	</div>
-   	  	 	<div class="required password_div">
-            <img src="../../assets/img/login_02.png">
-   	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码">
-   	  	 	</div>
-          <div class="re">
-            <span>
-              <input type="checkbox" id="keepPwd">记住密码
-            </span>
-            <a href="/findpwd">忘记密码？</a>
-          </div>
-   	  	 	<div class="login_div">
-   	  	 		<input type="button" value="登录" id="submit" @click="login">
-   	  	 			<!--<a href="javascript:void(0)" @click="login">登录</a>-->
-   	  	 		</input>
-   	  	 	</div>
-          <div id="login_message" class="error" v-show="empty">
-             {{message}}
-          </div>
-          <div class="register_div">
-             <p class="register">还没有Turing账号？<a href="/register">立即注册</a></p>
-          </div>
-   	  	 </form>
-   	  </div>
-   </div>	
+    <div class="register">
+        <div class="box">
+            <div id="register_title">
+                <span>注册</span>
+            </div>
+            <div class="register_div">
+                <div class="register_box">
+                    <!--<ul class="tab">
+                        <li class="active">手机用户</li>
+                        <li>邮箱用户</li>
+                    </ul>-->
+                    <div>
+                        <div class="phone-register">
+                            <!--手机用户注册-->
+                            <p><span class="country">中国(+0086)</span> <input type="text" id="phone" placeholder="请输入手机号码"></p>
+                            <div>
+                            </div>
+                            <p><input type="text" id="imgCode" placeholder="请输入图形验证码"> <img src="../../assets/img/guruvercode.jpg" id="veriImg" class="areaNum graph"></p>
+                            <div>
+                            </div>
+                            <p><input type="text" id="messageCode" placeholder="请输入短信验证码"> <input type="submit" value="发送短信验证码" id="send"></p>
+                            <div>
+                            </div>
+                            <p><input type="password" id="psw" placeholder="请输入密码"></p>
+                            <div>
+                            </div>
+                            <p><input type="password" id="psw1" placeholder="请确认密码"></p>
+                            <div>
+                            </div>
+                            <div class="checked_div"><input type="checkbox" id="checkbox"> 同意并遵守
+                                <a href="/glhProtocol" class="" target="_blank">格隆汇协议</a>
+                            </div>
+                            <div class="phone-submit"><input type="submit" id="submit-register" disabled="disabled" value="注册"></div>
+                        </div>
+                        <!--邮箱用户注册-->
+                        <div  class="email-register">
+                            <p><input  type="text" placeholder="请输入邮箱" id="email" v-model="username"></p>
+                            <div></div>
+                            <p ><input  type="password" placeholder="请输入密码" id="psw" v-model="password"></p>
+                            <div ></div> 
+                            <p ><input  type="password" placeholder="请确认密码" id="psw1" v-model="password2"></p>
+                            <div ></div>
+                            <div  class="checked-div"><input  type="checkbox" id="checkbox"> 同意并遵守
+                                <a  href="/glhProtocol" class="" target="_blank">格隆汇协议</a>
+                            </div> 
+                            <input  type="submit" id="submit" disabled="disabled" value="注册">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
-	export default {
-  name: 'login',
-  data () {
-    return {
-      username: '',
-      password: '',
-      empty:false,
-      message:'请填写完整'
+    export default {
+        name: 'Register',
+        data() {
+            return {
+                username: '',
+                password: '',
+                password2:'',
+                empty: false,
+                message: '请填写完整'
+            }
+        },
+        methods: {
+            register() {
+                var self = this
+                if (self.username === '' || self.password === '') {
+                    // alert('输入框不能为空')
+                    self.message = "请填写完整";
+                    self.empty = true;
+                    return false
+                    // 此处加入后台AJAX验证
+                } else {
+                    self.$router.push('/home')
+                }
+            }
+        }
     }
-  },
-  methods: {
-    login () {
-      var self = this
-      if (self.username === '' || self.password === '') {
-        // alert('输入框不能为空')
-         self.message = "请填写完整";
-         self.empty = true;
-        return false
-        // 此处加入后台AJAX验证
-      } else {
-        self.$router.push('/home')
-      }
-    }
-  }
-	}
 </script>
 <!-- scoped  样式只对当前组件起作用 -->
 <style scoped>
-*{
-  box-sizing:border-box;
+ * {
+      box-sizing: border-box;
 }
-.login{
-	position:relative;
-	width:100%;
-	height:100%;
-	background:#324157;
+ul,ol,li{
+    list-style:none;
 }
-.login .title{
-  	position: absolute;
-    top: 150px;
-    width: 100%;
-    /*margin-top: -230px;*/
-    text-align: center;
-    font-size: 30px;
-    color: #fff;
-}
-/*.login .login-form{
-	position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 300px;
-    height: 160px;
-    margin: -150px 0 0 -190px;
-    padding: 40px;
-    border-radius: 5px;
-    background: #fff;
-}*/
-.login .login-form{
-    width: 456px;
-    background-color: #fff;
-    border-radius: 7px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.33);
-    transition: all .3s ease;
-    position: absolute;
-    font-family: Helvetica,Arial,sans-serif;
-    top: 250px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    padding-top:30px;
-}
-/*form div.required{
-	margin-bottom:22px;
-}*/
-form div.username_div,form div.password_div{
-  width:310px;
-  font-size:14px;
-  padding-right:20px;
-  margin:10px auto;
-  border:1px solid #d8d8d8;
-  border-radius:20px;
-  height:40px;
-}
-form div img{
-  margin:10px 10px 0 20px;
-}
-#password,#username,#submit{
-  background-color:transparent;
-  outline:0;
-  height:30px;
-}
-.username_div input,.password_div input{
-  width:240px;
-  float:right;
-  border-radius:4px;
-  height:38px;
-  line-height:38px;
-}
-form div.re{
-  width:310px;
-  margin:15px auto;
-  padding:0 10px;
-  text-align:left;
-  font-size:14px;
-}
-.re span{
-  color:#858b97;
-}
-.re input{
-  width:13px;
-  height:13px;
-  margin-right:5px;
-  display:inline-block;
-  vertical-align:-2px;
-}
-.re a{
-  float:right;
-  color:#333;
-}
-.login_div input#submit{
-  width:315px;
-  display:block;
-  margin:0 auto 8px;
-  background-color:#3175d1;
-  color:#fff;
-  border-radius:20px;
-  height:40px;
-  border:0;
-  cursor:pointer;
-  font-size:14px;
-}
-.error{
-  color:red;
-}
-#login_message{
-  margin:10px;
-  font-size:14px;
-}
-p.error{
-  text-align:center;
-}
-.register_div p{
-  text-align:center;
-  margin:20px auto;
-  color:#858b97;
-  font-size:14px;
-}
-.register_div p a{
-  color:#3175d1;
-}
-/*.required input{
-	font-size:14px;
-	-webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #bfcbd9;
-    box-sizing: border-box;
-    color: #1f2d3d;
-    display: block;
-    height: 36px;
-    line-height: 1;
-    outline: 0;
-    padding: 3px 10px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 100%;
-}
-.required input:hover{
-	border-color:#8391a5;
-}
-.required input:focus{
-	outline:0;
-	border-color:#20a0ff;
-}
-form div:not(.required){
-	text-align: center;
-}
-form div button{
-    display: inline-block;
-    line-height: 1;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #bfcbd9;
-    color: #1f2d3d;
-    margin: 0;
-    padding: 10px 15px;
-    border-radius: 4px;
+.register{
     width:100%;
-    height:36px;
-    color:#fff;
-    background:#20a0ff;
-    border-color:#20a0ff;
+    height:100%;
+    background:#324157;
 }
-form div button:focus{
-	outline:0;
+.register div.box{
+    width:420px;
+    position:relative;
+    margin:0 auto;
+    background:#fff;
+    border-radius:5px;
+    border:1px solid #fff;
+    top:160px;
 }
-form div button:hover{
-	background:#4db3ff;
-	border-color:#4db3ff;
-	color:#fff;
+#register_title{
+    width:100%;
+    text-align:center;
+    border-bottom:1px solid #e8e8e8;
+    height:50px;
 }
-form div button a{
-	line-height:36px;
-	display:block;
-    color:#fff;
+#register_title span{
+   display:inline-block;
+   padding:0 5px;
+   height:50px;
+   line-height:50px; 
+   color:#333;
+   border-bottom:2px solid #000;
 }
-form p{
-	font-size:12px;
-	line-height:30px;
-	color:rgb(153, 153, 153);
-	text-align: left;
-}*/
+.register_div{
+    width:420px;
+    margin:0 auto;
+    overflow:hidden;
+}
+.register_box{
+    width:360px;
+    min-height:370px;
+    margin:0 auto;
+    padding-bottom:40px;
+    padding-top:20px;
+}
+.tab{
+    width:220px;
+    height:40px;
+    margin:10px auto;
+}
+.tab li{
+    display:inline-block;
+    width:100px;
+    text-align:center;
+    line-height:40px;
+    font-size:16px;
+    cursor:pointer;
+}
+.tab li.active{
+   color:#3175d1;
+}
+/*手机用户注册*/
+.phone-register{
+    display:none;
+}
+.phone-register p{
+    margin:10px 0;
+    border:1px solid #ddd;
+    padding:0 15px;
+    border-radius:20px;
+    background:#fff;
+}
+.country{
+    width:100px;
+    color:#000;
+}
+#phone,.country{
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+    font-size:14px;
+}
+#phone{
+    width:220px;
+}
+#imgCode{
+    width:150px;
+    height:40px;
+}
+#imgCode,#send{
+    display:inline-block;
+    line-height:40px;
+    font-size:14px;
+}
+.areaNum{
+    margin-top:0;
+    height:30px;
+    width:165px;
+    cursor:pointer;
+    vertical-align:-10px;
+    display:inline-block;
+}
+#messageCode,#nickname,#psw1,#psw{
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    width: 100%;
+}
+#send{
+    width:100px;
+    float:right;
+    background:#fff;
+    cursor:pointer;
+    text-align:right;
+}
+#send:disabled{
+    color:#666;
+}
+#messageCode{
+    width:220px;
+}
+.checked_div{
+    padding-left:15px;
+    font-size:14px;
+    color:#666;
+    margin:10px 0;
+    text-align:left;
+}
+#checkbox{
+    width:15px;
+    height:15px;
+    display:inline-block;
+    background:#fff;
+    vertical-align:-3px;
+}
+.checked_div a{
+    color:#3175d1;
+    font-size:14px;
+}
+.phone-submit{
+    width:100%;
+    height:40px;
+}
+#submit-register{
+    line-height: 40px;
+    display: inline-block;
+    font-size: 16px;
+    background: #3175d1;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid #fff;
+    width: 100%;
+    cursor: pointer;
+}
+#submit-register:disabled {
+    background: #ddd;
+    color: #999;
+}
+/*邮箱用户*/
+.email-register{
+
+}
+.email-register p{
+    margin:10px 0;
+    border:1px solid #ddd;
+    padding:0 15px;
+    border-radius:20px;
+    background:#fff;
+}
+#email,#nickname,#psw1,#psw,#submit{
+    line-height: 38px;
+    height: 38px;
+    width: 100%;
+    display: inline-block;
+    font-size: 14px;
+}
+.checked-div{
+    padding-left:15px;
+    font-size:14px;
+    color:#666;
+    margin:10px 0;
+    text-align:left;
+}
+.checked-div a{
+    color:#3175d1;
+    font-size:14px;
+}
+#submit{
+    background: #3175d1;
+    color: #fff;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    padding: 0 15px;
+    border-radius: 20px;
+    line-height: 40px;
+    height: 40px;
+    font-size: 16px;
+    width: 100%;
+    cursor: pointer;
+}
+#submit:disabled {
+    background: #ddd;
+    color: #999;
+}
 </style>
