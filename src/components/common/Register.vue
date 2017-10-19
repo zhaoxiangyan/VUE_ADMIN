@@ -1,5 +1,6 @@
 <template>
     <div class="register">
+      <div v-title>注册</div>
         <div class="box">
             <div id="register_title">
                 <span>注册</span>
@@ -29,22 +30,24 @@
                             <div>
                             </div>
                             <div class="checked_div"><input type="checkbox" id="checkbox"> 同意并遵守
-                                <a href="/glhProtocol" class="" target="_blank">格隆汇协议</a>
+                                <a href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
                             </div>
                             <div class="phone-submit"><input type="submit" id="submit-register" disabled="disabled" value="注册"></div>
                         </div>
                         <!--邮箱用户注册-->
                         <div  class="email-register">
-                            <p><input  type="text" placeholder="请输入邮箱" id="email" v-model="username"></p>
-                            <div></div>
-                            <p ><input  type="password" placeholder="请输入密码" id="psw" v-model="password"></p>
-                            <div ></div> 
-                            <p ><input  type="password" placeholder="请确认密码" id="psw1" v-model="password2"></p>
-                            <div ></div>
-                            <div  class="checked-div"><input  type="checkbox" id="checkbox"> 同意并遵守
-                                <a  href="/glhProtocol" class="" target="_blank">格隆汇协议</a>
+                            <p><input  type="text" placeholder="请输入邮箱" id="email" v-model="email"></p>
+                            <div><span class="error" v-show="error.mail">*请输入有效的邮箱地址</span></div>
+                            <p><input  type="password" placeholder="请输入密码" id="psw" v-model="password"></p>
+                            <div><span class="error" v-show="error.psw">*密码由大小写字母和数字组成，长度为6~20位</span></div> 
+                            <p><input  type="password" placeholder="请确认密码" id="psw1" v-model="password1"></p>
+                            <div><span class="error" v-show="error.psw1">*两次密码不一致</span></div>
+                            <div  class="checked-div">
+                                <input  type="checkbox" id="checkbox" v-model="checked"> 同意并遵守
+                                <a  href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
                             </div> 
-                            <input  type="submit" id="submit" disabled="disabled" value="注册">
+                            <input  type="submit" id="submit"  value="注册" v-if="checked" @click="register">
+                            <input type="submit" id="submit" disabled="disabled" value="注册" v-else>
                         </div>
                     </div>
                 </div>
@@ -57,24 +60,59 @@
         name: 'Register',
         data() {
             return {
-                username: '',
+                email: '',
                 password: '',
-                password2:'',
-                empty: false,
-                message: '请填写完整'
+                password1:'',
+                checked:false,
+                error: {
+                    mail:false,
+                    psw:false,
+                    psw1:false
+                }
+            }
+        },
+        watch:{
+            email:function(){
+                var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                if(this.email!=''&&emailReg.test(this.email)){
+                     this.error.mail = false;
+                }else{
+                     this.error.mail = true;
+                }
+            },
+            password:function(){
+                var pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
+                if(this.password!=''&&pswReg.test(this.password)){
+                     this.error.psw = false;
+                }else{
+                     this.error.psw = true;
+                }
+            },
+            password1:function(){
+                if(this.password!=''&&this.password==this.password1){
+                    this.error.psw1 = false;
+                }else{
+                    this.error.psw1 = true;
+                }
             }
         },
         methods: {
             register() {
                 var self = this
-                if (self.username === '' || self.password === '') {
-                    // alert('输入框不能为空')
-                    self.message = "请填写完整";
-                    self.empty = true;
-                    return false
-                    // 此处加入后台AJAX验证
+                var emailReg =  /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                var pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
+                if (self.email === '' || !emailReg.test(self.email)) {
+                     self.error.mail = true;
+                     return false;
+                } else if(self.password === '' || !pswReg.test(self.password)){
+                      self.error.psw = true;
+                      return false;
+                } else if(self.password!==self.password1){
+                      self.error.psw1 = true;
+                      return false;
+                    //   此处加入AJAX后台验证
                 } else {
-                    self.$router.push('/home')
+                    self.$router.push('/login')
                 }
             }
         }
@@ -123,7 +161,7 @@ ul,ol,li{
 }
 .register_box{
     width:360px;
-    min-height:370px;
+    /*min-height:370px;*/
     margin:0 auto;
     padding-bottom:40px;
     padding-top:20px;
@@ -288,5 +326,16 @@ ul,ol,li{
 #submit:disabled {
     background: #ddd;
     color: #999;
+}
+.error{
+    color:red;
+    font-size:14px;
+}
+.email-register>div{
+    text-align:left;
+}
+.email-register div span{
+    padding:0 15px;
+    display:inline-block;
 }
 </style>

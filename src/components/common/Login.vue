@@ -1,5 +1,6 @@
 <template>
    <div class="login">
+      <div v-title>登录</div>
    	  <div class="title">Turing-CRM后台管理系统</div>
    	  <div class="login-form">
    	  	 <form>
@@ -54,6 +55,14 @@
       }
     }
   }
+  // directives: {
+  //   title:{
+  //     inserted: function(el,binding){
+  //       document.title = el.innerText
+  //       el.remove()
+  //     }
+  //   }
+  // }
 	}
 </script>
 <!-- scoped  样式只对当前组件起作用 -->
