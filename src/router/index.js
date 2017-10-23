@@ -8,6 +8,10 @@ export default new Router({
   mode: 'history',
   // 打包之前要取消html5的history模式
   routes: [
+    {
+      path: '*',
+      component: resolve => require(['../components/common/Notfound.vue'], resolve)
+    },
      // 路由地址重定向
     {
       path: '/',

@@ -23,17 +23,17 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8090,
+    port: 8080,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
       // 本地代理服务器跨域并统一后端URL
       '/api': { 
-        target: 'https://188.188.18.8', 
+        target: 'http://192.168.0.133', 
         changeOrigin: true, 
         pathRewrite: { 
-        '^/api': '' 
+        '^/api': '/api' 
         } 
         } 
     },

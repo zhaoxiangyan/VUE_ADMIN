@@ -13,7 +13,7 @@
    	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码">
    	  	 	</div>
           <div class="re">
-            <label for="keepPwd"><input type="checkbox" id="keepPwd">记住密码</label>
+            <label for="keepPwd"><input type="checkbox" id="keepPwd" v-model="repassword">记住密码</label>
             <a href="/findpwd">忘记密码？</a>
           </div>
    	  	 	<div class="login_div">
@@ -37,32 +37,73 @@
     return {
       username: '',
       password: '',
+      repassword: false,
       empty:false,
       message:'请填写完整'
     }
   },
+  mounted() {
+    this.getUser();
+  },
   methods: {
+    getUser() {
+        var storage = window.localStorage; 
+        var getUsername = storage["username"]; 
+        // alert(getUsername);
+        var getPwd = storage["password"]; 
+        var getRepassword = storage["repassword"]; 
+        if(( ("" != getUsername) ||(null != getUsername)) && (("" != getPwd) ||(null != getPwd)) && (typeof(getUsername)!== "undefined")&&(typeof(getPwd)!=="undefined")) {
+          this.username = getUsername;
+          this.password = getPwd;
+          this.repassword = getRepassword;
+        }
+    },
     login () {
-      var self = this
+      var self = this;
+      var emailReg =  /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
       if (self.username === '' || self.password === '') {
         // alert('输入框不能为空')
          self.message = "请填写完整";
          self.empty = true;
         return false
-        // 此处加入后台AJAX验证
+      }else if(!emailReg.test(self.username)){
+           self.message = "请输入正确的邮箱地址";
       } else {
-        self.$router.push('/home')
+        var storage = window.localStorage; 
+        if(self.repassword){
+          storage["username"] = self.username; 
+          storage["password"] =  self.password; 
+          storage["repassword"] =  self.repassword; 
+        }else{
+          storage.removeItem("username");
+          storage.removeItem("password");
+          storage.removeItem("repassword");
+        }
+         // 此处加入后台AJAX验证
+        // this.$http({
+        //       method: 'post',
+        //       // url: '/api/turingcloud/beforeRegister',
+        //       // headers: ['Accept': '*/*'],
+        //       url: 'http://192.168.0.133/turingcloud/beforeRegister',
+        //       data: {
+        //         email: self.username
+        //       }
+        //  }).then(function(res){
+        //    alert("成功");
+        //  }).catch(function(err){
+        //    alert("失败");
+        //  });
+        this.$http.get('/api/turingcloud/beforeRegister?email='+self.username)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+        // self.$router.push('/home')
       }
     }
   }
-  // directives: {
-  //   title:{
-  //     inserted: function(el,binding){
-  //       document.title = el.innerText
-  //       el.remove()
-  //     }
-  //   }
-  // }
 	}
 </script>
 <!-- scoped  样式只对当前组件起作用 -->
