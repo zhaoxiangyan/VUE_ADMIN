@@ -82,24 +82,23 @@
          // 此处加入后台AJAX验证
         // this.$http({
         //       method: 'post',
-        //       // url: '/api/turingcloud/beforeRegister',
+        //       url:'/turingcloud/beforeRegister?email='+self.username
         //       // headers: ['Accept': '*/*'],
-        //       url: 'http://192.168.0.133/turingcloud/beforeRegister',
-        //       data: {
-        //         email: self.username
-        //       }
+        //       // data: {
+        //       //   email: self.username
+        //       // }
         //  }).then(function(res){
         //    alert("成功");
         //  }).catch(function(err){
         //    alert("失败");
         //  });
-        this.$http.get('/api/turingcloud/beforeRegister?email='+self.username)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+        this.$http.post('/turingcloud/beforeRegister?email='+self.username)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
         // self.$router.push('/home')
       }
     }

@@ -29,11 +29,11 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       // 本地代理服务器跨域并统一后端URL
-      '/api': { 
+      '/turingcloud': { 
         target: 'http://192.168.0.133', 
         changeOrigin: true, 
         pathRewrite: { 
-        '^/api': '/api' 
+        '^/turingcloud': '/turingcloud' 
         } 
         } 
     },
