@@ -7,50 +7,65 @@
 			<el-breadcrumb-item>协议</el-breadcrumb-item>
 		</el-breadcrumb>
        <p class="xieyi">
-	   <!-- <a href="../../../static/pdf/2地缘政治.pdf">扣款协议</a>
-		<a href="../../../static/pdf/4避险货币.pdf">合作协议</a>-->
-		<a href="../../../static/web/viewer.html" target="_blank"><i class="el-icon-document"></i>扣款协议预览下载</a>
-	   </p>
-	   <hr/>
-	   <p class="xieyi">
-		<a href="../../../static/web/viewer1.html" target="_blank"><i class="el-icon-document"></i>合作协议预览下载</a>
-	   </p>
-	   <hr/>
+	    <!-- <a href="../../../static/pdf/2地缘政治.zip" target="_blank">扣款协议预览下载</a>-->
+		  扣款协议<a href="http://turing-cloud.cn/turing-admin/2地缘政治.pdf" target="_blank">预览</a><a href="http://turing-cloud.cn/turing-admin/2地缘政治.zip">下载</a>
+	  	<!--<a href="../../../static/web/viewer.html" target="_blank"><i class="el-icon-document"></i>扣款协议预览下载</a>-->
 <el-upload
   class="upload-demo"
   action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList2"
-  list-type="picture">
+  :on-preview="handlePreview1"
+  :on-remove="handleRemove1"
+  :file-list="fileList1">
   <el-button size="small" type="primary">点击上传</el-button>
-  <!--<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>-->
-  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+</el-upload>			
+	   </p>
+	   <hr/>
+	   <p class="xieyi">
+	    <!--<a href="../../../static/web/viewer1.html" target="_blank"><i class="el-icon-document"></i>合作协议预览下载</a>-->
+		  <!--<a href="../../../static/pdf/4避险货币.zip" target="_blank">合作协议预览下载</a>-->
+			合作协议<a href="http://turing-cloud.cn/turing-admin/4避险货币.pdf" target="_blank">预览</a><a href="http://turing-cloud.cn/turing-admin/4避险货币.zip">下载</a>
+<el-upload
+  class="upload-demo"
+  action="https://jsonplaceholder.typicode.com/posts/"
+  :on-preview="handlePreview2"
+  :on-remove="handleRemove2"
+  :file-list="fileList2">
+  <el-button size="small" type="primary">点击上传</el-button>
+  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
 </el-upload>
+	   </p>
+	   <hr/>
 	</div>	
 </template>
 <script>
  export default {
     data() {
       return {
-        fileList2: [{
-			name: 'xiyi1.png', 
-			url: '../../../static/pdf/xieyi1.PNG'
-			}, 
-			{name: 'xieyi2.png', 
-			url: '../../../static/pdf/xieyi2.PNG'
-			}
-		]
+        fileList1: [{
+					name: 'xiyi1.png', 
+					url: '../../../static/pdf/xieyi1.PNG'
+				}],
+				fileList2: [{
+					name: 'xieyi2.png', 
+					url: '../../../static/pdf/xieyi2.PNG'
+				}]
       };
     },
     methods: {
 	//   submitUpload() {
     //     this.$refs.upload.submit();
     //   },
-      handleRemove(file, fileList) {
+      handleRemove1(file, fileList) {
         console.log(file, fileList);
       },
-      handlePreview(file) {
+      handlePreview1(file) {
+        console.log(file);
+      },
+			handleRemove2(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview2(file) {
         console.log(file);
       }
     }
@@ -71,8 +86,13 @@
 	color:#3175d1;
 }
 .upload-demo{
-	margin:40px 0;
-	width:360px;
+	/*margin:40px 0;*/
+	/*width:360px;*/
 	text-align:left;
+	float:right;
+}
+.upload-demo ul.el-upload-list{
+	display:inline-block;
+	width:300px;
 }
 </style>

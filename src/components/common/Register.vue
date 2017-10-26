@@ -73,9 +73,26 @@
         },
         watch:{
             email:function(){
+                var self = this;
                 var emailReg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-                if(this.email!=''&&emailReg.test(this.email)){
-                     this.error.mail = false;
+                if(self.email!=''&&emailReg.test(self.email)){
+                    self.$http({
+                        method: 'post',
+                        // url:'/turingcloud/beforeRegister?email='+self.email
+                        url: '/turingcloud/beforeRegister',
+                        // headers: {'Content-Type':'application/json'},
+                        data: {
+                            "email": self.email
+                        }
+                    }).then(function(res){
+                       if(res.data){
+                           self.error.mail = false;
+                       }else{
+                           self.error.mail = true;
+                       }
+                    }).catch(function(err){
+                      alert("AJAX失败");
+                    });
                 }else{
                      this.error.mail = true;
                 }
@@ -110,9 +127,37 @@
                 } else if(self.password!==self.password1){
                       self.error.psw1 = true;
                       return false;
-                    //   此处加入AJAX后台验证
                 } else {
-                    self.$router.push('/login')
+                    this.$http({
+                        method: 'post',
+                        url: '/turingcloud/register?action=register&email='+self.email+'&password='+self.password
+                        // url:'/turingcloud/register',
+                        // data: {
+                        //     "action":'register',
+                        //     "email": self.email,
+                        //     "password": self.password
+                        // }
+                    }).then(function(res){
+                    //    alert(res);
+                    //    console.log(res);
+                       if(res.data == '0'){
+                           alert('注册成功，未激活');
+                       }else if(res.data =='1'){
+                           alert('账号已经注册成功');
+                       }else if(res.data == '2'){
+                           alert('已经注册，未激活');
+                       }else if(res.data == '3'){
+                           alert('激活成功');
+                       }else if(res.data == '4'){
+                           alert('激活失败');
+                       }else{
+                           alert('出错');
+                       }
+                    }).catch(function(err){
+                       alert("AJAX失败");
+                    });
+                    // self.$router.push('/login')
+                    // alert('注册成功');
                 }
             }
         }

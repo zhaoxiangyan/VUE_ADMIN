@@ -80,25 +80,39 @@
           storage.removeItem("repassword");
         }
          // 此处加入后台AJAX验证
-        // this.$http({
-        //       method: 'post',
-        //       url:'/turingcloud/beforeRegister?email='+self.username
-        //       // headers: ['Accept': '*/*'],
-        //       // data: {
-        //       //   email: self.username
-        //       // }
-        //  }).then(function(res){
-        //    alert("成功");
-        //  }).catch(function(err){
-        //    alert("失败");
-        //  });
-        this.$http.post('/turingcloud/beforeRegister?email='+self.username)
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        this.$http({
+              method: 'post',
+              url: '/turingcloud/login?email='+self.username+'&password='+self.password+'&isremenber=0'
+              // url:'/turingcloud/login',
+              // data: {
+              //   "email": self.username,
+              //   "password": self.password,
+              //   "isremenber": '0'
+              // }
+         }).then(function(res){
+          //  alert(res);
+          //  console.log(res);
+          // alert(res.data); 
+            if(res.data == '0'){
+              alert('登录成功');
+              self.$router.push('/home');
+            }else if(res.data == '1'){
+              alert('登录失败，用户名不存在');
+            }else if(res.data == '2'){
+              alert('登录失败，密码错误');
+            }else{
+              alert('登录失败，账号未激活');
+            }
+         }).catch(function(err){
+           alert("失败");
+         });
+        // this.$http.post('/turingcloud/beforeRegister?email='+self.username)
+        // .then(function (response) {
+        //   console.log(response);
+        // })
+        // .catch(function (error) {
+        //   console.log(error);
+        // });
         // self.$router.push('/home')
       }
     }

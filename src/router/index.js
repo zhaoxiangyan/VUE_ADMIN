@@ -22,6 +22,12 @@ export default new Router({
     //   component: resolve => require(['../components/Hello.vue'], resolve)
     // },
     {
+      path: '/static/pdf/2地缘政治.pdf'
+    },
+    {
+      path: '/static/pdf/4避险货币.pdf'
+    },
+    {
       path: '/login',
       component: resolve => require(['../components/common/Login.vue'], resolve)
     },
