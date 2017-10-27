@@ -1,12 +1,16 @@
 <template>
    <div class="login">
       <div v-title>登录</div>
-   	  <div class="title">Turing-CRM后台管理系统</div>
+   	  <div class="title">图灵智能交易管理系统</div>
    	  <div class="login-form">
-   	  	 <form>
+         <ul class="switch">
+           <li  v-bind:class="[ this.switch ? 'active' : '']" @click="switchLogin1">密码登录</li>
+           <li class="code_switch"  v-bind:class="[ this.switch ? '' : 'active']"  @click="switchLogin2">验证码登录</li>
+         </ul>
+   	  	 <form class="password_form"  v-if="this.switch">
    	  	 	<div class="required username_div">
             <img src="../../assets/img/login_01.png">
-   	  	 		<input type="text" name="username"  v-model="username" placeholder="请输入邮箱">
+   	  	 		<input type="text" name="phone1"  v-model="phone1" placeholder="请输入手机号">
    	  	 	</div>
    	  	 	<div class="required password_div">
             <img src="../../assets/img/login_02.png">
@@ -23,10 +27,31 @@
           <div id="login_message" class="error" v-show="empty">
              {{message}}
           </div>
-          <div class="register_div">
-             <p class="register">还没有Turing账号？<a href="/register">立即注册</a></p>
+   	  	 </form>
+          <form class="code_form" v-else>
+   	  	 	<div class="required username_div">
+            <img src="../../assets/img/login_01.png">
+   	  	 		<input type="text" name="phone2"  v-model="phone2" placeholder="请输入手机号">
+   	  	 	</div>
+   	  	 	<div class="required password_div">
+            <img src="../../assets/img/login_02.png">
+   	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码">
+   	  	 	</div>
+          <div class="re">
+            <label for="keepPwd"><input type="checkbox" id="keepPwd" v-model="repassword">记住密码</label>
+            <a href="/findpwd">忘记密码？</a>
+          </div>
+   	  	 	<div class="login_div">
+   	  	 		<input type="button" value="登录" id="submit" @click="login">
+   	  	 		</input>
+   	  	 	</div>
+          <div id="login_message" class="error" v-show="empty">
+             {{message}}
           </div>
    	  	 </form>
+         <div class="register_div">
+            <p class="register">还没有Turing账号？<a href="/register">立即注册</a></p>
+         </div>
    	  </div>
    </div>	
 </template>
@@ -35,47 +60,60 @@
   name: 'Login',
   data () {
     return {
-      username: '',
+      // 密码验证码登录切换
+      switch: true,
+      // 密码登录
+      phone1: '',
       password: '',
       repassword: false,
       empty:false,
-      message:'请填写完整'
+      message:'请填写完整',
+      // 验证码登录
+      phone2: '',
+      code: '',
+      message1:'验证码输入错误'
     }
   },
   mounted() {
     this.getUser();
   },
   methods: {
+    // 登录方式切换
+    switchLogin1() {
+        this.switch = true
+    },
+    switchLogin2() {
+       this.switch = false
+    },
     getUser() {
         var storage = window.localStorage; 
-        var getUsername = storage["username"]; 
-        // alert(getUsername);
+        var getPhone = storage["phone"]; 
         var getPwd = storage["password"]; 
         var getRepassword = storage["repassword"]; 
         if(( ("" != getUsername) ||(null != getUsername)) && (("" != getPwd) ||(null != getPwd)) && (typeof(getUsername)!== "undefined")&&(typeof(getPwd)!=="undefined")) {
-          this.username = getUsername;
+          this.username = getPhone;
           this.password = getPwd;
           this.repassword = getRepassword;
         }
     },
     login () {
       var self = this;
-      var emailReg =  /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-      if (self.username === '' || self.password === '') {
+      var phoneReg = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
+      if (self.phone1 === '' || self.password === '') {
         // alert('输入框不能为空')
          self.message = "请填写完整";
          self.empty = true;
         return false
-      }else if(!emailReg.test(self.username)){
+      }else if(!emailReg.test(self.phone1)){
            self.message = "请输入正确的邮箱地址";
       } else {
         var storage = window.localStorage; 
         if(self.repassword){
-          storage["username"] = self.username; 
-          storage["password"] =  self.password; 
+          storage["phone"] = self.phone1; 
+          storage["password"] = self.password; 
           storage["repassword"] =  self.repassword; 
         }else{
-          storage.removeItem("username");
+          storage.removeItem("phone");
           storage.removeItem("password");
           storage.removeItem("repassword");
         }
@@ -90,9 +128,6 @@
               //   "isremenber": '0'
               // }
          }).then(function(res){
-          //  alert(res);
-          //  console.log(res);
-          // alert(res.data); 
             if(res.data == '0'){
               alert('登录成功');
               self.$router.push('/home');
@@ -106,14 +141,6 @@
          }).catch(function(err){
            alert("失败");
          });
-        // this.$http.post('/turingcloud/beforeRegister?email='+self.username)
-        // .then(function (response) {
-        //   console.log(response);
-        // })
-        // .catch(function (error) {
-        //   console.log(error);
-        // });
-        // self.$router.push('/home')
       }
     }
   }
@@ -123,6 +150,9 @@
 <style scoped>
 *{
   box-sizing:border-box;
+}
+ul,ol,li{
+    list-style:none;
 }
 .login{
 	position:relative;
@@ -162,11 +192,32 @@
     left: 0;
     right: 0;
     margin: auto;
-    padding-top:30px;
 }
-/*form div.required{
-	margin-bottom:22px;
-}*/
+.switch{
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #e8e8e8;
+  height: 50px;
+}
+.switch li{
+   display:inline-block;
+   padding:0 5px;
+   height:50px;
+   line-height:50px; 
+   color:#999;
+   cursor:pointer;
+}
+.switch li.code_switch{
+  margin-left:30px;
+}
+.switch li.active{
+    color:#333;
+    border-bottom:2px solid #000;
+}
+.login-form form{
+  margin-top:40px;
+  padding:0;
+}
 form div.username_div,form div.password_div{
   width:310px;
   font-size:14px;
@@ -243,69 +294,4 @@ p.error{
 .register_div p a{
   color:#3175d1;
 }
-/*.required input{
-	font-size:14px;
-	-webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #bfcbd9;
-    box-sizing: border-box;
-    color: #1f2d3d;
-    display: block;
-    height: 36px;
-    line-height: 1;
-    outline: 0;
-    padding: 3px 10px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 100%;
-}
-.required input:hover{
-	border-color:#8391a5;
-}
-.required input:focus{
-	outline:0;
-	border-color:#20a0ff;
-}
-form div:not(.required){
-	text-align: center;
-}
-form div button{
-    display: inline-block;
-    line-height: 1;
-    white-space: nowrap;
-    cursor: pointer;
-    background: #fff;
-    border: 1px solid #bfcbd9;
-    color: #1f2d3d;
-    margin: 0;
-    padding: 10px 15px;
-    border-radius: 4px;
-    width:100%;
-    height:36px;
-    color:#fff;
-    background:#20a0ff;
-    border-color:#20a0ff;
-}
-form div button:focus{
-	outline:0;
-}
-form div button:hover{
-	background:#4db3ff;
-	border-color:#4db3ff;
-	color:#fff;
-}
-form div button a{
-	line-height:36px;
-	display:block;
-    color:#fff;
-}
-form p{
-	font-size:12px;
-	line-height:30px;
-	color:rgb(153, 153, 153);
-	text-align: left;
-}*/
 </style>

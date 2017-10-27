@@ -6,7 +6,7 @@
 			<el-breadcrumb-item>协议</el-breadcrumb-item>
 		</el-breadcrumb>
       <div class="xieyi">
-					扣款协议<a href="http://192.168.0.133/file/agreement.pdf" target="_blank">预览</a><a href="http://192.168.0.133/file/agreement.zip">下载</a>
+					扣款协议<br/><a href="http://192.168.0.133/file/agreement.pdf" target="_blank">预览</a><br/><a href="http://192.168.0.133/file/agreement.zip">下载</a>
 				 <!--	<form action="http://192.168.0.133/turingcloud/upload" >
 					    <input type="file"  id="picture_one"  name="file">
 							<input type="hidden" name="fileType" value="0">
@@ -18,14 +18,14 @@
 <form action='http://192.168.0.133/turingcloud/user/file/upload' method='post' name='myform' enctype="multipart/form-data">
  <input type="hidden" name="fileType" value="0" />
  <a class="select_button" href="javascript:void(0)">选择上传图片</a>
- <input type='file' id='iptfileupload' name="file"  @change='show' value='' accept='image/*' /><br/>
+ <input type='file' id='iptfileupload' name="file" class="upload"  @change='show' value='' accept='image/*' /><br/>
  <img src='../../assets/img/login_01.png' alt='' id='img' /><br/>
  <input type="submit"  value="上传扣款协议">
 </form>
 	    </div>
 	    <hr/>
 	    <div class="xieyi">
-					合作协议<a href="http://192.168.0.133/file/Agreement.pdf" target="_blank">预览</a><a href="http://192.168.0.133/file/Agreement.zip">下载</a>
+					合作协议<br/><a href="http://192.168.0.133/file/Agreement.pdf" target="_blank">预览</a><br/><a href="http://192.168.0.133/file/Agreement.zip">下载</a>
 				<!--	<input type="file" id="picture_two" @change="upload_two"> -->
 	    </div>
 			<hr/>
@@ -33,7 +33,7 @@
 <form action='http://192.168.0.133/turingcloud/user/file/upload' method='post' name='myform1' enctype="multipart/form-data">
  <input type="hidden" name="fileType" value="1" />
  <a class="select_button" href="javascript:void(0)">选择上传图片</a>
- <input type='file' id='iptfileuploa' name="file" @change='show1' value='' accept='image/*' /><br/>
+ <input type='file' id='iptfileuploa' class="upload" name="file" @change='show1' value='' accept='image/*' /><br/>
  <img src='../../assets/img/login_01.png' alt='' id='img1' /><br/>
  <input type="submit"  value="上传合作协议">
 </form>			  
@@ -137,7 +137,22 @@
 form{
 	display:inline-block;
 }
-
+.xieyi form{
+	position:relative;
+}
+.xieyi form input.upload{
+  opacity:0;
+	/*z-index:200;*/
+}
+.xieyi form a.select_button{
+	width:303px;
+	height:27px;
+  position:absolute;
+	/*z-index:100;*/
+}
+a.select_button:hover{
+	color:red;
+}
 .upload-demo{
 	/*margin:40px 0;*/
 	/*width:360px;*/

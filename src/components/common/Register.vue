@@ -142,6 +142,7 @@
                     //    console.log(res);
                        if(res.data == '0'){
                            alert('注册成功，未激活');
+                           self.$router.push('/login');
                        }else if(res.data =='1'){
                            alert('账号已经注册成功');
                        }else if(res.data == '2'){
