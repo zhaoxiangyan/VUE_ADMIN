@@ -1,40 +1,43 @@
 <template>
 	<div class="one">
 		<el-breadcrumb separator="/">
-		    <!--<i class="el-icon-document"></i>-->
 			<el-breadcrumb-item :to="{path:'/'}">首页</el-breadcrumb-item>
 			<el-breadcrumb-item>附件</el-breadcrumb-item>
 			<el-breadcrumb-item>协议</el-breadcrumb-item>
 		</el-breadcrumb>
-       <p class="xieyi">
-	    <!-- <a href="../../../static/pdf/2地缘政治.zip" target="_blank">扣款协议预览下载</a>-->
-		  扣款协议<a href="http://turing-cloud.cn/turing-admin/2地缘政治.pdf" target="_blank">预览</a><a href="http://turing-cloud.cn/turing-admin/2地缘政治.zip">下载</a>
-	  	<!--<a href="../../../static/web/viewer.html" target="_blank"><i class="el-icon-document"></i>扣款协议预览下载</a>-->
-<el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview1"
-  :on-remove="handleRemove1"
-  :file-list="fileList1">
-  <el-button size="small" type="primary">点击上传</el-button>
-  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
-</el-upload>			
-	   </p>
-	   <hr/>
-	   <p class="xieyi">
-	    <!--<a href="../../../static/web/viewer1.html" target="_blank"><i class="el-icon-document"></i>合作协议预览下载</a>-->
-		  <!--<a href="../../../static/pdf/4避险货币.zip" target="_blank">合作协议预览下载</a>-->
-			合作协议<a href="http://turing-cloud.cn/turing-admin/4避险货币.pdf" target="_blank">预览</a><a href="http://turing-cloud.cn/turing-admin/4避险货币.zip">下载</a>
-<el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview2"
-  :on-remove="handleRemove2"
-  :file-list="fileList2">
-  <el-button size="small" type="primary">点击上传</el-button>
-  <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
-</el-upload>
-	   </p>
+      <div class="xieyi">
+					扣款协议<a href="http://192.168.0.133/file/agreement.pdf" target="_blank">预览</a><a href="http://192.168.0.133/file/agreement.zip">下载</a>
+				 <!--	<form action="http://192.168.0.133/turingcloud/upload" >
+					    <input type="file"  id="picture_one"  name="file">
+							<input type="hidden" name="fileType" value="0">
+							<input type="submit">
+					</form>-->
+			</div>
+			<hr/>
+			<div class="xieyi">
+<form action='http://192.168.0.133/turingcloud/user/file/upload' method='post' name='myform' enctype="multipart/form-data">
+ <input type="hidden" name="fileType" value="0" />
+ <a class="select_button" href="javascript:void(0)">选择上传图片</a>
+ <input type='file' id='iptfileupload' name="file"  @change='show' value='' accept='image/*' /><br/>
+ <img src='../../assets/img/login_01.png' alt='' id='img' /><br/>
+ <input type="submit"  value="上传扣款协议">
+</form>
+	    </div>
+	    <hr/>
+	    <div class="xieyi">
+					合作协议<a href="http://192.168.0.133/file/Agreement.pdf" target="_blank">预览</a><a href="http://192.168.0.133/file/Agreement.zip">下载</a>
+				<!--	<input type="file" id="picture_two" @change="upload_two"> -->
+	    </div>
+			<hr/>
+			<div class="xieyi">
+<form action='http://192.168.0.133/turingcloud/user/file/upload' method='post' name='myform1' enctype="multipart/form-data">
+ <input type="hidden" name="fileType" value="1" />
+ <a class="select_button" href="javascript:void(0)">选择上传图片</a>
+ <input type='file' id='iptfileuploa' name="file" @change='show1' value='' accept='image/*' /><br/>
+ <img src='../../assets/img/login_01.png' alt='' id='img1' /><br/>
+ <input type="submit"  value="上传合作协议">
+</form>			  
+			</div>
 	   <hr/>
 	</div>	
 </template>
@@ -42,32 +45,78 @@
  export default {
     data() {
       return {
-        fileList1: [{
-					name: 'xiyi1.png', 
-					url: '../../../static/pdf/xieyi1.PNG'
-				}],
-				fileList2: [{
-					name: 'xieyi2.png', 
-					url: '../../../static/pdf/xieyi2.PNG'
-				}]
+        imgURL_one:'',
+				imgURL_two:''
       };
     },
     methods: {
-	//   submitUpload() {
-    //     this.$refs.upload.submit();
-    //   },
-      handleRemove1(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview1(file) {
-        console.log(file);
-      },
-			handleRemove2(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview2(file) {
-        console.log(file);
-      }
+			  getPath:function(obj,fileQuery,transImg) {
+ 
+  var imgSrc = '', imgArr = [], strSrc = '' ;
+ 
+  if(window.navigator.userAgent.indexOf("MSIE")>=1){ // IE浏览器判断
+  if(obj.select){
+   obj.select();
+   var path=document.selection.createRange().text;
+   alert(path) ;
+   obj.removeAttribute("src");
+   imgSrc = fileQuery.value ;
+   imgArr = imgSrc.split('.') ;
+   strSrc = imgArr[imgArr.length - 1].toLowerCase() ;
+   if(strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0){
+   obj.setAttribute("src",transImg);
+   obj.style.filter=
+    "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+path+"', sizingMethod='scale');"; // IE通过滤镜的方式实现图片显示
+   }else{
+   throw new Error('File type Error! please image file upload..'); 
+   }
+  }else{
+   imgSrc = fileQuery.value ;
+   imgArr = imgSrc.split('.') ;
+   strSrc = imgArr[imgArr.length - 1].toLowerCase() ;
+   if(strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0){
+   obj.src = fileQuery.value ;
+   }else{
+   throw new Error('File type Error! please image file upload..') ;
+   }
+ 
+  }
+ 
+  } else{
+  var file =fileQuery.files[0];
+  var reader = new FileReader();
+  reader.onload = function(e){
+ 
+   imgSrc = fileQuery.value ;
+   imgArr = imgSrc.split('.') ;
+   strSrc = imgArr[imgArr.length - 1].toLowerCase() ;
+   if(strSrc.localeCompare('jpg') === 0 || strSrc.localeCompare('jpeg') === 0 || strSrc.localeCompare('gif') === 0 || strSrc.localeCompare('png') === 0){
+   obj.setAttribute("src", e.target.result) ;
+   }else{
+   throw new Error('File type Error! please image file upload..') ;
+   }
+  }
+  reader.readAsDataURL(file);
+  }
+ },
+			  show:function(){
+					var file_img=document.getElementById("img"),
+					iptfileupload = document.getElementById('iptfileupload') ;
+					this.getPath(file_img,iptfileupload,file_img);
+				},
+				show1:function(){
+					var file_img = document.getElementById("img1"),
+					iptfileuploa = document.getElementById('iptfileuploa');
+					this.getPath(file_img,iptfileuploa,file_img);
+				}
+        // upload_one:function(){
+        //    var reader = new FileReader();
+				// 	 console.log(reader);
+				// 	 reader.readAsDataURL(this.files);
+				// 	 reader.onload = function(){
+				// 		 document.getElementById("dd").innerHTML += "<img src='"+reader.result+"'>";
+				// 	 };
+				// }
     }
   }
 </script>
@@ -85,6 +134,10 @@
 .xieyi a:active{
 	color:#3175d1;
 }
+form{
+	display:inline-block;
+}
+
 .upload-demo{
 	/*margin:40px 0;*/
 	/*width:360px;*/
