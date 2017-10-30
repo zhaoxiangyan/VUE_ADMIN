@@ -1,55 +1,47 @@
 <template>
-    <div class="register">
-      <div v-title>注册</div>
+    <div class="add">
+      <div v-title>填写个人资料</div>
         <div class="box">
-            <div id="register_title">
-                <span>注册</span>
+            <div id="add_title">
+                <span>个人资料</span>
             </div>
-            <div class="register_div">
-                <div class="register_box">
-                    <!--<ul class="tab">
-                        <li class="active">手机用户</li>
-                        <li>邮箱用户</li>
-                    </ul>-->
+            <div class="add_div">
+                <div class="add_box">
                     <div>
-                        <div class="phone-register">
-                            <!--手机用户注册-->
-                            <p><span class="country">中国(+0086)</span> <input type="text" id="phone" placeholder="请输入手机号码"></p>
-                            <div><span class="error" v-show="error.phone1">*请输入正确的手机号码</span></div>
-                            <p><input type="text" id="imgCode" placeholder="请输入图形验证码"> <img src="http://192.168.0.133/gen" id="veriImg" class="areaNum graph" onclick="this.src='http://192.168.0.133/gen?random='+Math.random()"></p>
-                            <div><span class="error" v-show="error.img_code1">*图形验证码错误</span></div>
-                            <p><input type="text" id="messageCode" placeholder="请输入短信验证码"> <input type="submit" value="发送短信验证码" id="send"></p>
-                            <div><span class="error" v-show="error.code1">*短信验证码错误</span></div>
-                           <!-- <p><input type="password" id="psw" placeholder="请输入密码"></p>
-                            <div>
-                            </div>
-                            <p><input type="password" id="psw1" placeholder="请确认密码"></p>
-                            <div>
-                            </div>-->
+                        <div class="add_personal">
+                            <!--用户个人信息填写-->
+                            <form>
+                            <p><span class="input_title">姓名：</span> <input class="input_content" type="text" id="name" placeholder="请输入真实姓名"></p>
+                            <div><span class="error" v-show="error.name1">*请输入正确的姓名</span></div>
+                            <p><span class="input_title">身份证号码：</span> <input class="input_content" type="text" id="card" placeholder="请输入身份证号码"></p>
+                            <div><span class="error" v-show="error.card1">*请输入正确的身份证号码</span></div>
+                            <p><span class="input_title">登录密码：</span> <input class="input_content" type="password" id="password" placeholder="请输入登录密码"></p>
+                            <div><span class="error" v-show="error.password1">*请输入格式正确的密码</span></div>
+                            <p><span class="input_title">确认登录密码：</span> <input class="input_content" type="password" id="repassword" placeholder="请再次输入登录密码"></p>
+                            <div><span class="error" v-show="error.repassword1">*两次密码不一致</span></div>
+                            <p class="file_box">
+                               <span class="input_title">身份证正面：</span>
+                               <a href="javascript:void(0)">{{file_name1}}</a>
+                               <input class="input_content" type="file" name='file1' id="file1" @change="uploadCard1()" accept="image/png, image/jpeg, image/gif, image/jpg" >
+                            </p>
+                            <!--如果在input file标签里写成accept='image/*'会造成点击按钮后等待时间稍长-->
+                            <div><img id="img1" ></div>
+                            <p class="file_box">
+                                <span class="input_title">身份证反面：</span>
+                                <a href="javascript:void(0)">{{file_name2}}</a>
+                                <input class="input_content" type="file" name='file2' id="file2" @change="uploadCard2()" accept="image/png, image/jpeg, image/gif, image/jpg">
+                            </p>
+                            <div><img id="img2" ></div>
                             <div class="checked_div">
-                                <input type="checkbox" id="checkbox" v-model="checked"> 同意并遵守
+                                <input type="checkbox" id="checkbox" v-model="checked"> 同意和接受
                                 <a href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
                             </div>
                             <div class="phone-submit">
-                                <input type="submit" id="submit" value="注册" v-if="checked" @click="register">
-                                <input type="submit" id="submit" disabled="disabled" value="注册" v-else>
+                                <input type="submit" id="submit" value="确认提交" v-if="checked" @click="register">
+                                <input type="submit" id="submit" disabled="disabled" value="确认提交" v-else>
                             </div>
+                            </form>
                         </div>
-                        <!--邮箱用户注册-->
-                        <!--<div  class="email-register">
-                            <p><input  type="text" placeholder="请输入邮箱" id="email" v-model="email"></p>
-                            <div><span class="error" v-show="error.mail">*请输入有效的邮箱地址</span></div>
-                            <p><input  type="password" placeholder="请输入密码" id="psw" v-model="password"></p>
-                            <div><span class="error" v-show="error.psw">*密码由大小写字母和数字组成，长度为6~20位</span></div> 
-                            <p><input  type="password" placeholder="请确认密码" id="psw1" v-model="password1"></p>
-                            <div><span class="error" v-show="error.psw1">*两次密码不一致</span></div>
-                            <div  class="checked-div">
-                                <input  type="checkbox" id="checkbox" v-model="checked"> 同意并遵守
-                                <a  href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
-                            </div> 
-                            <input  type="submit" id="submit"  value="注册" v-if="checked" @click="register">
-                            <input type="submit" id="submit" disabled="disabled" value="注册" v-else>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -58,63 +50,60 @@
 </template>
 <script>
     export default {
-        name: 'Register',
+        name: 'Add',
         data() {
             return {
-                phone: '',
-                img_code: '',
-                code:'',
+                name: '',
+                card: '',
+                password: '',
+                repassword: '',
+                file_name1:'点击选择图片上传',
+                file_name2:'点击选择图片上传',
                 checked:false,
                 error: {
-                    phone1:false,
-                    img_code1:false,
-                    code1:false
+                    name1:false,
+                    card1:false,
+                    password1:false,
+                    repassword1:false
                 }
             }
         },
         watch:{
-            phone:function(){
-                var self = this;
-                var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
-                if(self.phone!=''&&phoneReg.test(self.phone)){
-                    self.$http({
-                        method: 'post',
-                        // url:'/turingcloud/beforeRegister?email='+self.email
-                        url: '/turingcloud/beforeRegister',
-                        // headers: {'Content-Type':'application/json'},
-                        data: {
-                            "phone": self.phone
-                        }
-                    }).then(function(res){
-                       if(res.data){
-                           self.error.phone1 = false;
-                       }else{
-                           self.error.phone1 = true;
-                       }
-                    }).catch(function(err){
-                      alert("AJAX失败");
-                    });
-                }else{
-                     this.error.phone1 = true;
-                }
+            name:function(){
+               
             }
-            /*img_code:function(){
-                var pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
-                if(this.password!=''&&pswReg.test(this.password)){
-                     this.error.psw = false;
-                }else{
-                     this.error.psw = true;
-                }
-            },
-            code:function(){
-                if(this.password!=''&&this.password==this.password1){
-                    this.error.psw1 = false;
-                }else{
-                    this.error.psw1 = true;
-                }
-            }*/
         },
         methods: {
+            uploadCard1(){
+                var self = this;
+                var reader = new FileReader();
+                var file = document.getElementById("file1").files[0];
+                self.file_name1 = file.name;
+                //读取文件过程方法
+                reader.onload = function (e) {
+                    console.log("成功读取....");
+                    var img = document.getElementById("img1");
+                    img.style.display = 'inline-block';
+                    img.src = e.target.result;
+                    //或者 img.src = this.result;  //e.target == this
+                }
+                reader.readAsDataURL(file)
+            },
+            uploadCard2(){
+                var self = this;
+                var reader = new FileReader();
+                var file = document.getElementById("file2").files[0];
+                self.file_name2 = file.name;
+                //读取文件过程方法
+                reader.onload = function (e) {
+                    console.log("成功读取....");
+                    var img = document.getElementById("img2");
+                    img.style.display = 'inline-block';
+                    img.src = e.target.result;
+                    //或者 img.src = this.result;  //e.target == this
+                }
+                reader.readAsDataURL(file)
+            },
             register() {
                 var self = this
                 var emailReg =  /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
@@ -132,12 +121,6 @@
                     this.$http({
                         method: 'post',
                         url: '/turingcloud/register?action=register&email='+self.email+'&password='+self.password
-                        // url:'/turingcloud/register',
-                        // data: {
-                        //     "action":'register',
-                        //     "email": self.email,
-                        //     "password": self.password
-                        // }
                     }).then(function(res){
                     //    alert(res);
                     //    console.log(res);
@@ -158,8 +141,6 @@
                     }).catch(function(err){
                        alert("AJAX失败");
                     });
-                    // self.$router.push('/login')
-                    // alert('注册成功');
                 }
             }
         }
@@ -173,27 +154,29 @@
 ul,ol,li{
     list-style:none;
 }
-.register{
+.add{
     width:100%;
     height:100%;
     background:#324157;
+    min-height:800px;
+    min-width:450px;
 }
-.register div.box{
+.add div.box{
     width:420px;
     position:relative;
     margin:0 auto;
     background:#fff;
     border-radius:5px;
     border:1px solid #fff;
-    top:160px;
+    top:60px;
 }
-#register_title{
+#add_title{
     width:100%;
     text-align:center;
     border-bottom:1px solid #e8e8e8;
     height:50px;
 }
-#register_title span{
+#add_title span{
    display:inline-block;
    padding:0 5px;
    height:50px;
@@ -201,17 +184,16 @@ ul,ol,li{
    color:#333;
    border-bottom:2px solid #000;
 }
-.register_div{
+.add_div{
     width:420px;
     margin:0 auto;
     overflow:hidden;
 }
-.register_box{
+.add_box{
     width:360px;
     /*min-height:370px;*/
     margin:0 auto;
-    padding-bottom:40px;
-    padding-top:20px;
+    padding:20px 0;
 }
 .tab{
     width:220px;
@@ -230,66 +212,56 @@ ul,ol,li{
    color:#3175d1;
 }
 /*手机用户注册*/
-.phone-register{
+.add_personal{
     
 }
-.phone-register p{
+.add_personal p{
     margin:10px 0;
     border:1px solid #ddd;
     padding:0 15px;
     border-radius:20px;
     background:#fff;
 }
-.country{
+.input_title{
     width:100px;
     color:#000;
 }
-#phone,.country{
+.input_title{
     display:inline-block;
     height:40px;
     line-height:40px;
     font-size:14px;
-}
-#phone{
-    width:220px;
-}
-#imgCode{
-    width:150px;
-    height:40px;
-}
-#imgCode,#send{
-    display:inline-block;
-    line-height:40px;
-    font-size:14px;
-}
-.areaNum{
-    margin-top:0;
-    height:30px;
-    width:165px;
-    cursor:pointer;
-    vertical-align:-10px;
-    display:inline-block;
-}
-#messageCode,#nickname,#psw1,#psw{
-    display: inline-block;
-    height: 40px;
-    line-height: 40px;
-    font-size: 14px;
-    width: 100%;
-}
-#send{
-    width:100px;
-    float:right;
-    background:#fff;
-    cursor:pointer;
     text-align:right;
 }
-#send:disabled{
-    color:#666;
-}
-#messageCode{
+.input_content{
+    display:inline-block;
+    height:40px;
+    line-height:40px;
+    font-size:14px;
     width:220px;
 }
+#img1,#img2{
+    display:none;
+    max-width:100%;
+    max-height:150px;
+}
+.file_box{
+    position:relative;
+}
+.file_box input{
+    opacity:0;
+}
+.file_box a{
+    position:absolute;
+    color:#3175d1;
+    display:inline-block;
+    width:220px;
+    height:40px;
+    text-align:left;
+    line-height:40px;
+    font-size:15px;
+}
+
 .checked_div{
     padding-left:15px;
     font-size:14px;
@@ -310,54 +282,9 @@ ul,ol,li{
 }
 .phone-submit{
     width:100%;
-    height:40px;
-}
-#submit-register{
-    line-height: 40px;
-    display: inline-block;
-    font-size: 16px;
-    background: #3175d1;
-    color: #fff;
-    text-align: center;
-    border-radius: 20px;
-    border: 1px solid #fff;
-    width: 100%;
-    cursor: pointer;
-}
-#submit-register:disabled {
-    background: #ddd;
-    color: #999;
-}
-/*邮箱用户*/
-.email-register{
-   display:none;
-}
-.email-register p{
-    margin:10px 0;
-    border:1px solid #ddd;
-    padding:0 15px;
-    border-radius:20px;
-    background:#fff;
-}
-#email,#nickname,#psw1,#psw,#submit{
-    line-height: 38px;
-    height: 38px;
-    width: 100%;
-    display: inline-block;
-    font-size: 14px;
-}
-.checked-div{
-    padding-left:15px;
-    font-size:14px;
-    color:#666;
-    margin:10px 0;
-    text-align:left;
-}
-.checked-div a{
-    color:#3175d1;
-    font-size:14px;
 }
 #submit{
+    display: inline-block;
     background: #3175d1;
     color: #fff;
     margin: 10px 0;
@@ -378,11 +305,5 @@ ul,ol,li{
     color:red;
     font-size:14px;
 }
-.email-register>div{
-    text-align:left;
-}
-.email-register div span{
-    padding:0 15px;
-    display:inline-block;
-}
+
 </style>

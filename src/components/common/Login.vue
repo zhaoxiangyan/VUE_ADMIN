@@ -99,7 +99,7 @@
     },
     login1 () {
       var self = this;
-      var phoneReg = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
+      var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
       if (self.phone1 === '' || self.password === '') {
         // alert('输入框不能为空')
          self.message1 = "请填写完整";
@@ -160,6 +160,8 @@ ul,ol,li{
 	width:100%;
 	height:100%;
 	background:#324157;
+      min-height:800px;
+    min-width:500px;
 }
 .login .title{
   	position: absolute;

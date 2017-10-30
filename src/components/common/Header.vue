@@ -1,7 +1,7 @@
 <template>
         <div class="header">
             <div class="left" v-bind:class="[ getcollapsed ? '' : 'min-left']">
-                XMAO
+                图灵
             </div>
             <div class="center" @click.prevent="changecollapsed">
                 <i v-bind:class="[ getcollapsed ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right']" ></i>

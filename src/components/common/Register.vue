@@ -18,14 +18,8 @@
                             <div class="error_div"><span class="error" v-show="error.phone1">*请输入正确的手机号码</span></div>
                             <p><input type="text" id="imgCode" placeholder="请输入图形验证码" v-model="img_code"> <img src="http://192.168.0.133/turingcloud/captcha/gen" id="veriImg" class="areaNum graph" onclick="this.src='http://192.168.0.133/turingcloud/captcha/gen?random='+Math.random()"></p>
                             <div class="error_div"><span class="error" v-show="error.img_code1">*图形验证码错误</span></div>
-                            <p><input type="text" id="messageCode" placeholder="请输入短信验证码" v-model="code"> <input type="submit" value="发送短信验证码" id="send"></p>
+                            <p><input type="text" id="messageCode" placeholder="请输入短信验证码" v-model="code"> <input type="submit" v-model="sendMessage" :disabled='disabled' id="send" @click="sendCaptcha"></p>
                             <div class="error_div"><span class="error" v-show="error.code1">*短信验证码错误</span></div>
-                           <!-- <p><input type="password" id="psw" placeholder="请输入密码"></p>
-                            <div>
-                            </div>
-                            <p><input type="password" id="psw1" placeholder="请确认密码"></p>
-                            <div>
-                            </div>-->
                             <div class="checked_div">
                                 <input type="checkbox" id="checkbox" v-model="checked"> 同意和接受
                                 <a href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
@@ -35,21 +29,6 @@
                                 <input type="submit" id="submit" disabled="disabled" value="注册" v-else>
                             </div>
                         </div>
-                        <!--邮箱用户注册-->
-                        <!--<div  class="email-register">
-                            <p><input  type="text" placeholder="请输入邮箱" id="email" v-model="email"></p>
-                            <div><span class="error" v-show="error.mail">*请输入有效的邮箱地址</span></div>
-                            <p><input  type="password" placeholder="请输入密码" id="psw" v-model="password"></p>
-                            <div><span class="error" v-show="error.psw">*密码由大小写字母和数字组成，长度为6~20位</span></div> 
-                            <p><input  type="password" placeholder="请确认密码" id="psw1" v-model="password1"></p>
-                            <div><span class="error" v-show="error.psw1">*两次密码不一致</span></div>
-                            <div  class="checked-div">
-                                <input  type="checkbox" id="checkbox" v-model="checked"> 同意并遵守
-                                <a  href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
-                            </div> 
-                            <input  type="submit" id="submit"  value="注册" v-if="checked" @click="register">
-                            <input type="submit" id="submit" disabled="disabled" value="注册" v-else>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -64,6 +43,8 @@
                 phone: '',
                 img_code: '',
                 code:'',
+                disabled: false,
+                sendMessage: '发送短信验证码',
                 checked:false,
                 error: {
                     phone1:false,
@@ -77,25 +58,9 @@
                 var self = this;
                 var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
                 if(self.phone!=''&&phoneReg.test(self.phone)){
-                    self.$http({
-                        method: 'post',
-                        // url:'/turingcloud/beforeRegister?email='+self.email
-                        url: '/turingcloud/beforeRegister',
-                        // headers: {'Content-Type':'application/json'},
-                        data: {
-                            "phone": self.phone
-                        }
-                    }).then(function(res){
-                       if(res.data){
-                           self.error.phone1 = false;
-                       }else{
-                           self.error.phone1 = true;
-                       }
-                    }).catch(function(err){
-                      alert("AJAX失败");
-                    });
+                    self.error.phone1 = false;
                 }else{
-                     this.error.phone1 = true;
+                     self.error.phone1 = true;
                 }
             },
             img_code:function(){
@@ -118,38 +83,59 @@
                     });  
                 }
             }
-            /*code:function(){
-                if(this.password!=''&&this.password==this.password1){
-                    this.error.psw1 = false;
-                }else{
-                    this.error.psw1 = true;
-                }
-            }*/
         },
         methods: {
-            register() {
-                var self = this
-                var emailReg =  /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-                var pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
-                if (self.email === '' || !emailReg.test(self.email)) {
-                     self.error.mail = true;
+            // 发送验证码倒计时
+            countDown(){
+                var self = this;
+                self.sendMessage = '重新发送(59)';
+                var _step = 58;
+                var _res = setInterval(function(){
+                    self.sendMessage = '重新发送('+_step+')';
+                    _step-=1;
+                    if(_step<=0){
+                        self.disabled = false;
+                        self.sendMessage = '发送短信验证码';
+                        clearInterval(_res);
+                    }else{
+                          self.disabled = true;
+                    }
+                },1000);
+            },
+            // 点击发送验证码
+            sendCaptcha(){
+                var self = this;
+                var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+                if (self.phone === '' || !phoneReg.test(self.phone)) {
+                     self.error.phone1 = true;
                      return false;
-                } else if(self.password === '' || !pswReg.test(self.password)){
-                      self.error.psw = true;
-                      return false;
-                } else if(self.password!==self.password1){
-                      self.error.psw1 = true;
+                } else if(self.error.img_code1 == true){
                       return false;
                 } else {
-                    this.$http({
+                     self.$http({
+                         method: 'post',
+                         url: '/turingcloud/sendMsmCode?phone='+self.phone
+                     }).then(function(res){
+                        self.countDown();
+                     }).catch(function(err){
+
+                     });
+
+                }
+            },
+            // 注册
+            register() {
+                var self = this;
+                var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+                if (self.phone === '' || !emailReg.test(self.phone)) {
+                     self.error.phone = true;
+                     return false;
+                } else if(self.error.img_code1 = true){
+                      return false;
+                } else {
+                    self.$http({
                         method: 'post',
                         url: '/turingcloud/register?action=register&email='+self.email+'&password='+self.password
-                        // url:'/turingcloud/register',
-                        // data: {
-                        //     "action":'register',
-                        //     "email": self.email,
-                        //     "password": self.password
-                        // }
                     }).then(function(res){
                     //    alert(res);
                     //    console.log(res);
@@ -189,6 +175,8 @@ ul,ol,li{
     width:100%;
     height:100%;
     background:#324157;
+    min-height:800px;
+    min-width:500px;
 }
 .register div.box{
     width:420px;
