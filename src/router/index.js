@@ -17,16 +17,6 @@ export default new Router({
       path: '/',
       redirect: '/login'
     },
-    // {
-    //   path: '/hello',
-    //   component: resolve => require(['../components/Hello.vue'], resolve)
-    // },
-    {
-      path: '/static/pdf/2地缘政治.pdf'
-    },
-    {
-      path: '/static/pdf/4避险货币.pdf'
-    },
     {
       path: '/login',
       component: resolve => require(['../components/common/Login.vue'], resolve)
@@ -34,6 +24,10 @@ export default new Router({
     {
       path: '/register',
       component: resolve => require(['../components/common/Register.vue'], resolve)
+    },
+    {
+      path: '/add',
+      component: resolve => require(['../components/common/Add.vue'], resolve)
     },
     {
       path: '/home',

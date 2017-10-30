@@ -8,45 +8,45 @@
            <li class="code_switch"  v-bind:class="[ this.switch ? '' : 'active']"  @click="switchLogin2">验证码登录</li>
          </ul>
    	  	 <form class="password_form"  v-if="this.switch">
-   	  	 	<div class="required username_div">
+   	  	 	<div class="required phone1_div">
             <img src="../../assets/img/login_01.png">
-   	  	 		<input type="text" name="phone1"  v-model="phone1" placeholder="请输入手机号">
+   	  	 		<input type="text" name="phone1"  v-model="phone1" placeholder="请输入手机号" id="phone1">
    	  	 	</div>
    	  	 	<div class="required password_div">
             <img src="../../assets/img/login_02.png">
-   	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码">
+   	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码" id="password">
    	  	 	</div>
           <div class="re">
             <label for="keepPwd"><input type="checkbox" id="keepPwd" v-model="repassword">记住密码</label>
             <a href="/findpwd">忘记密码？</a>
           </div>
    	  	 	<div class="login_div">
-   	  	 		<input type="button" value="登录" id="submit" @click="login">
+   	  	 		<input type="button" value="登录" id="submit1" @click="login1">
    	  	 		</input>
    	  	 	</div>
-          <div id="login_message" class="error" v-show="empty">
-             {{message}}
+          <div id="login_message" class="error" v-show="empty1">
+             {{message1}}
           </div>
    	  	 </form>
           <form class="code_form" v-else>
-   	  	 	<div class="required username_div">
+   	  	 	<div class="required phone2_div">
             <img src="../../assets/img/login_01.png">
-   	  	 		<input type="text" name="phone2"  v-model="phone2" placeholder="请输入手机号">
+   	  	 		<input type="text" name="phone2"  v-model="phone2" placeholder="请输入手机号" id="phone2">
    	  	 	</div>
-   	  	 	<div class="required password_div">
+   	  	 	<div class="required code_div">
             <img src="../../assets/img/login_02.png">
-   	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码">
+            <input type="button" value="发送短信验证码" id="send">
+   	  	 		<input type="password" name="code"  v-model="code" placeholder="请输入短信验证码" id="messageCode">
    	  	 	</div>
           <div class="re">
-            <label for="keepPwd"><input type="checkbox" id="keepPwd" v-model="repassword">记住密码</label>
             <a href="/findpwd">忘记密码？</a>
           </div>
    	  	 	<div class="login_div">
-   	  	 		<input type="button" value="登录" id="submit" @click="login">
+   	  	 		<input type="button" value="登录" id="submit2" @click="login2">
    	  	 		</input>
    	  	 	</div>
-          <div id="login_message" class="error" v-show="empty">
-             {{message}}
+          <div id="code_message" class="error" v-show="empty2">
+             {{message2}}
           </div>
    	  	 </form>
          <div class="register_div">
@@ -66,12 +66,13 @@
       phone1: '',
       password: '',
       repassword: false,
-      empty:false,
-      message:'请填写完整',
+      empty1:false,
+      message1:'请填写完整',
       // 验证码登录
       phone2: '',
       code: '',
-      message1:'验证码输入错误'
+      empty2:false,
+      message2:'验证码输入错误'
     }
   },
   mounted() {
@@ -90,22 +91,22 @@
         var getPhone = storage["phone"]; 
         var getPwd = storage["password"]; 
         var getRepassword = storage["repassword"]; 
-        if(( ("" != getUsername) ||(null != getUsername)) && (("" != getPwd) ||(null != getPwd)) && (typeof(getUsername)!== "undefined")&&(typeof(getPwd)!=="undefined")) {
-          this.username = getPhone;
+        if(( ("" != getPhone) ||(null != getPhone)) && (("" != getPwd) ||(null != getPwd)) && (typeof(getPhone)!== "undefined")&&(typeof(getPwd)!=="undefined")) {
+          this.phone1 = getPhone;
           this.password = getPwd;
           this.repassword = getRepassword;
         }
     },
-    login () {
+    login1 () {
       var self = this;
       var phoneReg = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
       if (self.phone1 === '' || self.password === '') {
         // alert('输入框不能为空')
-         self.message = "请填写完整";
-         self.empty = true;
+         self.message1 = "请填写完整";
+         self.empty1 = true;
         return false
       }else if(!emailReg.test(self.phone1)){
-           self.message = "请输入正确的邮箱地址";
+           self.message1 = "请输入正确的邮箱地址";
       } else {
         var storage = window.localStorage; 
         if(self.repassword){
@@ -120,7 +121,7 @@
          // 此处加入后台AJAX验证
         this.$http({
               method: 'post',
-              url: '/turingcloud/login?email='+self.username+'&password='+self.password+'&isremenber=0'
+              url: '/turingcloud/login?email='+self.phone1+'&password='+self.password+'&isremenber=0'
               // url:'/turingcloud/login',
               // data: {
               //   "email": self.username,
@@ -218,7 +219,7 @@ ul,ol,li{
   margin-top:40px;
   padding:0;
 }
-form div.username_div,form div.password_div{
+form div.phone1_div,form div.password_div{
   width:310px;
   font-size:14px;
   padding-right:20px;
@@ -230,12 +231,11 @@ form div.username_div,form div.password_div{
 form div img{
   margin:10px 10px 0 20px;
 }
-#password,#username,#submit{
+#password,#phone1,#submit1{
   background-color:transparent;
   outline:0;
-  height:30px;
 }
-.username_div input,.password_div input{
+.phone1_div input,.password_div input{
   width:240px;
   float:right;
   border-radius:4px;
@@ -259,11 +259,11 @@ form div.re{
   display:inline-block;
   vertical-align:-2px;
 }
-.re a{
+.password_form .re a{
   float:right;
   color:#333;
 }
-.login_div input#submit{
+.login_div input#submit1{
   width:315px;
   display:block;
   margin:0 auto 8px;
@@ -285,6 +285,64 @@ form div.re{
 p.error{
   text-align:center;
 }
+/*短信验证码*/
+form div.phone2_div,form div.code_div{
+  width:310px;
+  font-size:14px;
+  padding-right:20px;
+  margin:10px auto;
+  border:1px solid #d8d8d8;
+  border-radius:20px;
+  height:40px;
+}
+#code,#phone2,#submit2{
+  background-color:transparent;
+  outline:0;
+}
+.phone2_div input{
+  width:240px;
+  float:right;
+  border-radius:4px;
+  height:38px;
+  line-height:38px;
+}
+.code_div input{
+  width:120px;
+  height:38px;
+  line-height:38px;
+  float:right;
+}
+#send{
+  background:#fff;
+  cursor:pointer;
+  text-align:right;
+}
+#send:hover{
+  color:#3175d1;
+}
+.code_form .re{
+  text-align:right;
+}
+.code_form .re a{
+  color:#333;
+}
+.login_div input#submit2{
+  width:315px;
+  display:block;
+  margin:0 auto 8px;
+  background-color:#3175d1;
+  color:#fff;
+  border-radius:20px;
+  height:40px;
+  border:0;
+  cursor:pointer;
+  font-size:14px;
+}
+#code_message{
+  margin:10px;
+  font-size:14px;
+}
+/*立即注册公用*/
 .register_div p{
   text-align:center;
   margin:20px auto;

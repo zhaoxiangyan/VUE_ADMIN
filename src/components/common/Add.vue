@@ -14,12 +14,12 @@
                     <div>
                         <div class="phone-register">
                             <!--手机用户注册-->
-                            <p><span class="country">中国(+0086)</span> <input type="text" id="phone" placeholder="请输入手机号码" v-model="phone"></p>
-                            <div class="error_div"><span class="error" v-show="error.phone1">*请输入正确的手机号码</span></div>
-                            <p><input type="text" id="imgCode" placeholder="请输入图形验证码" v-model="img_code"> <img src="http://192.168.0.133/turingcloud/captcha/gen" id="veriImg" class="areaNum graph" onclick="this.src='http://192.168.0.133/turingcloud/captcha/gen?random='+Math.random()"></p>
-                            <div class="error_div"><span class="error" v-show="error.img_code1">*图形验证码错误</span></div>
-                            <p><input type="text" id="messageCode" placeholder="请输入短信验证码" v-model="code"> <input type="submit" value="发送短信验证码" id="send"></p>
-                            <div class="error_div"><span class="error" v-show="error.code1">*短信验证码错误</span></div>
+                            <p><span class="country">中国(+0086)</span> <input type="text" id="phone" placeholder="请输入手机号码"></p>
+                            <div><span class="error" v-show="error.phone1">*请输入正确的手机号码</span></div>
+                            <p><input type="text" id="imgCode" placeholder="请输入图形验证码"> <img src="http://192.168.0.133/gen" id="veriImg" class="areaNum graph" onclick="this.src='http://192.168.0.133/gen?random='+Math.random()"></p>
+                            <div><span class="error" v-show="error.img_code1">*图形验证码错误</span></div>
+                            <p><input type="text" id="messageCode" placeholder="请输入短信验证码"> <input type="submit" value="发送短信验证码" id="send"></p>
+                            <div><span class="error" v-show="error.code1">*短信验证码错误</span></div>
                            <!-- <p><input type="password" id="psw" placeholder="请输入密码"></p>
                             <div>
                             </div>
@@ -27,7 +27,7 @@
                             <div>
                             </div>-->
                             <div class="checked_div">
-                                <input type="checkbox" id="checkbox" v-model="checked"> 同意和接受
+                                <input type="checkbox" id="checkbox" v-model="checked"> 同意并遵守
                                 <a href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
                             </div>
                             <div class="phone-submit">
@@ -97,28 +97,16 @@
                 }else{
                      this.error.phone1 = true;
                 }
-            },
-            img_code:function(){
-                /*var pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;*/
-                var self = this;
-                if(self.img_code.length!=4){
-                   self.error.img_code1 = true;
-                }else{
-                this.$http({
-                        method: 'post',
-                        url: '/turingcloud/captcha/validate?captcha='+self.img_code,
-                    }).then(function(res){
-                       if(res.data.rcode == '0'){
-                           self.error.img_code1 = false;
-                       }else{
-                           self.error.img_code1 = true;
-                       }
-                    }).catch(function(err){
-                       alert("AJAX失败");
-                    });  
-                }
             }
-            /*code:function(){
+            /*img_code:function(){
+                var pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
+                if(this.password!=''&&pswReg.test(this.password)){
+                     this.error.psw = false;
+                }else{
+                     this.error.psw = true;
+                }
+            },
+            code:function(){
                 if(this.password!=''&&this.password==this.password1){
                     this.error.psw1 = false;
                 }else{
@@ -251,10 +239,6 @@ ul,ol,li{
     padding:0 15px;
     border-radius:20px;
     background:#fff;
-}
-.phone-register div.error_div{
-    text-align:left;
-    padding-left:15px;
 }
 .country{
     width:100px;
