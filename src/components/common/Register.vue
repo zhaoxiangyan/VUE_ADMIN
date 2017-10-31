@@ -21,7 +21,7 @@
                             <p><input type="text" id="messageCode" placeholder="请输入短信验证码" v-model="code"> <input type="submit" v-model="sendMessage" :disabled='disabled' id="send" @click="sendCaptcha"></p>
                             <div class="error_div"><span class="error" v-show="error.code1">*短信验证码错误</span></div>
                             <div class="checked_div">
-                                <input type="checkbox" id="checkbox" v-model="checked"> 同意和接受
+                                <input type="checkbox" id="checkbox" v-model="checked"> 同意并接受
                                 <a href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
                             </div>
                             <div class="phone-submit">
@@ -120,43 +120,44 @@
                      }).catch(function(err){
 
                      });
-
                 }
             },
             // 注册
             register() {
                 var self = this;
                 var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
-                if (self.phone === '' || !emailReg.test(self.phone)) {
-                     self.error.phone = true;
+                if (self.phone === '' || !phoneReg.test(self.phone)) {
+                     self.error.phone1 = true;
                      return false;
-                } else if(self.error.img_code1 = true){
+                } else if(self.error.img_code1 == true){
                       return false;
                 } else {
                     self.$http({
                         method: 'post',
-                        url: '/turingcloud/register?action=register&email='+self.email+'&password='+self.password
+                        url: '/turingcloud/registerWithPhone?phone='+self.phone+'&msmCode='+self.code
                     }).then(function(res){
-                    //    alert(res);
-                    //    console.log(res);
-                       if(res.data == '0'){
-                           alert('注册成功，未激活');
+                       if(res.data.rcode == '0'||res.data.rcode == '1'){
+                           alert('注册成功');
+                           self.$router.push('/add');
+                       }else if(res.data.rcode =='2'){
+                           alert('账号已注册,资料审核中');
+                       }else if(res.data.rcode == '3'){
+                           alert('账号已注册,请登录');
                            self.$router.push('/login');
-                       }else if(res.data =='1'){
-                           alert('账号已经注册成功');
-                       }else if(res.data == '2'){
-                           alert('已经注册，未激活');
-                       }else if(res.data == '3'){
-                           alert('激活成功');
-                       }else if(res.data == '4'){
-                           alert('激活失败');
+                       }else if(res.data.rcode == '4'){
+                           alert('账号已注册,资料审核未通过，请重新填写个人资料');
+                           self.$router.push('/add');
+                       }else if(res.data.rcode == '6'){
+                           alert('验证码过期,请重新发送验证码');
+                       }else if(res.data.rcode == '7'){
+                           alert('验证码错误,请重新填写');
                        }else{
-                           alert('出错');
+                           alert('Error');
                        }
                     }).catch(function(err){
                        alert("AJAX失败");
                     });
-                    // self.$router.push('/login')
+                    // self.$router.push('/add')
                     // alert('注册成功');
                 }
             }
