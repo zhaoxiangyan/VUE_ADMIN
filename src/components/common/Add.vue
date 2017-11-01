@@ -10,24 +10,25 @@
                     <div>
                         <div class="add_personal">
                             <!--用户个人信息填写--> 
-                            <!--tips:加入邮箱和MT4账号-->
-                            <form @submit.prevent="confirm">
-                            <p><span class="input_title">姓名：</span> <input class="input_content" type="text" id="name" placeholder="请输入真实姓名" v-model="name"></p>
+                            <!--<form action="http://192.168.0.133/turingcloud/fillInfor" method="post" enctype="multipart/form-data" accept-charset="utf-8" onsubmit="document.charset='utf-8';">-->
+                           <!--<form @submit.prevent="confirm" enctype="multipart/form-data">-->
+                           <form  @submit.prevent="confirm">
+                            <p><span class="input_title">姓名：</span> <input class="input_content" type="text" id="name" placeholder="请输入真实姓名" v-model="name" name="username"></p>
                             <div><span class="error" v-show="error.name1">*请输入正确的姓名</span></div>
-                            <p><span class="input_title">身份证号码：</span> <input class="input_content" type="text" id="card" placeholder="请输入身份证号码" v-model="card"></p>
+                            <p><span class="input_title">身份证号码：</span> <input class="input_content" type="text" id="card" placeholder="请输入身份证号码" v-model="card" name="idcard"></p>
                             <div><span class="error" v-show="error.card1">*请输入正确的身份证号码</span></div>
-                            <p><span class="input_title">MT4账号：</span> <input class="input_content" type="text" id="mt4" placeholder="请输入MT4账号" v-model="mt4"></p>
+                            <p><span class="input_title">MT4账号：</span> <input class="input_content" type="text" id="mt4" placeholder="请输入MT4账号" v-model="mt4" name="account"></p>
                             <div><span class="error" v-show="error.mt41">*请输入MT4账号</span></div>
-                            <p><span class="input_title">邮箱：</span> <input class="input_content" type="text" id="email" placeholder="请输入邮箱" v-model="email"></p>
+                            <p><span class="input_title">邮箱：</span> <input class="input_content" type="text" id="email" placeholder="请输入邮箱" v-model="email" name="email"></p>
                             <div><span class="error" v-show="error.email1">*请输入正确的邮箱</span></div>
-                            <p><span class="input_title">登录密码：</span> <input class="input_content" type="password" id="password" placeholder="请输入登录密码" v-model="password"></p>
+                            <p><span class="input_title">登录密码：</span> <input class="input_content" type="password" id="password" placeholder="请输入登录密码" v-model="password" name="password"></p>
                             <div><span class="error" v-show="error.password1">*请输入格式正确的密码（6-16位字母、数字和下划线）</span></div>
                             <p><span class="input_title">确认登录密码：</span> <input class="input_content" type="password" id="repassword" placeholder="请再次输入登录密码" v-model="repassword"></p>
                             <div><span class="error" v-show="error.repassword1">*两次密码不一致</span></div>
                             <p class="file_box">
                                <span class="input_title">身份证正面：</span>
                                <a href="javascript:void(0)">{{file_name1}}</a>
-                               <input class="input_content" type="file" name='file1' id="file1" @change="uploadCard1()" accept="image/png, image/jpeg, image/gif, image/jpg" >
+                               <input class="input_content" type="file" name='idcardPic' id="file1" @change="uploadCard1()" accept="image/png, image/jpeg, image/gif, image/jpg" >
                             </p>
                             <!--如果在input file标签里写成accept='image/*'会造成点击按钮后等待时间稍长-->
                             <div>
@@ -37,7 +38,7 @@
                             <p class="file_box">
                                 <span class="input_title">身份证反面：</span>
                                 <a href="javascript:void(0)">{{file_name2}}</a>
-                                <input class="input_content" type="file" name='file2' id="file2" @change="uploadCard2()" accept="image/png, image/jpeg, image/gif, image/jpg">
+                                <input class="input_content" type="file" name='idcardPic' id="file2" @change="uploadCard2()" accept="image/png, image/jpeg, image/gif, image/jpg">
                             </p>
                             <div>
                                 <img id="img2" >
@@ -52,7 +53,7 @@
                                 <input type="submit" id="submit" value="确认提交" v-if="checked" >
                                 <input type="submit" id="submit" disabled="disabled" value="确认提交" v-else>
                             </div>
-                            </form>
+                           </form>
                         </div>
                     </div>
                 </div>
@@ -65,12 +66,12 @@
         name: 'Add',
         data() {
             return {
-                name: '',
-                card: '',
-                mt4: '',
-                email: '',
-                password: '',
-                repassword: '',
+                name: '赵相炎',
+                card: '360421188211241541',
+                mt4: '35445',
+                email: '987670346@qq.com',
+                password: 'yan151',
+                repassword: 'yan151',
                 file_name1:'点击选择图片上传',
                 file1: false,
                 file_name2:'点击选择图片上传',
@@ -109,7 +110,7 @@
             },
             mt4:function(){
                 var self = this;
-                if(self.mt4 === '' ){
+                if(self.mt4 === ''|| self.mt4 === 'null' ){
                      self.error.mt41 = true;
                 }else{
                     self.error.mt41 = false;
@@ -202,10 +203,9 @@
                      self.error.name1 = true;
                      return false;
                 } else if(self.card === '' || !cardReg.test(self.card)){
-                     self.error.name1 = false;
                      self.error.card1 = true;
                      return false;
-                } else if(self.mt4 === ''){
+                } else if(self.mt4 === ''|| self.mt4 === 'null'){
                     self.error.mt41 = true;
                     return false;
                 } else if (self.email === '' || !emailReg.test(self.email)) {
@@ -224,24 +224,34 @@
                       self.error.file21 = true;
                       return false;
                 } else {
-                    this.$http({
+                    var image = new FormData();
+                    image.append('username',self.name);
+                    image.append('idcard',self.card);
+                    image.append('account',self.mt4);
+                    image.append('email',self.email);
+                    image.append('password',self.password);
+                    image.append('idcardPic',document.getElementById("file1").files[0]);
+                    image.append('idcardPic',document.getElementById("file2").files[0]);
+                    self.$http({
                         method: 'post',
-                        url: '/turingcloud/register?action=register&email='+self.email+'&password='+self.password
+                        url: '/turingcloud/fillInfor',
+                        // headers: { "Content-Type": "multipart/form-data;charset=UTF-8"},
+                        // headers: { 'Content-Type': 'application/json;charset=UTF-8'},
+                        data: image
+                        // data: {
+                        //     'username':self.name,
+                        //     'idcard':self.card,
+                        //     'account':self.mt4,
+                        //     'email':self.email,
+                        //     'password':self.password
+                        // }
                     }).then(function(res){
-                       if(res.data == '0'){
-                           alert('注册成功，未激活');
-                           self.$router.push('/login');
-                       }else if(res.data =='1'){
-                           alert('账号已经注册成功');
-                       }else if(res.data == '2'){
-                           alert('已经注册，未激活');
-                       }else if(res.data == '3'){
-                           alert('激活成功');
-                       }else if(res.data == '4'){
-                           alert('激活失败');
-                       }else{
-                           alert('出错');
-                       }
+                    //    alert(res.data);
+                        if(res.data === '0'){
+                            $router.push('/login');
+                        }else{
+                            alert('error');
+                        }
                     }).catch(function(err){
                        alert("AJAX失败");
                     });

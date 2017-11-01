@@ -30,6 +30,10 @@ export default new Router({
       component: resolve => require(['../components/common/Add.vue'], resolve)
     },
     {
+      path: '/test',
+      component: resolve => require(['../components/common/test.vue'], resolve)
+    },
+    {
       path: '/home',
       component: resolve => require(['../components/common/Home.vue'], resolve),
       children: [
@@ -52,26 +56,6 @@ export default new Router({
         {
           path: '/four',
           component: resolve => require(['../components/page/Four.vue'], resolve)
-        },
-        {
-          path: '/five',
-          component: resolve => require(['../components/page/Five.vue'], resolve)
-        },
-        {
-          path: '/six',
-          component: resolve => require(['../components/page/Six.vue'], resolve)
-        },
-        {
-          path: '/seven',
-          component: resolve => require(['../components/page/Seven.vue'], resolve)
-        },
-        {
-          path: '/eight',
-          component: resolve => require(['../components/page/Eight.vue'], resolve)
-        },
-        {
-          path: '/nine',
-          component: resolve => require(['../components/page/Nine.vue'], resolve)
         }
       ]
     }

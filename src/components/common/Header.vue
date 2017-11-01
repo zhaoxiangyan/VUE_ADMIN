@@ -8,7 +8,7 @@
             </div>
             <div class="right">
                   <el-dropdown trigger="hover">
-                   <span class="el-dropdown-link">andy<img src="../../assets/user_photo.png"></span>
+                   <span class="el-dropdown-link">andy<img src="../../assets/boy_default.png"></span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item>我的消息</el-dropdown-item>
                       <el-dropdown-item>设置</el-dropdown-item>
