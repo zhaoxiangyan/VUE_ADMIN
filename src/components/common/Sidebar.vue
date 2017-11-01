@@ -48,7 +48,7 @@
                         url:"one"
                     },
                     {
-                        menu:"交易配置",
+                        menu:"账户交易配置",
                         iconclassname:"el-icon-setting",
                         url:"two"
                     },
