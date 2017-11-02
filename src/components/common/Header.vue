@@ -59,7 +59,7 @@
     }
     .header .left{
         box-sizing:border-box;
-        width:251px;
+        width:201px;
         height:70px;
         padding-left:20px;
         padding-right:20px;
@@ -69,7 +69,7 @@
         float:left;
     }
     .left.min-left{
-      width:91px;
+      width:81px;
       padding:0;
     }
     .header .center{

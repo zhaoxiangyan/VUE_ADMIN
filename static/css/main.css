@@ -1,4 +1,7 @@
 *{margin:0;padding:0;}
+html{
+    /* min-width:1400px; */
+}
 html,body{
      /* width:100%; */
     height:100%; 
@@ -50,7 +53,7 @@ input:-webkit-autofill{
 .content {
     background: none repeat scroll 0 0 #fff;
     position: absolute;
-    left: 250px;
+    left: 200px;
     right: 0;
     top: 70px;
     bottom: 0;

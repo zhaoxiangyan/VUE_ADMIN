@@ -11,10 +11,10 @@
 		<el-row class="page_content">
 			<el-col :xs="24" :sm="24" :md="24" :lg="12">
 			    <el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="6"  class="li_left">
 				    <span>用户协议：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right">
+				  <el-col :span="18"  class="li_right">
 				    	<a class="preview" href="javascript:void(0)"><i class="el-icon-document"></i>您已签约用户协议</a>
           </el-col>
 				</el-row>
@@ -175,11 +175,11 @@
 			<el-col :span="24" class="table">
 			   <el-row>
 				   <el-col :span="12">6个月</el-col>
-					 <el-col :span="12">1860.76美金~2040.82美金</el-col>
+					 <el-col :span="12"><span>1860.76</span>美金~<span>2040.82</span>美金</el-col>
 				 </el-row>
 				 <el-row>
 				   <el-col :span="12">12个月</el-col>
-					 <el-col :span="12">3720.72美金~4080.97美金</el-col>
+					 <el-col :span="12"><span>3720.72</span>美金~<span>4080.97</span>美金</el-col>
 				 </el-row>
 			</el-col>
 		</el-row>
@@ -280,7 +280,7 @@
 <style scoped>
 .two{
 	/*position:relative;*/
-	min-height:100%;
+	/*min-height:100%;*/
 	height:auto;
 	background:#fff;
 	border-bottom:1px solid #d2d6de;
@@ -396,6 +396,10 @@
 	line-height:50px;
 	border:1px solid #f4f4f4;
 }
+.table .el-row .el-col span{
+	color:#dd4b39;
+}
+
 
 .page_footer{
 	height: 55px;

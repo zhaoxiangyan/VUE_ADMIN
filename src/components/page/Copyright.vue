@@ -19,13 +19,13 @@
   /*margin:0 -25px -25px;*/
   position:fixed;
   bottom:0px;
-  left:250px;
+  left:200px;
   right:0px;
   border-top:1px solid #d2d6de;
   background:#fff;
 }
 .min-left .copyright{
-  left:90px;
+  left:80px;
 }
 .copyright p{
   line-height:50px;

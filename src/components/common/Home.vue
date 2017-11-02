@@ -29,7 +29,7 @@
 
 <style scoped>
 .content.min-left{
-    left:90px;
+    left:80px;
 }
 .content{
     background:#ecf0f5;

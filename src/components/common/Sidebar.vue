@@ -13,7 +13,7 @@
             </template>
         </el-menu> 
         <!--导航菜单-折叠后-->
-        <ul class="collapsed" style="width:90px" v-else ref="menuCollapsed" router>
+        <ul class="collapsed" style="width:80px" v-else ref="menuCollapsed" router>
 			<li v-for="(item,index) in Item">
               <template v-if="!item.item">
 				<div><router-link :to="item.url"><i :class="item.iconclassname"></i></router-link></div>
@@ -71,7 +71,7 @@
         ]),
         opencollapse:function(){
             if(this.getcollapsed){
-                return 'width:250px';
+                return 'width:200px';
             }
         } 
       },
@@ -92,7 +92,7 @@
    .sidebar{
     display: block;
     position: absolute;
-    width: 90px;
+    width: 80px;
     left: 0;
     top: 70px;
     bottom: 0;
@@ -121,7 +121,7 @@
    .collapsed li div{
         height: 56px;
         line-height: 56px;
-        font-size: 28px;
+        font-size: 25px;
         color: rgba(163,175,183,.9);
         /* padding: 0 20px; */
         cursor: pointer;
