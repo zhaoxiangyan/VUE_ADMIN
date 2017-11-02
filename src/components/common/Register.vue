@@ -56,7 +56,7 @@
         watch:{
             phone:function(){
                 var self = this;
-                var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+                var phoneReg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
                 if(self.phone!=''&&phoneReg.test(self.phone)){
                     self.error.phone1 = false;
                 }else{
@@ -105,7 +105,7 @@
             // 点击发送验证码
             sendCaptcha(){
                 var self = this;
-                var phoneReg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+                var phoneReg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
                 if (self.phone === '' || !phoneReg.test(self.phone)) {
                      self.error.phone1 = true;
                      return false;

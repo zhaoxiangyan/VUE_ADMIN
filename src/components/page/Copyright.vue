@@ -1,6 +1,6 @@
 <template>
 	<div class="copyright">
-     <p>Copyright&copy;2015-2017 <b>CRM System</b>.<i>All rights reserved.</i><span>Version&nbsp;1.0.1</span></p>
+     <p>Copyright&nbsp;&copy;&nbsp;2015-2017 <b>CRM System</b>.<i>All rights reserved.</i><span>Version&nbsp;1.0.1</span></p>
 	</div>	
 </template>
 <script>
@@ -17,12 +17,15 @@
 .copyright{
 	height:50px;
   /*margin:0 -25px -25px;*/
-  position:absolute;
+  position:fixed;
   bottom:0px;
-  left:0px;
+  left:250px;
   right:0px;
   border-top:1px solid #d2d6de;
   background:#fff;
+}
+.min-left .copyright{
+  left:90px;
 }
 .copyright p{
   line-height:50px;

@@ -59,7 +59,8 @@
 <style scoped>
 .one{
 	/*position:relative;*/
-	height:100%;
+	min-height:100%;
+	height:auto;
 	background:#fff;
 	border-bottom:1px solid #d2d6de;
     border-left:1px solid #e7ebf0;

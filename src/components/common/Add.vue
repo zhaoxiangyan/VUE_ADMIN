@@ -89,6 +89,26 @@
                 }
             }
         },
+        mounted: function () {
+               var self = this;
+               self.$http({
+                        method: 'post',
+                        url: '/turingcloud/checkUserStatus'
+                        // headers: { "Content-Type": "multipart/form-data;charset=UTF-8"},
+                        // headers: { 'Content-Type': 'application/json;charset=UTF-8'},
+                    }).then(function(res){
+                        if(res.data == '0'){
+                            console.log('用户已注册，请填写资料');
+                        }else if(res.data == '1'){
+                            alert('请先注册手机号码');
+                            self.$router.push('/register');
+                        }else{
+                            alert('Error');
+                        }
+                    }).catch(function(err){
+                       alert("AJAX失败");
+                    }); 
+        },
         watch:{
             name:function(){
                var self = this;
@@ -237,20 +257,20 @@
                         url: '/turingcloud/fillInfor',
                         // headers: { "Content-Type": "multipart/form-data;charset=UTF-8"},
                         // headers: { 'Content-Type': 'application/json;charset=UTF-8'},
-                        data: image
-                        // data: {
-                        //     'username':self.name,
-                        //     'idcard':self.card,
-                        //     'account':self.mt4,
-                        //     'email':self.email,
-                        //     'password':self.password
-                        // }
+                        data:image
                     }).then(function(res){
                     //    alert(res.data);
-                        if(res.data === '0'){
-                            $router.push('/login');
+                        if(res.data == '0'){
+                            alert('资料提交成功，请等待审核');
+                            self.$router.push('/login');
+                        }else if(res.data == '1'){
+                            alert('请先注册手机号码');
+                            self.$router.push('/register');
+                        }else if(res.data == '2'){
+                            alert('身份证上传错误，请重新上传');
+                            return false;
                         }else{
-                            alert('error');
+                            alert('Error');
                         }
                     }).catch(function(err){
                        alert("AJAX失败");
