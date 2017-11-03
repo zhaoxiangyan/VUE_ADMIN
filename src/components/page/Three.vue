@@ -11,7 +11,7 @@
 		<el-row class="page_content">
           <el-col :span="24">
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>真实姓名：</span>
               </el-col>
               <el-col  :span="16">
@@ -19,7 +19,7 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>邮箱：</span>
               </el-col>
               <el-col  :span="16">
@@ -27,7 +27,7 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>手机号码：</span>
               </el-col>
               <el-col  :span="16">
@@ -35,15 +35,15 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>身份证号码：</span>
               </el-col>
-              <el-col  :span="16">
+              <el-col  :xs="16" :sm="16" :md="16" :lg="16">
                 <el-input v-model="input4" placeholder="3604211996467461452"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>国家：</span>
               </el-col>
               <el-col  :span="16">
@@ -51,7 +51,7 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>详细地址：</span>
               </el-col>
               <el-col  :span="16">
@@ -59,10 +59,10 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>上传身份证正面：</span>
               </el-col>
-              <el-col  :span="16" class="alignl">
+              <el-col  class="alignl"   :xs="17" :sm="18" :md="18" :lg="16">
                 <div class="file_box">
 			  <input type="file" id="card1" accept="image/png, image/jpeg, image/gif, image/jpg">
 			  <span class="mask card_mask1">选择文件</span>
@@ -71,7 +71,7 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>预览：</span>
               </el-col>
               <el-col  :span="16">
@@ -79,10 +79,10 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>上传身份证反面：</span>
               </el-col>
-              <el-col  :span="16" class="alignl">
+              <el-col  class="alignl"   :xs="17" :sm="18" :md="18" :lg="16">
                 <div class="file_box">
                 <input type="file" id="card2" accept="image/png, image/jpeg, image/gif, image/jpg">
                 <span class="mask card_mask2">选择文件</span>
@@ -91,7 +91,7 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>预览：</span>
               </el-col>
               <el-col  :span="16">
@@ -99,7 +99,7 @@
               </el-col>
             </el-row>
             <el-row class="li">
-              <el-col  :span="5">
+              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>最近登录时间：</span>
               </el-col>
               <el-col  :span="16">
@@ -169,15 +169,15 @@
 
 }
 .page_content .li{
-    height:36px;
+    /*height:36px;*/
     margin:15px 0;
 }
 .page_content .li div{
-    height:36px;
+    /*height:36px;*/
 }
 .li div span{
     display: block;
-    height: 36px;
+    /*height: 36px;*/
     line-height: 36px;
     text-align: right;
     padding-right: 10%;

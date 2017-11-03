@@ -9,28 +9,28 @@
 	    	</el-breadcrumb>
 		</div>	
 		<el-row class="page_content">
-			<el-col :xs="24" :sm="24" :md="24" :lg="12">
+			<el-col :xs="24" :sm="24" :md="24" :lg="11">
 			    <el-row class="li">
-				  <el-col :span="6"  class="li_left">
+				  <el-col :span="8"  class="li_left">
 				    <span>用户协议：</span>
 				  </el-col>
-				  <el-col :span="18"  class="li_right">
+				  <el-col :span="16"  class="li_right">
 				    	<a class="preview" href="javascript:void(0)"><i class="el-icon-document"></i>您已签约用户协议</a>
           </el-col>
 				</el-row>
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>委托扣款协议：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right">
+				  <el-col :span="16" class="li_right">
 				     	<a class="preview" href="javascript:void(0)"><i class="el-icon-document"></i>您已签约委托扣款三方协议</a>
           </el-col>
 				</el-row>	
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>账户投资资金：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right  capital">
+				  <el-col :span="16" class="li_right  capital">
 					    <template>
 								<el-select v-model="value" placeholder="请选择">
 									<el-option
@@ -50,10 +50,10 @@
           </el-col>
 				</el-row>	
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>使用的平台：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right platform select100">
+				  <el-col :span="16" class="li_right platform select100">
 					    <template>
 								<el-select v-model="value1" placeholder="请选择">
 									<el-option
@@ -67,10 +67,10 @@
           </el-col>
 				</el-row>	
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>选择交易账户：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right select100">
+				  <el-col :span="16" class="li_right select100">
 					    <template>
 								<el-select v-model="value2" placeholder="请选择">
 									<el-option
@@ -84,28 +84,28 @@
           </el-col>
 				</el-row>	
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>MT4账号编号：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right">
+				  <el-col :span="16" class="li_right">
 					   <el-input v-model="input2" placeholder="请输入MT4账号"></el-input>
           </el-col>
 				</el-row>	
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>最大承受风险：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right text40">
+				  <el-col :span="16" class="li_right text40">
 				  	<el-input v-model="input3" placeholder="自定义金额"></el-input>&nbsp;&nbsp;美元
           </el-col>
 				</el-row>	
 			</el-col>
-			<el-col :xs="24" :sm="24" :md="24" :lg="12">
+			<el-col :xs="24" :sm="24" :md="24" :lg="13">
 			    <el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>使用挂机模式：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right select100">
+				  <el-col :span="16" class="li_right select100">
 					    <template>
 								<el-select v-model="value3" placeholder="请选择">
 									<el-option
@@ -119,10 +119,10 @@
           </el-col>
 				</el-row>
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>同意挂机费用：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right radio35">
+				  <el-col :span="16" class="li_right radio35">
 					    <template>
 								<el-radio class="radio" v-model="radio" label="1">同意</el-radio>
 								<el-radio class="radio" v-model="radio" label="2">不同意</el-radio>
@@ -130,10 +130,10 @@
           </el-col>
 				</el-row>
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>账户预警设置：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right radio35 small_text">
+				  <el-col :span="16" class="li_right radio35 small_text">
 					    <template>
 								<el-radio class="radio" v-model="radio1" label="1">30%</el-radio>
 								<el-radio class="radio" v-model="radio1" label="2">50%</el-radio>
@@ -143,10 +143,10 @@
           </el-col>
 				</el-row>
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>最大回撤选择：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right radio35 small_text">
+				  <el-col :span="16" class="li_right radio35 small_text">
 					    <template>
 								<el-radio class="radio" v-model="radio2" label="1">30%</el-radio>
 								<el-radio class="radio" v-model="radio2" label="2">50%</el-radio>
@@ -156,18 +156,18 @@
           </el-col>
 				</el-row>
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>MT4账户密码：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right text100">
+				  <el-col :span="16" class="li_right text100">
 				     	<el-input type="password" v-model="password" auto-complete="off" placeholder="请输入MT4账号密码"></el-input>
           </el-col>
 				</el-row>
 				<el-row class="li">
-				  <el-col :span="6" class="li_left">
+				  <el-col :span="8" class="li_left">
 				    <span>确认MT4账户密码：</span>
 				  </el-col>
-				  <el-col :span="18" class="li_right text100">
+				  <el-col :span="16" class="li_right text100">
 				    	<el-input type="password" v-model="repassword" auto-complete="off" placeholder="请再次输入MT4账号密码"></el-input>
           </el-col>
 				</el-row>
@@ -423,5 +423,13 @@
 	text-align:center;
 	line-height:35px;
 	border-radius:4px;
+}
+
+/*修改样式*/
+.el-radio+.el-radio{
+	margin-left:5px;
+}
+.small_text .el-input{
+	width:30%;
 }
 </style>
