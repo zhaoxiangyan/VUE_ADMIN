@@ -10,8 +10,9 @@
 		</div>	
 		<ul class="page_content">
 		  <li>
-		  <el-row class="li" :gutter="30">
-			 <el-col  :xs="24" :sm="16" :md="8" :lg="8">
+		    <form @submit.prevent="uploadUser">
+		    <el-row class="li" :gutter="30">
+			 <el-col  :xs="24" :sm="24" :md="8" :lg="8">
 		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>用户协议</a>
 			  </el-col>
 			 <el-col  :xs="24" :sm="24" :md="16" :lg="16">
@@ -28,31 +29,34 @@
 			  <input type="file" id="user_file3" accept="image/png, image/jpeg, image/gif, image/jpg">
 			  <span class="mask user_mask3">上传协议3</span>
 			  </div>
-			  <input type="button" value="提交">
+			  <input type="submit" value="提交">
 			   </el-col> 
 			</el-row>  
 			  <p>*您如果同意签约，请先下载协议，打印后签名，再扫描上传已签约的协议，再提交审核</p>
+			</form>
 		  </li>
 		  <li>
+		    <form  @submit.prevent="uploadDebit">
 		    <el-row class="li" :gutter="30">
-			 <el-col  :xs="24" :sm="16" :md="8" :lg="8">
+			 <el-col  :xs="24" :sm="24" :md="8" :lg="8">
 		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>委托扣款三方协议</a>
 			 </el-col>
 			 <el-col  :xs="24" :sm="24" :md="16" :lg="12">
 			  <a class="download" href="http://192.168.0.133/file/agreement.zip">下载协议</a>
 			  <div class="file_box">
-			  <input type="file" id="debit_file1" accept="image/png, image/jpeg, image/gif, image/jpg">
-			  <span class="mask user_mask1">上传协议1</span>
+			  <input type="file" id="debit_file1" accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadDebit1()" name="withholdPic">
+			  <span class="mask user_mask1">{{debit1}}</span>
 			  </div>
 			  <div class="file_box">
-			  <input type="file" id="debit_file2" accept="image/png, image/jpeg, image/gif, image/jpg">
-			  <span class="mask user_mask2">上传协议2</span>
+			  <input type="file" id="debit_file2" accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadDebit2()" name="withholdPic">
+			  <span class="mask user_mask2">{{debit2}}</span>
 			  </div>
-			  <input type="button" value="提交">
+			  <input type="submit" value="提交">
+			  <em class="error" v-show="error.debit">{{error.debit_text}}</em>
 			 </el-col> 
 			</el-row>  
 			  <p>*您如果同意签约，请先下载协议，打印后签名，再扫描上传已签约的协议，再提交审核</p>
-			 
+		    </form>
 		  </li>
 		</ul>	  
 	</div>	
@@ -61,11 +65,77 @@
  export default {
     data() {
       return {
-       
+    //    用户协议
+	//    扣款协议
+         debit1:'上传协议1',
+		 debit2:'上传协议2',
+		 debit_file1:false,
+		 debit_file2:false,
+		//  上传出错
+		 error:{
+             debit:false,
+			 debit_text:'协议上传错误'
+		 }
       };
     },
     methods: {
-	
+		// 用户协议
+		// 扣款协议
+		uploadDebit1(){
+			var self = this;
+			var reader = new FileReader();
+			var file = document.getElementById("debit_file1").files[0];
+			self.debit1 = file.name;
+			//读取文件过程方法
+			reader.onload = function (e) {
+				console.log("成功读取....");
+				self.debit_file1 = true;
+			}
+			reader.readAsDataURL(file)
+		},
+		uploadDebit2(){
+			var self = this;
+			var reader = new FileReader();
+			var file = document.getElementById("debit_file2").files[0];
+			self.debit2 = file.name;
+			//读取文件过程方法
+			reader.onload = function (e) {
+				console.log("成功读取....");
+				self.debit_file2 = true;
+			}
+			reader.readAsDataURL(file)
+		},
+		uploadDebit() {
+			var self = this;
+		      self.error.debit = false;
+			if(self.debit_file1 == false){
+					self.error.debit_text = '上传协议1出错';
+					self.error.debit = true;
+					return false;
+			} else if(self.debit_file2 == false){
+					self.error.debit_text = '上传协议2出错';
+					self.error.debit = true;
+					return false;
+			} else {
+				var image = new FormData();
+				image.append('withholdPic',document.getElementById("debit_file1").files[0]);
+				image.append('withholdPic',document.getElementById("debit_file2").files[0]);
+				self.$http({
+					method: 'post',
+					url: '/turingcloud/upload/withholdPic',
+					data:image
+				}).then(function(res){
+				//    alert(res.data);
+					if(res.data == true){
+						alert('协议上传成功，请等待审核');
+					}else{
+						alert('Error：协议上传出错');
+					}
+				}).catch(function(err){
+					alert("AJAX失败");
+				});
+			}
+	    }
     }
 }
 </script>
@@ -152,10 +222,12 @@ ul,li{
 	position:relative;
 	border:none;
 	cursor:pointer;
+	vertical-align:middle;
 }
 .page_content li a.download{
 	box-sizing:border-box;
 	color:#000;
+	vertical-align:middle;	
 }
 .page_content li a.download:hover{
 
@@ -173,15 +245,17 @@ ul,li{
 }
 .page_content li div span{
 	cursor:pointer;
-   box-sizing:border-box;
+    box-sizing:border-box;
+   	overflow:hidden;
 }
 .page_content li span.mask_user1{
 }
 .page_content li span.mask_user2{}
 .page_content li span.mask_user3{}
-.page_content li input[type='button']{
+.page_content li input[type='submit']{
 	background:#fff;
 	cursor:pointer;
+	vertical-align:middle;
 }
 .page_content li p{
 	margin-top:10px;
@@ -193,6 +267,10 @@ ul,li{
 	margin:10px 0;
 }
 
+em.error{
+	font-style:normal;
+	color:red;
+}
 @media screen and (max-width: 1230px) {
     
 }
