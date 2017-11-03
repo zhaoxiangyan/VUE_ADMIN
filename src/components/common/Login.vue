@@ -35,7 +35,7 @@
    	  	 	</div>
    	  	 	<div class="required code_div">
             <img src="../../assets/img/login_02.png">
-            <input type="button" value="发送短信验证码" id="send">
+            <input type="button"  v-model="sendMessage" id="send" @click="sendCaptcha" :disabled='disabled' >
    	  	 		<input type="password" name="code"  v-model="code" placeholder="请输入短信验证码" id="messageCode">
    	  	 	</div>
           <div class="re">
@@ -72,7 +72,9 @@
       phone2: '',
       code: '',
       empty2:false,
-      message2:'验证码输入错误'
+      message2:'验证码输入错误',
+      disabled: true,
+      sendMessage: '发送短信验证码'
     }
   },
   mounted() {
@@ -85,36 +87,45 @@
       if(self.phone2 === ''||!phoneReg.test(self.phone2)){
          self.message2 = '请输入格式正确的手机号码';
          self.empty2 = true;
-         return false;
       }else{
-         self.$http({
-              method: 'post',
-              url: '/turingcloud/login/checkUserStatus?phone='+self.phone2
-         }).then(function(res){
-            if(res.data == '0'){
-              self.empty = false;
-              return false;
-            }else if(res.data == '1'){
-              self.message2 = '手机号码不存在,请先注册';
-              self.empty2 = true;
-            }else if(res.data == '2'){
-              self.message2 = '资料未填写，请先填写资料';
-              self.empty2 = true;
-              self.$router.push('/add');
-            }else if(res.data == '3'){
-              self.message2 = '资料正在审核中';
-              self.empty2 = true;
-            }else if(res.data == '4'){
-              self.message2 = '资料审核未通过，请重新填写资料';
-              self.empty2 = true;
-            }else{
-              alert('Error');
-            }
-         }).catch(function(err){
-            alert("AJAX失败");
-         });
+         self.empty2 = false;
+         self.disabled = false;
+        //  self.$http({
+        //       method: 'post',
+        //       url: '/turingcloud/login/checkUserStatus?phone='+self.phone2
+        //  }).then(function(res){
+        //     if(res.data == '0'){
+        //       self.empty = false;
+        //       return false;
+        //     }else if(res.data == '1'){
+        //       self.message2 = '手机号码不存在,请先注册';
+        //       self.empty2 = true;
+        //     }else if(res.data == '2'){
+        //       self.message2 = '资料未填写，请先填写资料';
+        //       self.empty2 = true;
+        //       self.$router.push('/add');
+        //     }else if(res.data == '3'){
+        //       self.message2 = '资料正在审核中';
+        //       self.empty2 = true;
+        //     }else if(res.data == '4'){
+        //       self.message2 = '资料审核未通过，请重新填写资料';
+        //       self.empty2 = true;
+        //     }else{
+        //       alert('Error');
+        //     }
+        //  }).catch(function(err){
+        //     alert("AJAX失败");
+        //  });
       }
     }
+    // code:function(){
+    //   if(self.code === ''){
+    //     self.message2 = '请输入验证码';
+    //     self.empty2 = true;
+    //   }else{
+
+    //   }
+    // }
   },
   methods: {
     // 登录方式切换
@@ -168,11 +179,6 @@
         self.$http({
               method: 'post',
               url: '/turingcloud/login/byPassword?phone='+self.phone1+'&password='+self.password
-              // url:'/turingcloud/login',
-              // data: {
-              //   "phone": self.phone1,
-              //   "password": self.password
-              // }
          }).then(function(res){
             if(res.data == '0'){
               alert('登录成功');
@@ -197,8 +203,129 @@
          });
       }
     },
-    login2(){
-      
+    // 发送验证码倒计时
+    countDown(){
+        var self = this;
+        self.sendMessage = '重新发送(59)';
+        var _step = 58;
+        var _res = setInterval(function(){
+            self.sendMessage = '重新发送('+_step+')';
+            _step-=1;
+            if(_step<=0){
+                self.disabled = false;
+                self.sendMessage = '发送短信验证码';
+                clearInterval(_res);
+            }else{
+                  self.disabled = true;
+            }
+        },1000);
+    },
+     // 点击发送验证码
+    sendCaptcha(){
+        var self = this;
+        var phoneReg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+        if (self.phone2 === '' || !phoneReg.test(self.phone2)) {
+              self.message2 = '请输入格式正确的手机号码';
+              self.empty2 = true;
+              return false;
+        } else {
+              self.$http({
+              method: 'post',
+              url: '/turingcloud/login/checkUserStatus?phone='+self.phone2
+         }).then(function(res){
+            if(res.data == '0'){
+              self.empty2 = false;
+              self.$http({
+                  method: 'post',
+                  url: '/turingcloud/login/sendMsmCode?phone='+self.phone2
+              }).then(function(res){
+                self.countDown();
+              }).catch(function(err){
+                alert('运行错误');
+              });
+            }else if(res.data == '1'){
+              self.message2 = '手机号码不存在,请先注册';
+              self.empty2 = true;
+            }else if(res.data == '2'){
+              self.message2 = '资料未填写，请先填写资料';
+              self.empty2 = true;
+              self.$router.push('/add');
+            }else if(res.data == '3'){
+              self.message2 = '资料正在审核中';
+              self.empty2 = true;
+            }else if(res.data == '4'){
+              self.message2 = '资料审核未通过，请重新填写资料';
+              self.empty2 = true;
+            }else{
+              alert('Error');
+            }
+         }).catch(function(err){
+            alert("AJAX失败");
+         });
+        }
+    },
+    // 短信验证码登录
+    login2 () {
+      var self = this;
+      if(self.empty2 == true && self.code != ''){
+        self.empty2 = false;
+      }
+      // self.empty2 = false;
+      var phoneReg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+      if (self.phone2 === '' || self.code === '') {
+        // alert('输入框不能为空')
+         self.message2 = "请填写完整";
+         self.empty2 = true;
+         return false;
+      }else if(!phoneReg.test(self.phone2)){
+           self.message2 = "请输入正确的手机号码";
+           self.empty2 = true;
+           return false;
+      }else {
+           self.$http({
+              method: 'post',
+              url: '/turingcloud/login/checkUserStatus?phone='+self.phone2
+          }).then(function(res){
+            if(res.data == '0'){
+              self.$http({
+              method: 'post',
+              url: '/turingcloud/login/byMsm?phone='+self.phone2+'&msm='+self.code
+              }).then(function(res){
+                  if(res.data == '0'){
+                    alert('登录成功');
+                    self.$router.push('/home');
+                  }else if(res.data == '1'){
+                    alert('登录失败，验证码失效');
+                  }else if(res.data == '2'){
+                    alert('登录失败，验证码错误');
+                  }else{
+                    alert('Error');
+                  }
+              }).catch(function(err){
+                  alert("AJAX失败");
+              });
+            }else if(res.data == '1'){
+              self.message2 = '手机号码不存在,请先注册';
+              self.empty2 = true;
+            }else if(res.data == '2'){
+              self.message2 = '资料未填写，请先填写资料';
+              self.empty2 = true;
+              self.$router.push('/add');
+            }else if(res.data == '3'){
+              self.message2 = '资料正在审核中';
+              self.empty2 = true;
+            }else if(res.data == '4'){
+              self.message2 = '资料审核未通过，请重新填写资料';
+              self.empty2 = true;
+            }else{
+              alert('Error');
+            }
+         }).catch(function(err){
+            alert("AJAX失败");
+         });
+         // 此处加入后台AJAX验证
+        
+      }
     }
   }
 	}

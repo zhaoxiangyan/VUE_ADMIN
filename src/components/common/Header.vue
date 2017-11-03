@@ -7,12 +7,12 @@
                 <i v-bind:class="[ getcollapsed ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right']" ></i>
             </div>
             <div class="right">
-                  <el-dropdown trigger="hover">
-                   <span class="el-dropdown-link">andy<img src="../../assets/boy_default.png"></span>
+                  <el-dropdown trigger="hover" @command="handleCommand">
+                   <span class="el-dropdown-link">{{name}} <img  v-bind:src=src ></span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item>我的消息</el-dropdown-item>
-                      <el-dropdown-item>设置</el-dropdown-item>
-                      <el-dropdown-item divided>退出登录</el-dropdown-item>
+                      <el-dropdown-item command="/three">我的信息</el-dropdown-item>
+                      <el-dropdown-item command="/two">设置</el-dropdown-item>
+                      <el-dropdown-item divided command="/">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                  </el-dropdown>  
             </div>
@@ -26,6 +26,7 @@
       data () {
         return {
           name: 'linxin',
+          src: 'static/img/boy_default.png'
           // collapsed:false
         }
       },
@@ -35,6 +36,35 @@
         'getcollapsed'
       ])    
       },
+      mounted:function(){
+        // 线上代码begin
+        // 登录拦截
+        // var self = this;
+        // self.$http({
+        //         method: 'get',
+        //         url: '/turingcloud/login/isLogin',
+        //         }).then(function(res){
+        //            if(res.data == true){
+        //                    // 返回用户信息
+        //                     self.$http({
+        //                             method: 'get',
+        //                             url: '/turingcloud/user/'
+        //                             }).then(function(res){
+        //                                 self.name = res.data.username;
+        //                                 if(res.data.sex == "女"){
+        //                                   self.src = 'static/img/girl_default.png';
+        //                                 }
+        //                             }).catch(function(err){
+        //                                 console.log("AJAX失败");
+        //                             }); 
+        //            }else{
+        //              self.$router.push('/');
+        //            }
+        //         }).catch(function(err){
+        //             console.log("AJAX失败");
+        //         }); 
+        //  线上代码end
+      },
       methods: {
         //折叠导航栏
         // collapse:function(){
@@ -42,7 +72,38 @@
         // }
         ...mapActions([
           'changecollapsed'
-        ])
+        ]),
+        // handleCommand(command) {
+        //   alert(command)
+        //   alert('111');
+        // }
+        handleCommand(command) {
+          var self = this;
+          if(command == '/'){
+             self.$http({
+              method: 'post',
+              url: '/turingcloud/user/logout'
+              }).then(function(res){
+                  self.$router.push('/');
+              }).catch(function(err){
+                  alert("AJAX失败");
+              }); 
+          }else{
+            self.$router.push(command);
+          }
+        }
+        // quit(){
+        //     alert('111');
+        //     var self = this;
+        //     self.$http({
+        //     method: 'post',
+        //     url: '/turingcloud/user/logout'
+        //     }).then(function(res){
+        //         self.$router.push('/');
+        //     }).catch(function(err){
+        //         alert("AJAX失败");
+        //     }); 
+        // }
       }
     }
 </script>

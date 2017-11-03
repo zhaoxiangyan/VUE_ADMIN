@@ -10,7 +10,11 @@
 		</div>	
 		<ul class="page_content">
 		  <li>
+		  <el-row class="li" :gutter="30">
+			 <el-col  :xs="24" :sm="16" :md="8" :lg="8">
 		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>用户协议</a>
+			  </el-col>
+			 <el-col  :xs="24" :sm="24" :md="16" :lg="16">
 			  <a class="download" href="http://192.168.0.133/file/agreement.zip">下载协议</a>
 			  <div class="file_box">
 			  <input type="file" id="user_file1" accept="image/png, image/jpeg, image/gif, image/jpg">
@@ -25,10 +29,16 @@
 			  <span class="mask user_mask3">上传协议3</span>
 			  </div>
 			  <input type="button" value="提交">
+			   </el-col> 
+			</el-row>  
 			  <p>*您如果同意签约，请先下载协议，打印后签名，再扫描上传已签约的协议，再提交审核</p>
 		  </li>
 		  <li>
+		    <el-row class="li" :gutter="30">
+			 <el-col  :xs="24" :sm="16" :md="8" :lg="8">
 		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>委托扣款三方协议</a>
+			 </el-col>
+			 <el-col  :xs="24" :sm="24" :md="16" :lg="12">
 			  <a class="download" href="http://192.168.0.133/file/agreement.zip">下载协议</a>
 			  <div class="file_box">
 			  <input type="file" id="debit_file1" accept="image/png, image/jpeg, image/gif, image/jpg">
@@ -39,7 +49,10 @@
 			  <span class="mask user_mask2">上传协议2</span>
 			  </div>
 			  <input type="button" value="提交">
+			 </el-col> 
+			</el-row>  
 			  <p>*您如果同意签约，请先下载协议，打印后签名，再扫描上传已签约的协议，再提交审核</p>
+			 
 		  </li>
 		</ul>	  
 	</div>	
@@ -102,7 +115,7 @@ ul,li{
 .page_content li a.preview{
 	box-sizing:border-box;
 	display:inline-block;
-	width:345px;
+	width:100%;
 	height:35px;
 	color:#fff;
 	background:#21b548;
@@ -110,7 +123,7 @@ ul,li{
 	border:1px solid #1a913a;
 	line-height:35px;
 	text-align:left;
-	margin-right:30px;
+	/*margin-right:30px;*/
 }
 .el-icon-document{
 	display:inline-block;
@@ -126,7 +139,7 @@ ul,li{
 }
 .page_content li a.download,.page_content li div.file_box,.page_content li input,.page_content li div span{
 	display:inline-block;
-	margin:0px 5px;
+	margin:0 10px 10px 0;
 	padding:0px;
 	width:90px;
 	height:35px;
@@ -171,8 +184,18 @@ ul,li{
 	cursor:pointer;
 }
 .page_content li p{
-	margin-top:15px;
+	margin-top:10px;
 	color:#797878;
 	font-size:15px;
 }
+
+.li .el-col{
+	margin:10px 0;
+}
+
+@media screen and (max-width: 1230px) {
+    
+}
+
+
 </style>

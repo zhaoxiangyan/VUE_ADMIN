@@ -15,7 +15,7 @@
                  <span>真实姓名：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input" placeholder="Andy"></el-input>
+                <el-input v-model="input1" placeholder="Andy"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
@@ -23,7 +23,7 @@
                  <span>邮箱：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input" placeholder="989746@qq.com"></el-input>
+                <el-input v-model="input2" placeholder="989746@qq.com"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
@@ -31,7 +31,7 @@
                  <span>手机号码：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input" placeholder="1388888888"></el-input>
+                <el-input v-model="input3" placeholder="1388888888"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
@@ -39,7 +39,7 @@
                  <span>身份证号码：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input" placeholder="3604211996467461452"></el-input>
+                <el-input v-model="input4" placeholder="3604211996467461452"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
@@ -47,7 +47,7 @@
                  <span>国家：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input" placeholder="中国"></el-input>
+                <el-input v-model="input5" placeholder="中国"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
@@ -55,7 +55,7 @@
                  <span>详细地址：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input" placeholder="广东深圳"></el-input>
+                <el-input v-model="input6" placeholder="广东深圳"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
@@ -103,7 +103,7 @@
                  <span>最近登录时间：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input" placeholder="2017/11/02"></el-input>
+                <el-input v-model="input7" placeholder="2017/11/02"></el-input>
               </el-col>
             </el-row>
           </el-col>
@@ -118,7 +118,13 @@
  export default {
     data() {
       return {
-		input:''
+		    input1: '',
+        input2: '',
+        input3: '',
+        input4: '',
+        input5: '',
+        input6: '',
+        input7: ''
       };
     },
     methods: {
