@@ -13,6 +13,7 @@ export default {
 <style>
     @import "../static/css/main.css";
     @import "../static/css/elementdefault.css";
+    @import "../static/css/video_default.css";
     #app{
       text-align: center;
     }

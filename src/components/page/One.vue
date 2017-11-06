@@ -13,21 +13,21 @@
 		    <form @submit.prevent="uploadUser">
 		    <el-row class="li" :gutter="30">
 			 <el-col  :xs="24" :sm="24" :md="8" :lg="8">
-		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>用户协议</a>
+		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>三方合作协议</a>
 			  </el-col>
 			 <el-col  :xs="24" :sm="24" :md="16" :lg="16">
 			  <a class="download" href="http://192.168.0.133/file/agreement.zip">下载协议</a>
 			  <div class="file_box">
 			  <input type="file" id="user_file1" accept="image/png, image/jpeg, image/gif, image/jpg">
-			  <span class="mask user_mask1">上传协议1</span>
+			  <span class="mask user_mask1">上传协议第一页</span>
 			  </div>
 			  <div class="file_box">
 			  <input type="file" id="user_file2" accept="image/png, image/jpeg, image/gif, image/jpg">
-			  <span class="mask user_mask2">上传协议2</span>
+			  <span class="mask user_mask2">上传协议第二页</span>
 			  </div>
 			  <div class="file_box">	
 			  <input type="file" id="user_file3" accept="image/png, image/jpeg, image/gif, image/jpg">
-			  <span class="mask user_mask3">上传协议3</span>
+			  <span class="mask user_mask3">上传协议第三页</span>
 			  </div>
 			  <input type="submit" value="提交">
 			   </el-col> 
@@ -39,7 +39,7 @@
 		    <form  @submit.prevent="uploadDebit">
 		    <el-row class="li" :gutter="30">
 			 <el-col  :xs="24" :sm="24" :md="8" :lg="8">
-		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>委托扣款三方协议</a>
+		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>委托扣款协议</a>
 			 </el-col>
 			 <el-col  :xs="24" :sm="24" :md="16" :lg="12">
 			  <a class="download" href="http://192.168.0.133/file/agreement.zip">下载协议</a>
@@ -67,8 +67,8 @@
       return {
     //    用户协议
 	//    扣款协议
-         debit1:'上传协议1',
-		 debit2:'上传协议2',
+         debit1:'上传协议第一页',
+		 debit2:'上传协议第二页',
 		 debit_file1:false,
 		 debit_file2:false,
 		//  上传出错
@@ -122,7 +122,7 @@
 				image.append('withholdPic',document.getElementById("debit_file2").files[0]);
 				self.$http({
 					method: 'post',
-					url: '/turingcloud/upload/withholdPic',
+					url: '/turingcloud/user/upload/withholdPic',
 					data:image
 				}).then(function(res){
 				//    alert(res.data);

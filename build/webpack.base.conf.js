@@ -2,7 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
-
+var webpack = require('webpack')
 // 返回绝对路径
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -24,7 +24,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src')
+      '@': resolve('src'),
+      'jquery': path.resolve(__dirname,'../static/js/jquery-1.11.1.min.js')
     }
   },
   module: {
@@ -65,5 +66,13 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins:[
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      jquery: "jquery",
+      "window.jQuery": "jquery"
+    })
+  ]
 }

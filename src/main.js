@@ -7,6 +7,16 @@ import 'element-ui/lib/theme-default/index.css'
 import Vuex from 'vuex'
 import store from './vuex/store'
 import axios from 'axios'
+import VideoPlayer from 'vue-video-player'
+// import 'videojs-flash'
+import 'video.js/dist/video-js.css'
+import 'vue-video-player/src/custom-theme.css'
+// VideoPlayer.config({
+//   youtube: true,
+//   switcher: true,
+//   hls: true
+// })
+Vue.use(VideoPlayer)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 Vue.use(ElementUI)

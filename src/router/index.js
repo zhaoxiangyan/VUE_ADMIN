@@ -15,7 +15,8 @@ export default new Router({
      // 路由地址重定向
     {
       path: '/',
-      redirect: '/login'
+      // redirect: '/login'
+      component: resolve => require(['../components/Index.vue'], resolve)
     },
     {
       path: '/login',
