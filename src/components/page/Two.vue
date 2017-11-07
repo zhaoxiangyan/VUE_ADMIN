@@ -12,10 +12,10 @@
 			<el-col :xs="24" :sm="24" :md="24" :lg="11">
 			    <el-row class="li">
 				  <el-col :span="8"  class="li_left">
-				    <span>用户协议：</span>
+				    <span>三方合作协议：</span>
 				  </el-col>
 				  <el-col :span="16"  class="li_right">
-				    	<a class="preview" href="javascript:void(0)"><i class="el-icon-document"></i>您已签约用户协议</a>
+				    	<a class="preview" href="javascript:void(0)"><i class="el-icon-document"></i>您已签约三方合作协议</a>
           </el-col>
 				</el-row>
 				<el-row class="li">
@@ -23,7 +23,7 @@
 				    <span>委托扣款协议：</span>
 				  </el-col>
 				  <el-col :span="16" class="li_right">
-				     	<a class="preview" href="javascript:void(0)"><i class="el-icon-document"></i>您已签约委托扣款三方协议</a>
+				     	<a class="preview" href="javascript:void(0)"><i class="el-icon-document"></i>您已签约委托扣款协议</a>
           </el-col>
 				</el-row>	
 				<el-row class="li">
