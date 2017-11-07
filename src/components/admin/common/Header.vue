@@ -26,7 +26,7 @@
       data () {
         return {
           name: 'linxin',
-          src: '../static/img/boy_default.png'
+          src: '../../static/img/boy_default.png'
           // collapsed:false
         }
       },

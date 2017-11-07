@@ -22,7 +22,7 @@
                             <div class="error_div"><span class="error" v-show="error.code1">*短信验证码错误</span></div>
                             <div class="checked_div">
                                 <input type="checkbox" id="checkbox" v-model="checked"> 同意并接受
-                                <a href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
+                                <a href="/system/glhProtocol" class="" target="_blank">图灵用户协议</a>
                             </div>
                             <div class="phone-submit">
                                 <input type="submit" id="submit" value="注册" v-if="checked" @click="register">

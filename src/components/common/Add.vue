@@ -47,7 +47,7 @@
                             </div>
                             <div class="checked_div">
                                 <input type="checkbox" id="checkbox" v-model="checked"> 同意并接受
-                                <a href="/glhProtocol" class="" target="_blank">图灵用户协议</a>
+                                <a href="/system/glhProtocol" class="" target="_blank">图灵用户协议</a>
                             </div>
                             <div class="phone-submit">
                                 <input type="submit" id="submit" value="确认提交" v-if="checked" >
@@ -66,12 +66,12 @@
         name: 'Add',
         data() {
             return {
-                name: '赵相炎',
-                card: '360421188211241541',
-                mt4: '35445',
-                email: '987670346@qq.com',
-                password: 'yan151',
-                repassword: 'yan151',
+                name: '',
+                card: '',
+                mt4: '',
+                email: '',
+                password: '',
+                repassword: '',
                 file_name1:'点击选择图片上传',
                 file1: false,
                 file_name2:'点击选择图片上传',
@@ -101,7 +101,7 @@
                             console.log('用户已注册，请填写资料');
                         }else if(res.data == '1'){
                             alert('请先注册手机号码');
-                            self.$router.push('/register');
+                            self.$router.push('/system/register');
                         }else{
                             alert('Error');
                         }
@@ -262,10 +262,10 @@
                     //    alert(res.data);
                         if(res.data == '0'){
                             alert('资料提交成功，请等待审核');
-                            self.$router.push('/login');
+                            self.$router.push('/system/login');
                         }else if(res.data == '1'){
                             alert('请先注册手机号码');
-                            self.$router.push('/register');
+                            self.$router.push('/system/register');
                         }else if(res.data == '2'){
                             alert('身份证上传错误，请重新上传');
                             return false;

@@ -1,6 +1,6 @@
 <template>
    <div class="login">
-      <div v-title>登录</div>
+      <div v-title>管理员登录</div>
    	  <div class="title">图灵智能交易管理系统</div>
    	  <div class="login-form">
          <ul class="switch">
@@ -9,11 +9,11 @@
          </ul>
    	  	 <form class="password_form"  v-if="this.switch">
    	  	 	<div class="required phone1_div">
-            <img src="../../assets/img/login_01.png">
+            <img src="../../../assets/img/login_01.png">
    	  	 		<input type="text" name="phone1"  v-model="phone1" placeholder="请输入手机号" id="phone1">
    	  	 	</div>
    	  	 	<div class="required password_div">
-            <img src="../../assets/img/login_02.png">
+            <img src="../../../assets/img/login_02.png">
    	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码" id="password">
    	  	 	</div>
           <div class="re">
@@ -30,11 +30,11 @@
    	  	 </form>
           <form class="code_form" v-else>
    	  	 	<div class="required phone2_div">
-            <img src="../../assets/img/login_01.png">
+            <img src="../../../assets/img/login_01.png">
    	  	 		<input type="text" name="phone2"  v-model="phone2" placeholder="请输入手机号" id="phone2">
    	  	 	</div>
    	  	 	<div class="required code_div">
-            <img src="../../assets/img/login_02.png">
+            <img src="../../../assets/img/login_02.png">
             <input type="button"  v-model="sendMessage" id="send" @click="sendCaptcha" :disabled='disabled' >
    	  	 		<input type="password" name="code"  v-model="code" placeholder="请输入短信验证码" id="messageCode">
    	  	 	</div>
