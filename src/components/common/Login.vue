@@ -7,28 +7,28 @@
            <li  v-bind:class="[ this.switch ? 'active' : '']" @click="switchLogin1">密码登录</li>
            <li class="code_switch"  v-bind:class="[ this.switch ? '' : 'active']"  @click="switchLogin2">验证码登录</li>
          </ul>
-   	  	 <form class="password_form"  v-if="this.switch">
+   	  	 <form class="password_form"  v-if="this.switch"  @keyup.13="login1">
    	  	 	<div class="required phone1_div">
             <img src="../../assets/img/login_01.png">
    	  	 		<input type="text" name="phone1"  v-model="phone1" placeholder="请输入手机号" id="phone1">
    	  	 	</div>
    	  	 	<div class="required password_div">
             <img src="../../assets/img/login_02.png">
-   	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码" id="password">
+   	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码" id="password" >
    	  	 	</div>
           <div class="re">
             <label for="keepPwd"><input type="checkbox" id="keepPwd" v-model="repassword">记住密码</label>
             <a href="/system/findpwd">忘记密码？</a>
           </div>
    	  	 	<div class="login_div">
-   	  	 		<input type="button" value="登录" id="submit1" @click="login1">
+   	  	 		<input type="button" value="登录" id="submit1" @click="login1" >
    	  	 		</input>
    	  	 	</div>
           <div id="login_message" class="error" v-show="empty1">
              {{message1}}
           </div>
    	  	 </form>
-          <form class="code_form" v-else>
+          <form class="code_form" v-else @keyup.13="login2">
    	  	 	<div class="required phone2_div">
             <img src="../../assets/img/login_01.png">
    	  	 		<input type="text" name="phone2"  v-model="phone2" placeholder="请输入手机号" id="phone2">

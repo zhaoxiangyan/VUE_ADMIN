@@ -10,87 +10,128 @@
 		</div>	
 		<ul class="page_content">
 		  <li>
-		    <form @submit.prevent="uploadUserPDF">
 		    <el-row class="li"  :gutter="30">
 			  <el-col  :xs="24" :sm="18" :md="12" :lg="8">
-		        <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>三方合作协议</a>
+		        <a class="preview" href="http://192.168.0.133/system/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>三方合作协议</a>
 			  </el-col>
-			  <el-col   :xs="24" :sm="6" :md="8" :lg="4">
-			     <a class="download" href="http://192.168.0.133/file/agreement.zip">下载协议</a>
+			  <el-col   :xs="24" :sm="24" :md="24" :lg="24">
+			     <a class="download" href="http://192.168.0.133/system/file/agreement.zip">下载协议</a>
+			  </el-col>
+			  <el-col    :xs="24" :sm="24" :md="24" :lg="24">		
+请选择协议上传方式：
+<template>
+  <el-radio class="radio" v-model="radio" label="0">上传pdf文件</el-radio>
+  <el-radio class="radio" v-model="radio" label="1">上传img文件</el-radio>
+</template>
 			  </el-col>
 			</el-row>  
+		    <form @submit.prevent="uploadUserPDF" v-if="radio == 0">	 		
 			<p>*请上传签约后的pdf文件</p>
 			<el-row class="li" :gutter="30">
 			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<div class="file_box">
-				<input type="file" id="user_file" accept="application/pdf" @change="uploadUser()">
+				<input type="file" id="user_file" accept="application/pdf" @change="uploadUser()" name="cooperationPdf">
 				<span class="mask user_mask">{{user}}</span>
 				</div>
+			  </el-col>
+			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<input type="submit" value="提交">
+				<em class="error" v-show="error.user">{{error.user_text}}</em>
 			  </el-col> 
 			</el-row>  
 			</form>
-			<form @submit.prevent="uploadUserIMG">
-			<p>*或上传签约后的文件图片，支持上传png/jpeg/gif/jpg格式的图片</p>
+			<form @submit.prevent="uploadUserIMG" v-else>
+			<p>*请上传签约后的文件图片，支持上传png/jpeg/gif/jpg格式的图片</p>
 			<el-row class="li" :gutter="30">
 			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<div class="file_box">
 				<input type="file" id="user_file1" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser1()" name="cooperationPic">
 				<span class="mask user_mask1">{{user1}}</span>
 				</div>
+				<br/>
+				<img id="user_img1">
+			  </el-col>
+			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<div class="file_box">
 				<input type="file" id="user_file2" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser2()" name="cooperationPic">
 				<span class="mask user_mask2">{{user2}}</span>
 				</div>
+				<br/>
+				<img id="user_img2">
+			  </el-col>
+			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<div class="file_box">	
 				<input type="file" id="user_file3" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser3()" name="cooperationPic">
 				<span class="mask user_mask3">{{user3}}</span>
 				</div>
+				<br/>
+				<img id="user_img3">
+			  </el-col>
+			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<input type="submit" value="提交">
+				<em class="error" v-show="error.user1">{{error.user_text1}}</em>
 			  </el-col> 
 			</el-row>  
+			</form>			
 			  <p>*您如果同意签约，请先下载协议，打印后签名，再扫描上传已签约的协议，再提交审核</p>
-			</form>
 		  </li>
 		  <li>
-		    <form  @submit.prevent="uploadDebitPDF">
 		    <el-row class="li" :gutter="30">
 			 <el-col  :xs="24" :sm="18" :md="12" :lg="8">
-		      <a class="preview" href="http://192.168.0.133/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>委托扣款协议</a>
+		      <a class="preview" href="http://192.168.0.133/system/file/agreement.pdf" target="_blank"><i class="el-icon-document"></i>委托扣款协议</a>
 			 </el-col>
-			 <el-col  :xs="24" :sm="6" :md="8" :lg="4">
-			  <a class="download" href="http://192.168.0.133/file/agreement.zip">下载协议</a>
+			 <el-col  :xs="24" :sm="24" :md="24" :lg="24">
+			  <a class="download" href="http://192.168.0.133/system/file/agreement.zip">下载协议</a>
 			 </el-col>
+			  <el-col    :xs="24" :sm="24" :md="24" :lg="24">		
+请选择协议上传方式：
+<template>
+  <el-radio class="radio" v-model="radio1" label="0">上传pdf文件</el-radio>
+  <el-radio class="radio" v-model="radio1" label="1">上传img文件</el-radio>
+</template>
+			  </el-col>			 
 			</el-row>
-			<p>*请上传签约后的pdf文件</p>
+			<form  @submit.prevent="uploadDebitPDF" v-if="radio1 == 0">
+     		<p>*请上传签约后的pdf文件</p>
 			<el-row class="li" :gutter="30">
 			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<div class="file_box">
-				<input type="file" id="debit_file" accept="application/pdf"  @change="uploadDebit()" name="withholdPic">
+				<input type="file" id="debit_file" accept="application/pdf"  @change="uploadDebit()"  name="withholdPdf">
 				<span class="mask user_mask">{{debit}}</span>
 				</div>
+			   </el-col>
+			   <el-col :xs="24" :sm="24" :md="24" :lg="24">
 				<input type="submit" value="提交">
+				<em class="error" v-show="error.debit">{{error.debit_text}}</em>
 			  </el-col> 
 			</el-row>  
 			</form>
-			<form  @submit.prevent="uploadDebitIMG">
-			<p>*或上传签约后的文件图片，支持上传png/jpeg/gif/jpg格式的图片</p>
+			<form  @submit.prevent="uploadDebitIMG" v-else>
+			<p>*请上传签约后的文件图片，支持上传png/jpeg/gif/jpg格式的图片</p>
 			<el-row class="li" :gutter="30">
-			 <el-col  :xs="24" :sm="24" :md="24" :lg="24">
+			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 			  <div class="file_box">
 			  <input type="file" id="debit_file1" accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadDebit1()" name="withholdPic">
 			  <span class="mask user_mask1">{{debit1}}</span>
 			  </div>
+			  <br/>
+			  <img id="debit_img1">
+			  </el-col>
+			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 			  <div class="file_box">
 			  <input type="file" id="debit_file2" accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadDebit2()" name="withholdPic">
 			  <span class="mask user_mask2">{{debit2}}</span>
 			  </div>
+			  <br/>
+			  <img id="debit_img2">
+			  </el-col>
+			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 			  <input type="submit" value="提交">
-			  <em class="error" v-show="error.debit">{{error.debit_text}}</em>
-			 </el-col> 
+			  <em class="error" v-show="error.debit1">{{error.debit_text1}}</em>
+			  </el-col> 
 			</el-row>  
+			</form>
 			  <p>*您如果同意签约，请先下载协议，打印后签名，再扫描上传已签约的协议，再提交审核</p>
-		    </form>
 		  </li>
 		</ul>	  
 	</div>	
@@ -99,6 +140,9 @@
  export default {
     data() {
       return {
+    //   协议上传方式选择
+		  radio:'0',
+		  radio1:'0',
     //    三方协议pdf
 	     user:'上传协议pdf文件',
 		 user_file:false,
@@ -156,16 +200,20 @@
 					self.error.user = true;
 					return false;
 			}else {
+				var userid = window.sessionStorage['userId'];
 				var image = new FormData();
-				image.append('withholdPic',document.getElementById("user_file").files[0]);
+				image.append('cooperationPdf',document.getElementById("user_file").files[0]);
 				self.$http({
 					method: 'post',
-					url: '/turingcloud/upload/withholdPic',
+					url: '/turingcloud/user/'+userid+'/contract/pdf/addCooperation',
 					data:image
 				}).then(function(res){
-				//    alert(res.data);
-					if(res.data == true){
+			    	if(res.status == '201'){
 						alert('协议上传成功，请等待审核');
+					}else if(res.status == '400'){
+						alert('用户数据获取错误，请重新登录');
+					}else if(res.status == '500'){
+						alert('文件因服务器内部存储失败');
 					}else{
 						alert('Error：协议上传出错');
 					}
@@ -184,6 +232,9 @@
 			reader.onload = function (e) {
 				console.log("成功读取....");
 				self.user_file1 = true;
+				var img = document.getElementById("user_img1");
+                    img.style.display = 'inline-block';
+                    img.src = e.target.result;
 			}
 			reader.readAsDataURL(file)
 		},
@@ -196,6 +247,9 @@
 			reader.onload = function (e) {
 				console.log("成功读取....");
 				self.user_file2 = true;
+				var img = document.getElementById("user_img2");
+                    img.style.display = 'inline-block';
+                    img.src = e.target.result;
 			}
 			reader.readAsDataURL(file)
 		},
@@ -208,6 +262,9 @@
 			reader.onload = function (e) {
 				console.log("成功读取....");
 				self.user_file3 = true;
+				var img = document.getElementById("user_img3");
+                    img.style.display = 'inline-block';
+                    img.src = e.target.result;
 			}
 			reader.readAsDataURL(file)
 		},
@@ -268,16 +325,20 @@
 					self.error.debit = true;
 					return false;
 			}else {
+				var userid = window.sessionStorage['userId']; 
 				var image = new FormData();
-				image.append('withholdPic',document.getElementById("debit_file").files[0]);
+				image.append('withholdPdf',document.getElementById("debit_file").files[0]);
 				self.$http({
 					method: 'post',
-					url: '/turingcloud/user/upload/withholdPic',
+					url: '/turingcloud/user/'+userid+'/contract/pdf/addWithhold',
 					data:image
 				}).then(function(res){
-				//    alert(res.data);
-					if(res.data == true){
+					if(res.status == '201'){
 						alert('协议上传成功，请等待审核');
+					}else if(res.status == '400'){
+						alert('用户数据获取错误，请重新登录');
+					}else if(res.status == '500'){
+						alert('文件因服务器内部存储失败');
 					}else{
 						alert('Error：协议上传出错');
 					}
@@ -296,6 +357,9 @@
 			reader.onload = function (e) {
 				console.log("成功读取....");
 				self.debit_file1 = true;
+				var img = document.getElementById("debit_img1");
+                    img.style.display = 'inline-block';
+                    img.src = e.target.result;
 			}
 			reader.readAsDataURL(file)
 		},
@@ -308,6 +372,9 @@
 			reader.onload = function (e) {
 				console.log("成功读取....");
 				self.debit_file2 = true;
+				var img = document.getElementById("debit_img2");
+                    img.style.display = 'inline-block';
+                    img.src = e.target.result;
 			}
 			reader.readAsDataURL(file)
 		},
@@ -416,7 +483,6 @@ ul,li{
 .page_content li a.download,.page_content li div.file_box,.page_content li input,.page_content li div span{
 	display:inline-block;
 	/*margin:0 10px 10px 0;*/
-	margin-bottom:10px;
 	padding:0;
 	min-width:90px;
 	height:35px;
@@ -477,7 +543,16 @@ ul,li{
 .li .el-col{
 	margin:10px 0;
 }
-
+.li  div img{
+	display:none;
+	vertical-align:bottom;
+	max-width:400px;
+}
+/*@media screen and (max-width: 740px) {
+    .li div img{
+		width:100%;
+	}
+}*/
 em.error{
 	font-style:normal;
 	color:red;

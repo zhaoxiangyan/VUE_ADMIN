@@ -12,15 +12,15 @@
           <el-col :span="24">
             <el-row class="li">
               <el-col  :xs="7" :sm="6" :md="5" :lg="5">
-                 <span>真实姓名：</span>
+                 <span class="title">真实姓名：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input1" placeholder="Andy"></el-input>
+                <el-input v-model="input1" placeholder="Andy" :disabled="true"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
               <el-col  :xs="7" :sm="6" :md="5" :lg="5">
-                 <span>邮箱：</span>
+                 <span class="title">邮箱：</span>
               </el-col>
               <el-col  :span="16">
                 <el-input v-model="input2" placeholder="989746@qq.com"></el-input>
@@ -28,7 +28,7 @@
             </el-row>
             <el-row class="li">
               <el-col  :xs="7" :sm="6" :md="5" :lg="5">
-                 <span>手机号码：</span>
+                 <span class="title">手机号码：</span>
               </el-col>
               <el-col  :span="16">
                 <el-input v-model="input3" placeholder="1388888888"></el-input>
@@ -36,29 +36,30 @@
             </el-row>
             <el-row class="li">
               <el-col  :xs="7" :sm="6" :md="5" :lg="5">
-                 <span>身份证号码：</span>
+                 <span class="title">身份证号码：</span>
               </el-col>
               <el-col  :xs="16" :sm="16" :md="16" :lg="16">
-                <el-input v-model="input4" placeholder="3604211996467461452"></el-input>
+                <el-input v-model="input4" placeholder="3604211996467461452" :disabled="true"></el-input>
               </el-col>
             </el-row>
             <el-row class="li">
               <el-col  :xs="7" :sm="6" :md="5" :lg="5">
-                 <span>国家：</span>
+                 <span class="title">居住地址：</span>
               </el-col>
               <el-col  :span="16">
-                <el-input v-model="input5" placeholder="中国"></el-input>
+                <!--<el-input v-model="input6" placeholder="广东深圳"></el-input>-->
+<el-cascader
+    expand-trigger="hover"
+    :options="options"
+    v-model="selectedOptions"
+    @change="handleChange">
+</el-cascader>
+<template>
+  <v-distpicker></v-distpicker>
+</template>
               </el-col>
             </el-row>
-            <el-row class="li">
-              <el-col  :xs="7" :sm="6" :md="5" :lg="5">
-                 <span>详细地址：</span>
-              </el-col>
-              <el-col  :span="16">
-                <el-input v-model="input6" placeholder="广东深圳"></el-input>
-              </el-col>
-            </el-row>
-            <el-row class="li">
+            <!--<el-row class="li">
               <el-col  :xs="7" :sm="6" :md="5" :lg="5">
                  <span>上传身份证正面：</span>
               </el-col>
@@ -97,10 +98,10 @@
               <el-col  :span="16">
                 <img id="img2">
               </el-col>
-            </el-row>
+            </el-row>-->
             <el-row class="li">
               <el-col  :xs="7" :sm="6" :md="5" :lg="5">
-                 <span>最近登录时间：</span>
+                 <span class="title">最近登录时间：</span>
               </el-col>
               <el-col  :span="16">
                 <el-input v-model="input7" placeholder="2017/11/02"></el-input>
@@ -115,6 +116,8 @@
 	</div>	
 </template>
 <script>
+import VDistpicker from 'v-distpicker'
+// Vue.component('v-distpicker',VDistpicker)
  export default {
     data() {
       return {
@@ -122,13 +125,106 @@
         input2: '',
         input3: '',
         input4: '',
-        input5: '',
         input6: '',
-        input7: ''
-      };
+        input7: '',
+        // 城市选择器
+        options: [{
+          value: '北京市',
+          label: '北京市',
+          children: [{
+            value: '市辖区',
+            label: '市辖区'
+          }]
+        }, {
+          value: '天津市',
+          label: '天津市',
+          children: [{
+            value: '市辖区',
+            label: '市辖区'
+          }]
+        }, {
+          value: '河北省',
+          label: '河北省',
+          children: [{
+            value: '石家庄市',
+            label: '石家庄市'
+          }, {
+            value: '唐山市',
+            label: '唐山市'
+          }, {
+            value: '邯郸市',
+            label: '邯郸市'
+          }, {
+            value: '邢台市',
+            label: '邢台市'
+          }, {
+            value: '保定市',
+            label: '保定市'
+          }, {
+            value: '张家口市',
+            label: '张家口市'
+          }, {
+            value: '承德市',
+            label: '承德市'
+          }, {
+            value: '沧州市',
+            label: '沧州市'
+          }, {
+            value: '廊坊市',
+            label: '廊坊市'
+          }, {
+            value: '衡水市',
+            label: '衡水市'
+          }]
+        }, {
+          value: '山西省',
+          label: '山西省',
+          children: [{
+            value: '太原市',
+            label: '太原市'
+          }, {
+            value: '大同市',
+            label: '大同市'
+          }, {
+            value: '阳泉市',
+            label: '阳泉市'
+          }, {
+            value: '长治市',
+            label: '长治市'
+          }, {
+            value: '晋城市',
+            label: '晋城市'
+          }, {
+            value: '朔州市',
+            label: '朔州市'
+          }, {
+            value: '晋中市',
+            label: '晋中市'
+          }, {
+            value: '运城市',
+            label: '运城市'
+          }, {
+            value: '忻州市',
+            label: '忻州市'
+          }, {
+            value: '临汾市',
+            label: '临汾市'
+          }, {
+            value: '吕梁市',
+            label: '吕梁市'
+          }]
+        }],
+        selectedOptions: []
+      }
+    },
+    components:{
+      VDistpicker
     },
     methods: {
-    
+      // 城市选择器
+      handleChange(value) {
+        console.log(value);
+      }
     }
 }
 </script>
@@ -175,7 +271,7 @@
 .page_content .li div{
     /*height:36px;*/
 }
-.li div span{
+.li div span.title{
     display: block;
     /*height: 36px;*/
     line-height: 36px;

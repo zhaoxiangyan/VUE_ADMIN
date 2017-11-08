@@ -17,13 +17,13 @@
                             <div><span class="error" v-show="error.name1">*请输入正确的姓名</span></div>
                             <p><span class="input_title">身份证号码：</span> <input class="input_content" type="text" id="card" placeholder="请输入身份证号码" v-model="card" name="idcard"></p>
                             <div><span class="error" v-show="error.card1">*请输入正确的身份证号码</span></div>
-                            <p><span class="input_title">MT4账号：</span> <input class="input_content" type="text" id="mt4" placeholder="请输入MT4账号" v-model="mt4" name="account"></p>
-                            <div><span class="error" v-show="error.mt41">*请输入MT4账号</span></div>
                             <p><span class="input_title">邮箱：</span> <input class="input_content" type="text" id="email" placeholder="请输入邮箱" v-model="email" name="email"></p>
                             <div><span class="error" v-show="error.email1">*请输入正确的邮箱</span></div>
-                            <p><span class="input_title">登录密码：</span> <input class="input_content" type="password" id="password" placeholder="请输入登录密码" v-model="password" name="password"></p>
+                            <p><span class="input_title">MT4账号：</span> <input class="input_content" type="text" id="mt4" placeholder="请输入MT4账号" v-model="mt4" name="account"></p>
+                            <div><span class="error" v-show="error.mt41">*请输入MT4账号</span></div>
+                            <p><span class="input_title">MT4密码：</span> <input class="input_content" type="password" id="password" placeholder="请输入登录密码" v-model="password" name="password"></p>
                             <div><span class="error" v-show="error.password1">*请输入格式正确的密码（6-16位字母、数字和下划线）</span></div>
-                            <p><span class="input_title">确认登录密码：</span> <input class="input_content" type="password" id="repassword" placeholder="请再次输入登录密码" v-model="repassword"></p>
+                            <p><span class="input_title">确认MT4密码：</span> <input class="input_content" type="password" id="repassword" placeholder="请再次输入登录密码" v-model="repassword"></p>
                             <div><span class="error" v-show="error.repassword1">*两次密码不一致</span></div>
                             <p class="file_box">
                                <span class="input_title">身份证正面：</span>

@@ -138,15 +138,15 @@
                     }).then(function(res){
                        if(res.data.rcode == '0'||res.data.rcode == '1'){
                            alert('注册成功');
-                           self.$router.push('/add');
+                           self.$router.push('/system/add');
                        }else if(res.data.rcode =='2'){
                            alert('账号已注册,资料审核中');
                        }else if(res.data.rcode == '3'){
                            alert('账号已注册,请登录');
-                           self.$router.push('/login');
+                           self.$router.push('/system/login');
                        }else if(res.data.rcode == '4'){
                            alert('账号已注册,资料审核未通过，请重新填写个人资料');
-                           self.$router.push('/add');
+                           self.$router.push('/system/add');
                        }else if(res.data.rcode == '6'){
                            alert('验证码过期,请重新发送验证码');
                        }else if(res.data.rcode == '7'){
