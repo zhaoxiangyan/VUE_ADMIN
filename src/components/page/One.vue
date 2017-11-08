@@ -35,15 +35,15 @@
 			<el-row class="li" :gutter="30">
 			  <el-col  :xs="24" :sm="24" :md="24" :lg="24">
 				<div class="file_box">
-				<input type="file" id="user_file1" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser1()">
+				<input type="file" id="user_file1" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser1()" name="cooperationPic">
 				<span class="mask user_mask1">{{user1}}</span>
 				</div>
 				<div class="file_box">
-				<input type="file" id="user_file2" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser2()">
+				<input type="file" id="user_file2" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser2()" name="cooperationPic">
 				<span class="mask user_mask2">{{user2}}</span>
 				</div>
 				<div class="file_box">	
-				<input type="file" id="user_file3" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser3()">
+				<input type="file" id="user_file3" accept="image/png, image/jpeg, image/gif, image/jpg"  @change="uploadUser3()" name="cooperationPic">
 				<span class="mask user_mask3">{{user3}}</span>
 				</div>
 				<input type="submit" value="提交">
@@ -228,12 +228,12 @@
 					return false;
 			} else {
 				var image = new FormData();
-				image.append('withholdPic',document.getElementById("user_file1").files[0]);
-				image.append('withholdPic',document.getElementById("user_file2").files[0]);
-				image.append('withholdPic',document.getElementById("user_file3").files[0]);
+				image.append('cooperationPic',document.getElementById("user_file1").files[0]);
+				image.append('cooperationPic',document.getElementById("user_file2").files[0]);
+				image.append('cooperationPic',document.getElementById("user_file3").files[0]);
 				self.$http({
 					method: 'post',
-					url: '/turingcloud/upload/withholdPic',
+					url: '/turingcloud/user/upload/cooperationPic',
 					data:image
 				}).then(function(res){
 				//    alert(res.data);
@@ -272,7 +272,7 @@
 				image.append('withholdPic',document.getElementById("debit_file").files[0]);
 				self.$http({
 					method: 'post',
-					url: '/turingcloud/upload/withholdPic',
+					url: '/turingcloud/user/upload/withholdPic',
 					data:image
 				}).then(function(res){
 				//    alert(res.data);

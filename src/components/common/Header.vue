@@ -39,30 +39,30 @@
       mounted:function(){
         // 线上代码begin
         // 登录拦截
-        // var self = this;
-        // self.$http({
-        //         method: 'get',
-        //         url: '/turingcloud/login/isLogin',
-        //         }).then(function(res){
-        //            if(res.data == true){
-        //                    // 返回用户信息
-        //                     self.$http({
-        //                             method: 'get',
-        //                             url: '/turingcloud/user/'
-        //                             }).then(function(res){
-        //                                 self.name = res.data.username;
-        //                                 if(res.data.sex == "女"){
-        //                                   self.src = '../static/img/girl_default.png';
-        //                                 }
-        //                             }).catch(function(err){
-        //                                 console.log("AJAX失败");
-        //                             }); 
-        //            }else{
-        //              self.$router.push('/system/');
-        //            }
-        //         }).catch(function(err){
-        //             console.log("AJAX失败");
-        //         }); 
+        var self = this;
+        self.$http({
+                method: 'get',
+                url: '/turingcloud/login/isLogin',
+                }).then(function(res){
+                   if(res.data == true){
+                           // 返回用户信息
+                            self.$http({
+                                    method: 'get',
+                                    url: '/turingcloud/user/'
+                                    }).then(function(res){
+                                        self.name = res.data.username;
+                                        if(res.data.sex == "女"){
+                                          self.src = '../static/img/girl_default.png';
+                                        }
+                                    }).catch(function(err){
+                                        console.log("AJAX失败");
+                                    }); 
+                   }else{
+                     self.$router.push('/system/');
+                   }
+                }).catch(function(err){
+                    console.log("AJAX失败");
+                }); 
         //  线上代码end
       },
       methods: {

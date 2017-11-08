@@ -11,6 +11,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 Vue.use(ElementUI)
 Vue.use(Vuex)
+axios.defaults.withCredentials = true
 Vue.prototype.$http = axios
 // Vue.use(Index)
 
