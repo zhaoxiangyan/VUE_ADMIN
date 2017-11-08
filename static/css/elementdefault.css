@@ -12,3 +12,12 @@
 .el-upload-list__item:first-child{
     margin-top:0!important;
 }
+/*three*/
+/*模态框element样式*/
+.el-form-item__content{
+    text-align:left;
+}
+.el-form-item__content button{
+    float:right;
+    margin-right:30px;
+}
