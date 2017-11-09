@@ -4,10 +4,9 @@
    	  <div class="title">图灵智能交易管理系统</div>
    	  <div class="login-form">
          <ul class="switch">
-           <li  v-bind:class="[ this.switch ? 'active' : '']" @click="switchLogin1">密码登录</li>
-           <li class="code_switch"  v-bind:class="[ this.switch ? '' : 'active']"  @click="switchLogin2">验证码登录</li>
+           <li  class="active">管理员登录</li>
          </ul>
-   	  	 <form class="password_form"  v-if="this.switch">
+   	  	 <form class="password_form" >
    	  	 	<div class="required phone1_div">
             <img src="../../../assets/img/login_01.png">
    	  	 		<input type="text" name="phone1"  v-model="phone1" placeholder="请输入手机号" id="phone1">
@@ -16,42 +15,17 @@
             <img src="../../../assets/img/login_02.png">
    	  	 		<input type="password" name="password"  v-model="password" placeholder="请输入密码" id="password">
    	  	 	</div>
-          <div class="re">
-            <label for="keepPwd"><input type="checkbox" id="keepPwd" v-model="repassword">记住密码</label>
-            <a href="/system/findpwd">忘记密码？</a>
+          <div id="login_message" class="error" v-show="empty1">
+             {{message1}}
           </div>
    	  	 	<div class="login_div">
    	  	 		<input type="button" value="登录" id="submit1" @click="login1">
    	  	 		</input>
    	  	 	</div>
-          <div id="login_message" class="error" v-show="empty1">
-             {{message1}}
-          </div>
    	  	 </form>
-          <form class="code_form" v-else>
-   	  	 	<div class="required phone2_div">
-            <img src="../../../assets/img/login_01.png">
-   	  	 		<input type="text" name="phone2"  v-model="phone2" placeholder="请输入手机号" id="phone2">
-   	  	 	</div>
-   	  	 	<div class="required code_div">
-            <img src="../../../assets/img/login_02.png">
-            <input type="button"  v-model="sendMessage" id="send" @click="sendCaptcha" :disabled='disabled' >
-   	  	 		<input type="password" name="code"  v-model="code" placeholder="请输入短信验证码" id="messageCode">
-   	  	 	</div>
-          <div class="re">
-            <a href="/system/findpwd">忘记密码？</a>
-          </div>
-   	  	 	<div class="login_div">
-   	  	 		<input type="button" value="登录" id="submit2" @click="login2">
-   	  	 		</input>
-   	  	 	</div>
-          <div id="code_message" class="error" v-show="empty2">
-             {{message2}}
-          </div>
-   	  	 </form>
-         <div class="register_div">
+         <!--<div class="register_div">
             <p class="register">还没有Turing账号？<a href="/system/register">立即注册</a></p>
-         </div>
+         </div>-->
    	  </div>
    </div>	
 </template>
@@ -60,8 +34,6 @@
   name: 'Login',
   data () {
     return {
-      // 密码验证码登录切换
-      switch: true,
       // 密码登录
       phone1: '',
       password: '',
@@ -128,13 +100,6 @@
     // }
   },
   methods: {
-    // 登录方式切换
-    switchLogin1() {
-        this.switch = true
-    },
-    switchLogin2() {
-       this.switch = false
-    },
     getUser() {
         var storage = window.localStorage; 
         var getPhone = storage["phone"]; 

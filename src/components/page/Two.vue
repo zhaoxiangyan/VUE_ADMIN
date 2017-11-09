@@ -47,7 +47,7 @@
 				    <span>MT4账号：</span>
 				  </el-col>
 				  <el-col :span="16" class="li_right">
-					   <el-input v-model="input2" placeholder="请输入MT4账号"></el-input>
+					   <el-input v-model="input2" placeholder="请输入MT4账号" :disabled="true"></el-input>
           </el-col>
 				</el-row>	
 				<el-row class="li">
